@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../common/head %>
+    <link rel="stylesheet" href="/styles/socialshare.css" media="screen">
+
+    <!-- Facebook & Google+ open graph (og) protocol properties to customize what you share-->
+    <!-- Once hosted to a site, update this info and Facebook/G+/LinkedIn will build a share dialog box with it. It does not pull info correctly on localhost, but works once deployed-->
+    <meta property="og:url"           content="https://eatablez.herokuapp.com/socialshare" />
+  	<meta property="og:type"          content="website" />
+  	<meta property="og:title"         content="Plate Rate" />
+  	<meta property="og:description"   content="PlateRate is a great app to help you find food you love - Find the highest rated menu items - wherever you are!" />
+  	<meta property="og:image"         content="/images/logo_platerate.png" />
+
+    <!-- LinkedIn SDK, which must be in head tag according to documentation -->
+    <script type="text/javascript" src="//platform.linkedin.com/in.js">
+    //Create an api key in LinkedIn for the site and update the current test one and store it as an environmental variable
+      api_key:   75cad1rwxl5dug
+      authorize: true
+      onLoad:    onLinkedInLoad
+    </script>
+  </head>
+  <body id="invite_friend">
+    <div class="container header-container">
+	     <% include ../common/header %>
+    </div>
+    <!-- page content  -->
+    <div class="container page-content">
+      <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-12 ">
+          <h2>Invite your friends to join PlateRate</h2>
+          <br>
+          <h4 class="h4-lg-font">Let friends know about Plate Rate via social media: </h4>
+        </div>
+      </div>
+        <br>
+        <div class="row">
+          <!-- Twitter Share Button -->
+          <div class="social col-xs-2 col-xs-offset-2 col-md-2 col-md-offset-2 col-lg-2 col-lg-offset-2">
+            <a class="twitter-share-button"
+              href="https://twitter.com/share"
+              data-hashtags="platerate"
+              data-text="@platerate is a great app to help you find food you love - Find the highest rated menu items - wherever you are!">
+            </a>
+          </div>
+          <!--Facebook Share Button -->
+          <div id="fb-root"></div>
+          <div class="social col-xs-2 col-md-2 col-md-offset-0 col-lg-2 col-lg-offset-0">
+            <div class="fb-share-button" data-href="https://eatablez.herokuapp.com/socialshare" data-layout="button"></div>
+          </div>
+          <!-- LinkedIn Share Button -->
+          <div class="social col-xs-2 col-md-2 col-md-offset-0 col-lg-2 col-lg-offset-0">
+            <script type="IN/Share" data-url="https://eatablez.herokuapp.com/socialshare"></script>
+          </div>
+          <!-- Google+ Share Button -->
+          <div class="social col-xs-2 col-md-2 col-md-offset-0 col-lg-2 col-lg-offset-0">
+            <div class="g-plus" data-action="share" data-annotation="none"></div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="row form-top-container">
+          <div class="col-xs-12 col-md-12 col-lg-12 divide-page">
+            <h4 class="h4-lg-font"> -OR- </h4>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="row form-top-container">
+          <div class="col-xs-12 col-md-12 col-lg-12">
+            <h4 class="h4-lg-font"> Email a friend directly: </h4>
+            <% if (typeof type !== 'undefined'){ %>
+              <% if (type == 'error'){ %>
+                <div class="alert alert-danger" role="alert">
+                  <i class="fa fa-exclamation-triangle"></i>
+                  Message could not be sent. Please try again.
+                </div>
+              <% } if (type == 'empty'){ %>
+                <div class="alert alert-warning" role="alert">
+                  <i class="fa fa-exclamation-triangle"></i>
+                  <%= msg %>
+                </div>
+              <% } if (type == 'success'){ %>
+                <div class="alert alert-success" role="alert">
+                  <i class="fa fa-check-square"></i>
+                  Message successfully sent! Thanks for sharing PlateRate with your friends!
+                </div>
+              <% }
+            } %>
+
+          </div>
+        </div>
+        <br>
+        <div class="form-content" id="email-a-friend">
+          <form method="post" action="/socialshare/send" class= "form-horizontal invite_friends text-input">
+            <div class="form-group">
+              <label for="from-field" class="col-sm-1 control-label invite_label">From: </label>
+              <div class="col-sm-10">
+                <input type="text" name="from_email_field" placeholder="Your Email" class="form-control" id="from-field" value="<% if(typeof from !== 'undefined'){ %><%= from %> <% } %>" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="to-field" class="col-sm-1 control-label invite_label">To: </label>
+              <div class="col-sm-10">
+                <input type="text" name="to_email_field" placeholder="Recipient's Email" class="form-control" id="to-field" value="<% if(typeof to !== 'undefined'){ %><%= to %><% } %>" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-1" id="customize">
+                <label for="email-invite" class="control-label invite_label">Customize your invite: </label>
+              </div>
+              <div class="col-sm-10 col-sm-offset-1">
+                <textarea rows="4" name="message" class="form-control"><% if(typeof body !== 'undefined'){ %><%= body %> <% } else { %><%= body="PlateRate is a great app to help you find food you love - Find the highest rated menu items - wherever you are!" %><% } %> </textarea>
+              </div>
+            </div>
+            <div class="submitDiv">
+              <button class="btn btn-default" id="sent_invite" type="submit">Send invite </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="footer">
+  	     <% include ../common/footer %>
+      </div>
+  	  <% include ../common/foot %>
+      <script>
+        $(window).bind("load", function(){
+          $.getScript('/js/socialshare.js', function(){})
+        })
+      </script>
+      <!-- Google+ -->
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+  </body>
+</html>

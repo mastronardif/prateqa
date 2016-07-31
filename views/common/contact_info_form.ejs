@@ -1,0 +1,66 @@
+
+    <div class="row accord" role="tab" id="headingOne">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Contact Info Preferences
+            </a>
+        </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse material_accordion_collapse" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+            <div class="container page-content">
+                <h4>Home Address</h4>
+                <p>Street
+                    <div class="form-group materail_input_block">
+                        <input type="text" id="street" name="street" class="form-control materail_input" placeholder="enter the street address"
+                        value="<%=userInfo[0].street%>">
+                    </div>
+                </p>
+                <p>City
+                    <div class="form-group materail_input_block">
+                        <input type="text" id="city" name="city" class="form-control materail_input" placeholder="enter city"
+                        value="<%=userInfo[1].city%>">
+                    </div>
+                </p>
+                <p>Postal Code
+                    <div class="form-group materail_input_block">
+                        <input type="text" id="postal" name="postal" class="form-control materail_input" placeholder="enter postal code"
+                        value="<%=userInfo[2].postalCode%>">
+                    </div>
+                </p>
+                <p>Country
+                    <div class="form-group materail_input_block">
+                        <input type="text" id="country" name="country" class="form-control materail_input" placeholder="enter country"
+                        value="<%=userInfo[3].country%>"  >
+                    </div>
+                </p>
+                <p>Mobile Phone
+                    <div class="form-group materail_input_block">
+                        <input type="text" id="phone" name="phone" class="form-control materail_input" placeholder="enter phone number"
+                        value="<%=userInfo[4].phone%>">
+                    </div>
+                </p>
+                <p>Birthday
+                    <div class="form-group materail_input_block">
+                        <input type="text" id="datepicker" name="datepicker" class="form-control materail_input" placeholder="Calendar"
+                        value="<%=userInfo[5].bday%>">
+                    </div>
+                </p>
+                <h4>Offer Contact Preferences</h4>
+                <p>Select how you want to hear about offers from us and/or our partners</p>
+                <label class="checkbox" id="check">
+                    <input type="checkbox" id="byemail" value="byemail" />By Email
+                </label>
+                <label class="checkbox" id="check">
+                    <input type="checkbox" id="textmssg" value="textmssg" />By Text Message
+                </label>
+                <label class="checkbox" id="check">
+                    <input type="checkbox" id="nocontact" value="nocontact" />Please don't contact me
+                </label>
+                <h4>Login Preferences</h4>
+                <label class="checkbox" id="check">
+                    <input type="checkbox" id="pictures" value="pictures" />Keep me logged in
+                </label>
+            </div>
+        </div>
+    </div>

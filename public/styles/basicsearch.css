@@ -1,0 +1,34 @@
+.floatright{
+  float: right;
+}
+img.feeling-image{
+  height: 32px;
+  width: auto;
+}
+
+.row-no-padding{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.row-no-padding>[class*="col-"]{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+div.feeling-button {
+    background-color: #74c046;
+    background-image: none;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    text-shadow: none;
+    border: 1px solid black;
+}
+
+div.feeling-button:hover {
+    background-color: #566f7d;
+    color: #fff;
+    text-shadow: none;
+}

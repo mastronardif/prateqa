@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../common/head %>
+</head>
+<body  onload="checked()">
+	<!-- id="advanced_search" -->
+	<!-- Begin page content -->
+	<div class="container header-container">
+
+		<% include ../common/header %>
+	</div>
+	<!-- container -->
+	<!-- page content -->
+
+	<div class="container page-content">
+		<form action="/profile/update" name="profileUpdate" method="post">
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- <div class='wrapper'> -->
+					<div id='second'>
+						<!-- <div class='section1'> -->
+						<!-- <div class='part2'> -->
+						<div class='col-xs-6 user-pic' margin-bottom="50px">
+							<img src='/images/garett.jpg' />
+							<input type="number" class="rating" id="test" name="test" data-min="1" data-max="5" value="3">
+						</div>
+
+
+						<div class='col-xs-6 item-pic' margin-bottom="50px">
+							<p>First Name
+								<input type="text" id="firstname" name="firstname" value="<%=user.givenName%>" >
+							</p>
+							<p>Last Name
+								<input type="text" id="lastname" name="lastname" value="<%=user.surname%>" >
+							</p>
+							<p>Email
+								<input type="text" id="emailaddress" style="width:170px;" name="email" value="<%=user.email%>">
+							</p>
+
+							<div class='info'>
+								<p>I prefer..</p></br>
+
+								<p>
+									<label class="checkbox">
+									<input type="checkbox" id="pictures" value="pictures" name="Profile[preference]"/>Picture
+									</label>
+									<label class="checkbox">
+									<input type="checkbox" id="text" value="text" name="Profile[preference]"/>Text
+									</label>
+								</p>
+
+							</div>
+
+						</div>
+
+
+						<!-- </div> -->
+						<!-- </div> -->
+					</div>
+					<!-- </div> -->
+				</div>
+			</div>
+
+
+
+			<div class="panel-group material_accordion" id="accordion" role="tablist" aria-multiselectable="true">
+				<!-- contact info update-->
+				<% include ../common/contact_info_form.ejs %>
+				<!-- dietary preferences general -->
+				<% include ../common/dietary_preferences_general.ejs %>
+				<!-- past ratings -->
+				<% include ../common/past_ratings.ejs %>
+				<!-- expert taster preference -->
+				<% include ../common/expert_taster_preference.ejs %>
+			</div>
+
+			<input type="submit"  value="SAVE" class="btn btn-lg btn-primary btn-block" id="profileSubmit"/>
+		</form>
+		<form action="/logout" method="post">
+			<button value="logout" class="btn btn-lg btn-danger" id="logoutbtn">Log out</button>
+		</form>
+	</div>
+
+	<script>
+		function checked() {
+			var foundPref = <%- JSON.stringify(userInfo[7].dietaryPreferences) %> ;
+			for(var i=0; i<foundPref.length;i++){
+				document.getElementById(foundPref[i]).checked = true;
+			}
+		}
+	</script>
+
+	<!-- container -->
+	<div id="footer">
+		<% include ../common/footer %>
+	</div>
+	<% include ../common/foot %>
+</body>
+</html>

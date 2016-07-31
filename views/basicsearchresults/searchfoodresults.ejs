@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	   <% include ../common/head %>
+     <link rel="stylesheet" href="/styles/basicsearchresults.css" media="screen" title="no title" charset="utf-8">
+     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG8XdsI0xYqPvnPX7C8S2oTm2eXg169hQ&libraries=places"></script>
+  
+  <!-- FM begin remove this.  just for testing -->
+  <style>
+      tr:nth-of-type(odd) {
+      background-color:#bbff99;
+    }
+  </style>
+  <!-- FM end remove this.  just for testing -->
+
+  </head>
+  <body>
+    <div class="container header-container">
+       <% include ../common/header %>
+    </div><!-- End Header-Container -->
+    <div class="container-fluid page-content">
+    <div class="row row-border">
+      <div class="col-xs-6 center border-right" id="listBtn">Item View</div>
+      <div class="col-xs-6 center border-left" id="mapBtn">Map View</div>
+    </div>
+    <div id="listView"></div>
+    <div id="mapView" style="display:none;" height="200px" width="300px">
+      <button id="geoBtn" onclick="geoFindMe()">Click Me!</button>
+    </div>
+    </div>
+    <div id="footer">
+	     <% include ../common/footer %>
+    </div>
+	     <% include ../common/foot %>
+
+     <script>
+     $('#mapBtn').on('click',function() {
+         $('#mapView').show();
+         $('#listView').hide();
+     });
+      $('#listBtn').on('click',function() {
+         $('#listView').html('You are in List View! ').show();
+         $('#mapView').hide();
+      });
+           
+     function geoFindMe() {
+       var output = document.getElementById("mapView");
+       if (!navigator.geolocation){
+         output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+         return;
+       }
+       function success(position) {
+         var latitude  = position.coords.latitude;
+         var longitude = position.coords.longitude;
+         output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+         var img = new Image();
+         img.src = "https://maps.googleapis.com/maps/api/staticmap?size=500x200&maptype=roadmap&markers=color:blue%7Clabel:S%7C"+latitude+","+longitude+"&key=AIzaSyCG8XdsI0xYqPvnPX7C8S2oTm2eXg169hQ";
+         output.appendChild(img);
+       };
+       function error() {
+         output.innerHTML = "Unable to retrieve your location";
+       };
+       output.innerHTML = "<p>Locating…</p>";
+       navigator.geolocation.getCurrentPosition(success, error);
+     };
+     </script>
+     
+    <!-- use a partial -->
+    <table border='1' align='center' width='90%'">
+        <tr><th colspan="100%" style="text-align:center"><%= query %></th></tr>
+        <% for(var i=0; i < data.length; i++) { %>
+        <tr>
+        <td>
+        <p>
+        <%= data[i].id %>        
+        </p>
+        </td>
+        <td>
+        <p>
+        General Tao's Chicken $12-16<br/>
+        ***** 12 reviews <br/>
+        Buddha Bodai  7 blocks away <br/> 
+        <img src="<%=data[i].img%>" alt="wtf" style="float:right;width:82px;height:82px;">
+        **** Yelp Ratin <br/>
+        <%= data[i].name %></td>
+        </p>
+        </tr>
+        <% } %>
+    </table>
+    
+  </body>
+</html>

@@ -1,0 +1,37 @@
+/***** PAGE CONTENT *****/
+
+.h4-lg-font {
+  font-size: 16px;
+}
+
+/***** BUTTON *****/
+
+#sent_invite {
+	margin-top: 20px;
+}
+
+/***** SOCIAL MEDIA BUTTONS *****/
+.social {
+  text-align:center;
+}
+
+/***** PAGE DIVIDER *****/
+.divide-page{
+  text-shadow: 0 1px 0 #fff;
+  text-align: center;
+  background-image: linear-gradient(to bottom,#fff 0,#E0E0E5 110%);
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+/***** EMAIL FORM *****/
+#customize{
+  padding-left: 18px;
+  padding-bottom: 8px;
+}
+
+/* Override main css label settings to allow for horizontal form*/
+.invite_label{
+  margin-right: 0px;
+}

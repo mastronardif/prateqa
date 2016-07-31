@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<% include ../common/head %>
+    <link rel="stylesheet" href="/styles/basicsearch.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <div class="container header-container">
+      <div class="main container clearfix">
+        <a href="/register" class="btn btn-lg btn-success">Register</a>
+        <a href="/login" class="btn btn-lg btn-success">Login</a>
+        <form action="/logout" method="POST">
+            <button name="thing" value="logout" class="btn btn-lg btn-success">Log out</button>
+        </form>
+      </div>
+	     <% include ../common/header %>
+    </div><!-- End Header-Container -->
+      <div class="container page-content">
+        <form action="/basicsearch/food" method="POST" enctype="{enctype}">
+            <h1><%= title %></h1>
+            <input name="basicsearchinput" type="text" placeholder="Search">
+            <button class="feeling-button" type="submit">Search</button>
+        </form>
+        <a href="/advancedsearch">Advanced Search</a>
+        <!--
+        <div class="row row-no-padding">
+          <div class="col-xs-6 col-md-6 col-lg-6">
+            <img src="/images/clover.png" class="feeling-image center-block" alt="Four leaf clover" />
+            <div class="feeling-button">I'm feeling lucky</div>
+          </div>
+          <div class="col-xs-6 col-md-6 col-lg-6">
+            <img src="/images/lightning.png" class="feeling-image center-block" alt="Lightning bolt" />
+            <div class="feeling-button">I'm feeling adventurous</div>
+          </div>
+        </div>
+        --->
+        <h6>Find random or unusual but awesome menu items!</h6>
+    </div><!-- End Page-Content -->
+    <div id="footer">
+	     <% include ../common/footer %>
+    </div>
+	     <% include ../common/foot %>
+  </body>
+</html>

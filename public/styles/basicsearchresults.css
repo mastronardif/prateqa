@@ -1,0 +1,65 @@
+.alignedH3{
+  margin-top: 5px;
+}
+
+.alignedP{
+  margin-top: 10px;
+}
+
+.food-items{
+  border: 2px solid black;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  margin-bottom: -2px;
+}
+
+.venueImg{
+  border: 1px solid black;
+  width: 100px;
+}
+
+.row-border{
+  border: 2px solid black;
+}
+
+.border-left{
+  border-width: 0px 0px 0px 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+.border-right{
+  border-width: 0px 1px 0px 0px;
+  border-style: solid;
+  border-color: black;
+}
+
+div.center {
+    background-color: #74c046;
+    background-image: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-shadow: none;
+    padding: 10px 0px;
+    margin-bottom: -2px;
+}
+
+div.center:hover {
+    background-color: #566f7d;
+    color: #fff;
+    text-shadow: none;
+    text-decoration: none;
+}
+
+.reviews{
+  font-style: oblique;
+}
+
+div:target{
+  display: block;
+}

@@ -1,0 +1,158 @@
+<!--
+returns
+<restaurantId>_rating: id of the restaurant
+<restaurantId>_review: the text review of the restaurant
+<restaurantId>_ambiance: classy ambiance rating
+<restaurantId>_cleanliness: cleanliness
+reataurantId_noise: noise level rating
+-->
+
+<div class="rating-group">
+	<div class="accord">
+		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><%= restaurant.name %></a>
+	</div>
+	<!-- .collapse.in determines state of collapsable div; exists = not collapsed -->
+	<div id="collapseOne" class='collapse in'>
+		<div class="container">
+
+			<div class="yelp-info sub-section row">
+				<div class='col col-xs-6'>
+					<p><%= restaurant.name %></p>
+					<input name="RestaurantName" type="text" class="hidden" value="<%= restaurant.name %>">
+					<input name="RestaurantId" type="text" class="hidden" value="<%= restaurant.id %>">
+					<!-- THIS SHOULD BE A STATIC YELP RATING; TAKEN FROM YELP -->
+					<input name="YelpRating" type='number' class="rating" data-min='1' data-max='5' value='5'>
+					<span>Yelp Rating</span>
+				</div>
+				<div class="col col-xs-6">
+					<div class="image">
+						<img src="http://placehold.it/1000x500" align="middle">
+					</div>
+				</div>
+			</div> <!-- end .yelp-info -->
+
+			<!-- RATER/CUSTOMER INPUT -->
+			<div class="restaurant-review">
+				<div class="restaurant-review">
+					<!-- rater's information -->
+					<div class="sub-section user-info row">
+						<div class="user-image col col-xs-4">
+							<img src="/images/garett.jpg">
+						</div>
+						<div class="user-details col col-xs-8">
+							<div class="row">
+								<div class="col col-xs-12">
+									<!-- should this be editable? -->
+									<input name="restaurantid_rating" type='number' class="rating" data-min='1' data-max='5' value='5'>
+									<span>by USERNAME</span>
+								</div>
+							</div>
+							<div class="row">
+								<!-- number of user's upvoted reviews -->
+								<div class="col col-xs-8 upvoted-count">
+									<span>50 upvoted reviews</span>
+								</div>
+								<div class="col col-xs-4 friend-count">
+									<!-- <span>6 friends</span> -->
+								</div>
+							</div>
+						</div>
+					</div> <!-- end .user-info -->
+					<!-- rater's word review -->
+					<div class="sub-section row">
+						<div class="col col-xs-10 col-xs-offset-1">
+							<textarea name="restaurantid_review" id="" class='text-review' rows='5' placeholder='What did you think of the restaurant?'></textarea>
+						</div>
+					</div>
+
+					<!-- BEGIN NUMERIC RATINGS -->
+					<div class="sub-section sliders">
+						<!-- service rating 
+						<div id='expert' class='row'>
+							<p class='col col-xs-6'>Service Rating</p>
+							<div class='col col-xs-6'>
+								<input name='restaurantid_service' type='number' class="rating" data-min='1' data-max='5' value='4' data-step"0.5">
+							</div>
+						</div> -->
+
+						<!-- classy ambiance rating 
+						<div id="expert" class="row">
+							<p class="col col-xs-6">Ambience Rating</p>
+							<div class="col col-xs-6">
+								<input name='restaurantid_ambience' type='number' class="rating" data-min='1' data-max='5' value='4'>
+							</div>
+						</div> -->
+
+					<div id="expert" class="row">
+            	    	<p class="col col-xs-6">Service Rating</p>
+            			<div class="col col-xs-6">
+            				<div class="row">
+            					<span class='col col-xs-3'>Low</span>
+                  				<!-- the slider generates a whole new div above the input tag so i gotta house it in parent div -->
+                  				<div class="col col-xs-6 pad-right-0">
+                  				<!-- you can remove the right padding from this parent's div to make it look better -->
+	                  				<input class="flat-slider" name='restaurantid_service' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" />
+                  				</div>
+                 		 		<span class='col col-xs-3'>High</span>
+            				</div>
+            			</div>
+            		</div>
+
+		            <div id="expert" class="row">
+		            	<p class="col col-xs-6">Ambience Rating</p>
+		            	<div class="col col-xs-6">
+		            		<div class="row">
+		            			<span class='col col-xs-3'>Low</span>
+		                  <!-- the slider generates a whole new div above the input tag so i gotta house it in parent div -->
+		                  		<div class="col col-xs-6 pad-right-0">
+		                  	<!-- you can remove the right padding from this parent's div to make it look better -->
+			                  		<input class="flat-slider" name='restaurantid_ambience' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" />
+		                  		</div>
+		                 		 <span class='col col-xs-3'>High</span>
+		            		</div>
+		            	</div>
+		            </div>
+
+						<!-- cleanliness -->
+						<div id="expert" class="row">
+							<p class="col col-xs-6">Cleanliness</p>
+							<div class="col col-xs-6">
+								<div class="row">
+									<span class='col col-xs-3'>Low</span>
+									<!-- the slider generates a whole new div above the input tag so i gotta house it in parent div -->
+									<div class="col col-xs-6 pad-right-0">
+										<!-- you can remove the right padding from this parent's div to make it look better -->
+										<input class="flat-slider" name='restaurantid_cleanliness' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" />
+									</div>
+
+									<span class='col col-xs-3'>High</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- rate noise level -->
+						<div id="expert" class="row">
+							<p class="col col-xs-6">Rate Noise Level</p>
+							<div class="col col-xs-6">
+								<div class="row">
+									<span class='col col-xs-3'>Low</span>
+									<!-- the slider generates a whole new div above the input tag so i gotta house it in parent div -->
+									<div class="col col-xs-6 pad-right-0">
+										<!-- you can remove the right padding from this parent's div to make it look better -->
+										<input class="flat-slider" name='restaurantid_noise' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" />
+									</div>
+
+									<span class='col col-xs-3'>High</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- end .restaurant-review -->
+				<div class="submit">
+					<button class='btn btn-danger submit-button'>Submit</button>
+				</div>
+
+			</div>
+		</div> <!-- end .container -->
+	</div>
+</div> <!-- end .rating-group-->
