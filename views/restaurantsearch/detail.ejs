@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<% include ../common/head %>
+    <link rel="stylesheet" href="/styles/basicsearch.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <div class="container header-container">
+      <div id="welcomediv">
+        <p  class="floatright">You are logged in as <%= account.fullName %> ! </p>
+      </div>
+      <div id="registerorlogindiv" class="floatright">
+        <a href="/register" class="btn btn-lg btn-danger">Register</a>
+        <a href="/login" class="btn btn-lg btn-danger">Login</a>
+      </div>
+	     <% include ../common/header %>
+    </div><!-- End Header-Container -->
+
+      <div class="container page-content">
+
+        <div class="col-xs-6 col-md-6 col-lg-6">
+           <section>
+            <h3>Restaurant - <%= output.business.name %></h3>
+            <p>
+                <b>Phone:</b> <%= output.business.contact.phone %>
+                <br />
+                <b>Address: </b><%= output.business.location.address %> 
+                 <%= output.business.location.city %> 
+                 <%= output.business.location.state %> 
+                 <%= output.business.location.postalCode %> 
+                <br />
+                <br />
+                <b>Deals - <%= output.externalID%> (hard coded deals - no data)</b>
+                <br />
+                <!--<a href="<%= output.yelpData.deals[0].url %>">
+                        <img src="<%= output.yelpData.deals[0].image_url %>" alt="<%= output.yelpData.deals[0].title %>" with="42" height="42">
+                </a>-->
+                <br />
+                <b>Title: </b> <%= output.yelpData.deals[0].title %>
+                <br />
+                <b>What you get: </b> <%- output.yelpData.deals[0].what_you_get %>
+                <br />
+                <b>Time Start: </b><%= output.yelpData.deals[0].time_start %>
+                <br />
+                <b>Important restrictions: </b><%= output.yelpData.deals[0].important_restrictions %>
+                <form action="/basicsearch/restaurant/deal" method="post">
+                  <input type="hidden" name="id" value="<%= output.business._id %>">
+                  <input type="hidden" name="deal_id" value="<%= output.yelpData.deals[0].id %>">
+                  <input type="hidden" name="time_start" value="<%= output.yelpData.deals[0].time_start %>">
+                  <button type="submit">Save this Deal</button>
+                </form>
+            </p>
+        </section>
+      </div>
+    </div>
+
+    <script>
+    $(document).ready(function(){
+      if( ! "<%= account %>" ) {
+        $('#registerorlogindiv').show();
+        $('#welcomediv').hide();
+      }
+      else {
+        $('#registerorlogindiv').hide();
+        $('#welcomediv').show();
+      }
+    });
+    </script>
+    <div id="footer">
+	     <% include ../common/footer %>
+    </div>
+	     <% include ../common/foot %>
+  </body>
+</html>

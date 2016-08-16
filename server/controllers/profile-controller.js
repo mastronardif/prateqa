@@ -1,18 +1,15 @@
 'use strict';
 var util = require('util');
-var session = require('client-sessions');
-//var MongoClient = require('mongodb').MongoClient;
-//var url = 'mongodb://localhost:27017/platerate';
+var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-//var db;
+var session = require('client-sessions');
+var assert = require('assert');
 
-// Initialize connection once
-/* MongoClient.connect(url, function(err, database) {
-  if(err) throw err;
-  console.log("Connected correctly to server.");
-  db = database;
-}); */
+module.exports.viewProfile = function(req, res) {
+    res.render('profile/edit');
+};
 
+//for setting the values
 module.exports.editProfile = function(req, res) {
   var diet = req.body.diet;
   var selectedDiets = [];
@@ -20,18 +17,23 @@ module.exports.editProfile = function(req, res) {
     console.log("No dietary preferences selected!");
   }
   else{
-    for(var i=0; i<diet.length;i++){
+    for(var i=0; i < diet.length;i++){
       selectedDiets.push(diet[i]);
     }
     console.log("These are selected:"+ selectedDiets);
   }
+  console.log("this is the req.body.user ");
   var email = req.body.email;
-  console.log("Here is the email:" + email);
+  var theBody = req.body.firstname;
+  console.log("Here is the req.firstname");
+  console.log(theBody);
   var updatedProfile = req.body;
   req.db.collection('profile').updateOne(
     {"email": email},
       { $set:
         {
+          "firstname": updatedProfile.firstname,
+          "lastname": updatedProfile.lastname,
           "Street": updatedProfile.street,
           "City": updatedProfile.city,
           "PostalCode": updatedProfile.postal,
@@ -48,10 +50,10 @@ module.exports.editProfile = function(req, res) {
                 "Spicy": updatedProfile.spicy,
                 "Presentation": updatedProfile.presentation,
                 "Quantity": updatedProfile.quantity,
-                "ServiceRating": updatedProfile.service_rating,
-                "ClassyAmbience": updatedProfile.classy_ambience,
                 "NoiseLevel": updatedProfile.noise_level,
-                "ValueForPricing": updatedProfile.value_for_price
+                "ValueForPricing": updatedProfile.value_for_price,
+                "ServiceRating": updatedProfile.service_rating,
+                "ClassyAmbience": updatedProfile.classy_ambience
              },
              "DietaryPreferences": selectedDiets
          }
@@ -63,18 +65,26 @@ module.exports.editProfile = function(req, res) {
   res.redirect('/basicsearch');
 };
 
+//checks if the user exist if
 module.exports.loadProfile = function(req,res) {
-  // sets a cookie with the user's info
-  console.log(".loadProfile for " + req.user);
+  //sets a cookie with the user's info
   req.session.user = req.user;
   req.db.collection('profile').findOne({'href': req.user.href})
     .then(function (found){
     if(!found) {
     	req.db.collection('profile').insertOne(req.user);
-			res.render('basicsearch/new');
+			res.render('basicsearch/new', {account:req.user});
       return;
     }
     else {
+      /*
+        for when the user edits their name, this will change it in
+        in the database and in their profile
+      */
+      if(found.firstname != null && found.found != null) {
+        req.user.givenName = found.firstname;
+        req.user.surname   = found.lastname;
+      }
       /*
       create an array of objects to hold the fields of the objectfound
       from the query
@@ -82,7 +92,12 @@ module.exports.loadProfile = function(req,res) {
       accept the respective inputs when the array is passed in render by
       using the <% userInfo %> to input the values in the form.
       */
-      if(found.Street == null){
+      if(found.Street == null     ||
+         found.City == null       ||
+         found.PostalCode == null ||
+         found.Country == null    ||
+         found.Phone == null      ||
+         found.Birthday == null){
         var userInfo = [
           { street: "" },
           { city: ""},
@@ -99,10 +114,10 @@ module.exports.loadProfile = function(req,res) {
               Spicy: '40,60',
               Presentation: '40,60',
               Quantity: '40,60',
-              ServiceRating: '0',
-              ClassyAmbience: '0',
               NoiseLevel: '40,60',
-              ValueForPricing: '40,60'
+              ValueForPricing: '40,60',
+              ServiceRating: '40,60',
+              ClassyAmbience: '40,60'
             }
           },
           { dietaryPreferences: [] }
@@ -111,7 +126,13 @@ module.exports.loadProfile = function(req,res) {
         return;
       }
       else {
+        console.log("this is the found object");
+        console.dir(found);
+        req.user.givenName = found.firstname;
+        req.user.surname   = found.lastname;
         var userInfo = [
+         // { firstname: found.firstname },
+         // { lastname: found.lastname   },
           { street: found.Street       },
           { city: found.City           },
           { postalCode: found.PostalCode },

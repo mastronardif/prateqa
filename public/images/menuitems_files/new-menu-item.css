@@ -1,0 +1,19 @@
+
+#review-count {
+  margin-left: 10px;
+}
+
+ #yelp-rating {
+  margin-left: 10px;
+}
+
+#get-directions{
+  color: #5d9d36;
+}
+
+
+.write-review-btn{
+  height: 50px;
+  width: 300px;
+  font-size:25px;
+}

@@ -702,7 +702,7 @@
                 value: 5,
                 range: false,
                 selection: 'before',
-                tooltip: 'show',
+                tooltip: 'hide',
                 tooltip_split: false,
                 handle: 'round',
                 reversed: false,

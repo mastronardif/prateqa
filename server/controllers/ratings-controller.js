@@ -1,16 +1,6 @@
 'use strict';
 var util = require('util');
-//var MongoClient = require('mongodb').MongoClient;
-//var url = 'mongodb://localhost:27017/platerate';
 var assert = require('assert');
-//var db;
-
-// Initialize connection once
-/* MongoClient.connect(url, function(err, database) {
-  if(err) throw err;
-  console.log("Connected correctly to server.");
-  db = database;
-}); */
 
 module.exports.newRatings = function(req, res) {
     res.render('rating/new', {
@@ -67,7 +57,7 @@ module.exports.rateVenues = function(req,res){
         upsert: true //create a doc if the id doesn't exist
       }
     ); //RestaurantUpdateOne
-  res.redirect("/basicsearch");
+  res.redirect("/ratings/new");
 };
 
 module.exports.rateItems = function(req,res){

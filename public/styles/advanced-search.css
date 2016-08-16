@@ -1,0 +1,32 @@
+.edit_text {
+  font-weight: 500;
+  color: black;
+}
+
+label, .stars {
+  margin-top: .5em;
+}
+
+.btn-primary {
+  opacity: 0.8;
+}
+
+/*Avoiding overlaps for dropdowns*/
+.dropdown.open {
+  margin-bottom: 210px;
+}
+.input-group-btn.open {
+  margin-bottom: 80px;
+}
+.marginVertical {
+  margin: 1em 0;
+}
+
+.marginLeft {
+  margin-left: 2em;
+}
+
+.panel .panel-heading {
+  padding-left: 0;
+}
+

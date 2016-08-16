@@ -1,0 +1,242 @@
+<div class="panel-group material_accordion" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="row accord" role="tab" id="headingfour">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
+                Additional Restaurant Details
+            </a>
+        </h4>
+    </div>  
+	<div id="collapsefour" class="panel-collapse collapse material_accordion_collapse menu_item_style" role="tabpanel" aria-labelledby="headingfour">
+		<div class="panel-body">
+			<h3>Restaurant Attributes</h3>
+			<br>
+			<div>
+				<div id="addRestDetHours">
+					<p>Hours</p>
+					<div class="btn-group-vertical" role="group" aria-label="...">
+  						<button type="button" class="btn btn-default" id="restDetDaySun">Sunday   </button>
+  						<button type="button" class="btn btn-default" id="restDetDayMon">Monday   </button>
+  						<button type="button" class="btn btn-default" id="restDetDayTue">Tuesday  </button>
+  						<button type="button" class="btn btn-default" id="restDetDayWed">Wednesday</button>
+  						<button type="button" class="btn btn-default" id="restDetDayThu">Thursday </button>
+  						<button type="button" class="btn btn-default" id="restDetDayFri">Friday   </button>
+  						<button type="button" class="btn btn-default" id="restDetDaySat">Saturday </button>
+                   </div>
+				</div>
+				<div id="addRestDetStartTime">
+					<p>From</p>
+					<div class="btn-group-vertical" role="group" aria-label="...">
+  						<button type="button" class="btn btn-default" id="restDetStrtTmeSun">11:00 AM</button>
+  						<button type="button" class="btn btn-default" id="restDetStrtTmeMon">11:00 AM</button>
+  						<button type="button" class="btn btn-default" id="restDetStrtTmeTue">11:00 AM</button>
+  						<button type="button" class="btn btn-default" id="restDetStrtTmeWed">11:00 AM</button>
+  						<button type="button" class="btn btn-default" id="restDetStrtTmeThu">11:00 AM</button>
+  						<button type="button" class="btn btn-default" id="restDetStrtTmeFri">11:00 AM</button>
+  						<button type="button" class="btn btn-default" id="restDetStrtTmeSat">11:00 AM</button>
+                   </div>
+				</div>
+			    <div id="addRestDetEndTime">
+			    	<p>To</p>
+			    	<div class="btn-group-vertical" role="group" aria-label="...">
+  						<button type="button" class="btn btn-default" id="restDetEndTmeSun">11:00 PM</button>
+  						<button type="button" class="btn btn-default" id="restDetEndTmeMon">11:00 PM</button>
+  						<button type="button" class="btn btn-default" id="restDetEndTmeTue">11:00 PM</button>
+  						<button type="button" class="btn btn-default" id="restDetEndTmeWed">11:00 PM</button>
+  						<button type="button" class="btn btn-default" id="restDetEndTmeThu">11:00 PM</button>
+  						<button type="button" class="btn btn-default" id="restDetEndTmeFri">11:00 PM</button>
+  						<button type="button" class="btn btn-default" id="restDetEndTmeSat">11:00 PM</button>
+                   </div>
+			    </div>
+			    <div id="addRestDetEdit">
+			    	<a href="#">Edit</a>
+			    	<br>
+			    	<button type="button" class="btn btn-default">Click Here</button>
+  					<button type="button" class="btn btn-default">Click Here</button>
+  					<button type="button" class="btn btn-default">Click Here</button>
+  					<button type="button" class="btn btn-default">Click Here</button>
+  					<button type="button" class="btn btn-default">Click Here</button>
+  					<button type="button" class="btn btn-default">Click Here</button>
+  					<button type="button" class="btn btn-default">Click Here</button>
+			    </div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<div>
+			    <br>
+				<form action="" method="post">
+				    Accessibility  <input type="text">
+				    <br>
+					Awards         <input type="text">
+                    <br>
+				</form>
+			</div>
+			<div>
+				<h3>BYOB Available ?</h3>
+				<div class="btn-group" role="group" aria-label="...">
+  						<button type="button" class="btn btn-default" id="byobAvailSun">Sunday   </button>
+  						<button type="button" class="btn btn-default" id="byobAvailMon">Monday   </button>
+  						<button type="button" class="btn btn-default" id="byobAvailTue">Tuesday  </button>
+  						<button type="button" class="btn btn-default" id="byobAvailWed">Wednesday</button>
+  						<button type="button" class="btn btn-default" id="byobAvailThu">Thursday </button>
+  						<button type="button" class="btn btn-default" id="byobAvailFri">Friday   </button>
+  						<button type="button" class="btn btn-default" id="byobAvailSat">Saturday </button>
+                   </div>
+                   <div>
+                   	  <h3>
+                   		 Corkage Fee (When BYOB is not available)
+                   	  </h3>
+                   	  <input type="text">
+                   </div>
+			</div>
+			
+				<!-- Max Seats Accordion-->
+			<div>	
+				<div role="tab" id="add_Rest_Max_Seats">
+        			<h3>
+            			<a data-toggle="collapse" data-parent="#accordion" href="#collapseSeats" aria-expanded="true" aria-controls="collapseSeats">
+                			Max Seats
+            			</a>
+        			</h3>
+    			</div> 
+    			<br>
+    			 
+    			<div id="collapseSeats"  role="tabpanel" aria-labelledby="seatsAccordion" >
+		        	<div class="addRestDetails">
+		        		<form>
+		        			<input type="button" class="addRestDetailsButton" value="+"  id="addSeatsEntireVen"/>
+		        			<input type="button" class="addRestDetailsButton" value="- " id="subSeatsEntireVen"/>
+		        				Entire Venue
+		        			<input type="text"                                        id="seatsVenValue"       />
+		        		</form>
+		        	</div>
+		        	<br>
+		        	<div class="">
+		        		<form>
+		        			<input type="button" class="addRestDetailsButton" value="+"  id="addSeatsEntireGrp"/>	
+		        			<input type="button" class="addRestDetailsButton" value="- " id="subSeatsEntireGrp"/>
+		        				Entire Group
+		        			<input type="text"                                           id="seatsGrpValue"    />
+		        		</form>
+		        	</div>
+		        	<br>
+		        	<div class="">
+		        		<form>
+		        			<input type="button" class="addRestDetailsButton" value="+"  id="addSeatsSingTab"/>
+		        			<input type="button" class="addRestDetailsButton" value="- " id="subSeatsSingTab"/>
+		        				Single Table
+		        			<input type="text"                                           id="seatsSingValue" />
+		        		</form>
+		        		<br>
+		        		<br>
+		        	</div>
+		        </div>
+		    </div>    
+		        <!-- end of max seats accordion-->
+
+		        <!-- for the Ownship text and Parking fields-->
+		        <div>
+		        	<form>
+		        		Ownership <input type="text" id="addRestDetOwnership"/>
+		        		<br><br>
+		        		Parking   <input type="text" id="addRestDetParking"  />
+		        	</form>
+		        	<br>
+		        </div>
+				<!-- end of ownership and parking fields -->
+
+		        <!-- types of payment Accordion--> 
+		        <div>
+			        <div role="tab" id="add_Rest_Payment_Types">
+	        			<h3>
+	            			<a data-toggle="collapse" data-parent="#accordion" href="#collapsePayments" aria-expanded="true" aria-controls="collapsePayments">
+	                			Payment Types Accepted
+	            			</a>
+	        			</h3>
+	    			</div> 
+	    			<br>
+
+	    			<div id="collapsePayments"  role="tabpanel" aria-labelledby="seatsAccordion">
+			        	<div class="">
+			        		<form>
+			        			<input type="button" class="addRestDetailsButton" value="+"  id="addCashButton"/>
+			        			
+			        			<input type="button" class="addRestDetailsButton" value="- " id="subCashButton"/>
+			        				Cash
+			        			<input type="text"              id="cashValue"    />
+			        		</form>
+			        	</div>
+			        	<br>
+			        	<div class="">
+			        		<form>
+			        			<input type="button" class="addRestDetailsButton" value="+"  id="addDebitButton"  />
+			        		
+			        			<input type="button" class="addRestDetailsButton" value="- " id="subDebitButton"  />
+			        				Debit
+			        			<input type="text"              id="debitButtonValue"/>
+			        		</form>
+			        	</div>
+			        	<br>
+			        	<div class="">
+			        		<form>
+			        			<input type="button" class="addRestDetailsButton" value="+"  id="addCreditButton"/>
+			        		
+			        			<input type="button" class="addRestDetailsButton" value="- " id="subCreditButton"/>
+			        				Credit
+			        			<input type="text"              id="creditButtonValue">
+			        		</form>
+			        		<br>
+			        		<br>
+			        	</div>
+			        </div>
+		        </div>
+				<!-- end of types of payment-->
+
+				<!-- Primary Ingredients Accordion-->
+				<div>
+			        <div role="tab" id="add_Rest_Primary_Ingredients">
+	        			<h3>
+	            			<a data-toggle="collapse" data-parent="#accordion" href="#collapsePryIngredients" aria-expanded="true" aria-controls="collapsePryIngredients">
+	                			Primary Ingredients Sources Within:
+	            			</a>
+	        			</h3>
+	    			</div> 
+	    			<br>
+	    			<div id="collapsePryIngredients"  role="tabpanel" aria-labelledby="PryIngredientsAccordion">
+			        	<div class="">
+			        		<form>
+			        			<input type="text" id="">
+			        				Miles of 
+			        			<input type="text" id="">
+			        		</form>
+			        	</div>
+			        </div>
+		        </div>
+		        <br>
+		    
+		        <!-- end of Primary ingredients accordion -->
+
+		        <!-- Romantic glyphicons -->
+		        <div class="addRestRomanticSection" id="addRestDetRomanticRating" value="">
+		        	<h3 id="headingRomanticSec">
+		        		Romantic
+		        		<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+		        		<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+		        		<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+		        		<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+		        		<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+		        	</h3>
+		        	<br>
+		      
+		        </div>
+		        <!-- end of Romantic glyphicons -->
+
+		        <!-- WI-FI Text field -->
+		        <div>
+		        	<form>
+		        		WI-FI <input type="text">
+		        	</form>
+		        </div>
+		</div>
+ 	</div>	
+</div>	

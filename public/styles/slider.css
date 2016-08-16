@@ -129,9 +129,9 @@
   border: 0px solid transparent;
 }
 .slider-handle.round {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 .slider-handle.triangle {
   background: transparent none;

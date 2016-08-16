@@ -61,3 +61,17 @@ db.profile.getIndexes()
 mongo  ds023694.mlab.com:23694/bubblevan -u ling -p ling
 
 FM test July 29th 7:05pm
+https://enigmatic-falls-23514.herokuapp.com/
+
+
+
+
+
+
+# Mongo Database set-up
+ Steps to set up mongodb for disconnected local development
+ 
+	In root directory, create `data` directory:
+ 	```mkdir data```
+ 	Run this command to start your mongod server:
+	```mongod --dbpath ./data --port 27017```

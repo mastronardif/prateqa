@@ -10,19 +10,48 @@ $(function() {
     });
 
     jQuery(document).ready(function($) {
-        
+
         $('#basicExample').timepicker();
 
-        $(document).on('click', '#btn-change', function(e) {
+        $(document).on('click', '#btn-change', function(e){
           var previousClass = e.target.className;
           var newClass = "glyphicon glyphicon-minus";
           $(e.target).toggleClass(newClass);
+        });
 
+        $('#romantic').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
+        $('#service').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
+        $('#ambience').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
+        $('#noise_level').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
+        $('#price_asearch').bootstrapSlider({
+          formatter: function(value) {
+            return;
+          }
         });
 
         $('#ex1').bootstrapSlider({
           formatter: function(value) {
-            return 'Current value: ' + value;
+            return;
           }
         });
 
@@ -38,7 +67,7 @@ $(function() {
 
         $('#ex2').bootstrapSlider({
             formatter: function(value) {
-                return 'Current value: ' + value;
+                return;
             }
         });
 
@@ -54,7 +83,7 @@ $(function() {
 
         $('#ex3').bootstrapSlider({
             formatter: function(value) {
-                return 'Current value: ' + value;
+                return;
             }
         });
 
@@ -70,7 +99,7 @@ $(function() {
 
         $('#ex4').bootstrapSlider({
             formatter: function(value) {
-                return 'Current value: ' + value;
+                return;
             }
         });
 
@@ -86,7 +115,7 @@ $(function() {
 
         $('#ex5').bootstrapSlider({
             formatter: function(value) {
-                return 'Current value: ' + value;
+                return;
             }
         });
 
@@ -102,7 +131,7 @@ $(function() {
 
         $('#ex6').bootstrapSlider({
             formatter: function(value) {
-                return 'Current value: ' + value;
+                return;
             }
         });
 
@@ -118,7 +147,7 @@ $(function() {
 
         $('#ex7').bootstrapSlider({
             formatter: function(value) {
-                return 'Current value: ' + value;
+                return;
             }
         });
 
@@ -134,24 +163,46 @@ $(function() {
 
         $('#ex8').bootstrapSlider({
             formatter: function(value) {
-                return 'Current value: ' + value;
+                return;
             }
         });
 
         $('#ex9').bootstrapSlider({
             formatter: function(value) {
-                return 'Current value: ' + value;
+                return;
             }
         });
 
         $('#ex10').bootstrapSlider({
             formatter: function(value) {
-                return 'Current value: ' + value;
+                return;
             }
         });
 
+        $('#ex11').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
 
+        $('#ex12').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
+        $('#ex11').bootstrapSlider({
+            formatter: function(value) {
+                return 'Current value: ' + value;
+            }
+        });
         // $('.slider').slider()
+
+        $('#ex12').bootstrapSlider({
+            formatter: function(value) {
+                return 'Current value: ' + value;
+            }
+        });
 
 
         $("#datepicker").datepicker({

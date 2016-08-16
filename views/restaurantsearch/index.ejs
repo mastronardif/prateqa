@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<% include ../common/head %>
+    <link rel="stylesheet" href="/styles/basicsearch.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <div class="container header-container">
+      <div id="welcomediv">
+        <p  class="floatright">Hello, <%= account.fullName %>! </p>
+      </div>
+      <div id="registerorlogindiv" class="floatright">
+        <a href="/register" class="btn btn-lg btn-danger">Register</a>
+        <a href="/login" class="btn btn-lg btn-danger">Login</a>
+      </div>
+	     <% include ../common/header %>
+    </div><!-- End Header-Container -->
+
+      <div class="container page-content">
+        <form action="/basicsearch/restaurant" method="POST" >
+          <!-- enctype="{enctype}" -->
+            <h1>Search Restaurant</h1>
+            <input name="basicsearchinput" type="text" placeholder="Restaurant Name">
+            <button class="feeling-button" type="submit">Search</button>
+        </form>
+
+        <div class="col-xs-6 col-md-6 col-lg-6">
+        <% if (count !== null ) {%>
+           <% if (errorMessage !== '' ) { %>
+              <p><%= errorMessage %></p>
+           <% } else { %>
+              <h4>Search Result: <%= count%></h4>
+              <% for (var i=0; i < searchResult.length; i++) { %>
+                  <a href='/basicsearch/restaurant/<%= searchResult[i]._id %>'><%= searchResult[i].name %></a>
+                  <br />
+              <% } %>
+           <% } %>
+        <% } %>
+        </div>
+        <!--
+        <a href="/advancedsearch">Advanced Search</a>
+        <div class="row row-no-padding">
+          <div class="col-xs-6 col-md-6 col-lg-6">
+            <img src="/images/clover.png" class="feeling-image center-block" alt="Four leaf clover" />
+            <div class="feeling-button">I'm feeling lucky</div>
+          </div>
+          <div class="col-xs-6 col-md-6 col-lg-6">
+            <img src="/images/lightning.png" class="feeling-image center-block" alt="Lightning bolt" />
+            <div class="feeling-button">I'm feeling adventurous</div>
+          </div>
+        </div>
+        <h6>Find random or unusual but awesome menu items!</h6>
+    </div>--><!-- End Page-Content -->
+    <script>
+    $(document).ready(function(){
+      if( ! "<%= account %>" ) {
+        $('#registerorlogindiv').show();
+        $('#welcomediv').hide();
+      }
+      else {
+        $('#registerorlogindiv').hide();
+        $('#welcomediv').show();
+      }
+    });
+    </script>
+    <div id="footer">
+	     <% include ../common/footer %>
+    </div>
+	     <% include ../common/foot %>
+  </body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<% include ../common/head %>
-	<link rel="stylesheet" href="/styles/rating-new.css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="/styles/rating-new.css" media="screen">
 </head>
 <body>
 	<div class="container header-container">
@@ -17,7 +17,7 @@
 			</div>
 		</div>
 
-		<div class="rating-form">
+		<div class="rating-form" id="restaurantForm">
 			<form action="/submitRestaurant/<%=restaurant.id%>" method="POST">
 				<!-- RESTAURANT Rating -->
 				<% include ../common/rate_restaurant_form.ejs %>
@@ -28,7 +28,9 @@
 			<!-- Item Rating -->
 			<% foods.forEach(function(food,index) { %>
 				<form action="/submitItem/<%=food.foodId%>" method="POST">
-					<% include ../common/review_dish_template.ejs %>
+					<div id="foodForm">
+						<% include ../common/review_dish_template.ejs %>
+					</div>
 				</form>
 			<% }) %>
 		</div> <!-- end rating-group -->
@@ -38,6 +40,9 @@
 		</div>
 		<% include ../common/foot %>
 		<script>
+		function hideForm() {
+			document.getElementById('restaurantForm').style.display = "none";
+		};
 		// converts into single slider bar
 		$(function() {
 			$('.flat-slider').bootstrapSlider({

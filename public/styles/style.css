@@ -76,6 +76,9 @@
 
 .panel-title a {
   text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+  margin: -10px -15px;
 }
 
 .panel-title a:hover {
@@ -92,7 +95,7 @@
   background-color: #74c046;
   font-size: 106%;
   letter-spacing: -0.01em;
-  margin: 5px;
+  margin: 5px 0;
   padding: 1%;
   text-align: center;
   text-transform: uppercase;
@@ -226,4 +229,83 @@ p a {
 .tooltip-inner {
   padding-top: 0rem !important;
   margin-top: -10rem;
+}
+
+#empty_col {
+  float:left;
+  width: 32%;
+}
+
+#food_choices {
+  float: left;
+  width: 32%;
+  font-size: 15px;
+  font-color: black;
+}
+
+#menu-split-button {
+  float: left;
+  width: 32%;
+  font-size: 15px;
+}
+
+#addRestDetHours {
+  float: left;
+  width: 30%;
+  font-size: 15px;
+
+}
+
+#addRestDetStartTime {
+  float: left;
+  width: 30%;
+  font-size: 15px;
+}
+
+#addRestDetEndTime {
+  float: left;
+  width: 30%;
+  font-size: 15px;
+
+}
+
+#addRestDetEdit {
+  float: left;
+  width: 10%;
+  font-size: 15px;
+
+}
+
+
+span.review-author {
+  position: relative;
+  bottom: 21px;
+  left: 80px; 
+}
+img.detailed-review {
+  height: 50%;
+  width: 50%;
+}
+
+
+.addRestRomanticSection {
+  h4 {
+    display: inline;
+    color: black;
+  }
+
+#headingRomanticSec {
+  color: black;
+  }
+
+
+
+.addRestDetailsButton {
+  background-color: #4CAF50;
+  color: white;
+  
+ }
+
+.individualRatingStyle {
+  padding: 100px;
 }

@@ -26,7 +26,7 @@ reataurantId_noise: noise level rating
 				</div>
 				<div class="col col-xs-6">
 					<div class="image">
-						<img src="http://placehold.it/1000x500" align="middle">
+						<img src="ht`tp://placehold.it/1000x500" align="middle">
 					</div>
 				</div>
 			</div> <!-- end .yelp-info -->
@@ -67,7 +67,7 @@ reataurantId_noise: noise level rating
 
 					<!-- BEGIN NUMERIC RATINGS -->
 					<div class="sub-section sliders">
-						<!-- service rating 
+						<!-- service rating
 						<div id='expert' class='row'>
 							<p class='col col-xs-6'>Service Rating</p>
 							<div class='col col-xs-6'>
@@ -75,7 +75,7 @@ reataurantId_noise: noise level rating
 							</div>
 						</div> -->
 
-						<!-- classy ambiance rating 
+						<!-- classy ambiance rating
 						<div id="expert" class="row">
 							<p class="col col-xs-6">Ambience Rating</p>
 							<div class="col col-xs-6">
@@ -83,36 +83,34 @@ reataurantId_noise: noise level rating
 							</div>
 						</div> -->
 
-					<div id="expert" class="row">
-            	    	<p class="col col-xs-6">Service Rating</p>
-            			<div class="col col-xs-6">
-            				<div class="row">
-            					<span class='col col-xs-3'>Low</span>
-                  				<!-- the slider generates a whole new div above the input tag so i gotta house it in parent div -->
-                  				<div class="col col-xs-6 pad-right-0">
-                  				<!-- you can remove the right padding from this parent's div to make it look better -->
-	                  				<input class="flat-slider" name='restaurantid_service' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" />
-                  				</div>
-                 		 		<span class='col col-xs-3'>High</span>
-            				</div>
-            			</div>
-            		</div>
-
-		            <div id="expert" class="row">
-		            	<p class="col col-xs-6">Ambience Rating</p>
-		            	<div class="col col-xs-6">
-		            		<div class="row">
-		            			<span class='col col-xs-3'>Low</span>
-		                  <!-- the slider generates a whole new div above the input tag so i gotta house it in parent div -->
-		                  		<div class="col col-xs-6 pad-right-0">
-		                  	<!-- you can remove the right padding from this parent's div to make it look better -->
-			                  		<input class="flat-slider" name='restaurantid_ambience' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" />
-		                  		</div>
-		                 		 <span class='col col-xs-3'>High</span>
-		            		</div>
-		            	</div>
-		            </div>
-
+						<div id="expert" class="row">
+							<p class="col col-xs-6">Service Rating</p>
+							<div class="col col-xs-6">
+								<div class="row">
+									<span class='col col-xs-3'>Low</span>
+									<!-- the slider generates a whole new div above the input tag so i gotta house it in parent div -->
+									<div class="col col-xs-6 pad-right-0">
+										<!-- you can remove the right padding from this parent's div to make it look better -->
+										<input class="flat-slider" name='restaurantid_service' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" />
+									</div>
+									<span class='col col-xs-3'>High</span>
+								</div>
+							</div>
+						</div>
+						<div id="expert" class="row">
+							<p class="col col-xs-6">Ambience Rating</p>
+							<div class="col col-xs-6">
+								<div class="row">
+									<span class='col col-xs-3'>Low</span>
+									<!-- the slider generates a whole new div above the input tag so i gotta house it in parent div -->
+									<div class="col col-xs-6 pad-right-0">
+										<!-- you can remove the right padding from this parent's div to make it look better -->
+										<input class="flat-slider" name='restaurantid_ambience' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" />
+									</div>
+									<span class='col col-xs-3'>High</span>
+								</div>
+							</div>
+						</div>
 						<!-- cleanliness -->
 						<div id="expert" class="row">
 							<p class="col col-xs-6">Cleanliness</p>
@@ -129,7 +127,6 @@ reataurantId_noise: noise level rating
 								</div>
 							</div>
 						</div>
-
 						<!-- rate noise level -->
 						<div id="expert" class="row">
 							<p class="col col-xs-6">Rate Noise Level</p>
@@ -149,7 +146,7 @@ reataurantId_noise: noise level rating
 					</div>
 				</div> <!-- end .restaurant-review -->
 				<div class="submit">
-					<button class='btn btn-danger submit-button'>Submit</button>
+					<input type="button" class='btn btn-danger submit-button' onclick="hideForm()" value="Submit" />
 				</div>
 
 			</div>

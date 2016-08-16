@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../common/head %>
+</head>
+<body>
+<div class="container header-container">
+    <% include ../common/header %>
+</div>
+
+<!-- page content -->
+<div class="container-fluid page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="text_edit">Advanced Search</h2>
+            </div>
+        </div>
+    </div>
+    <form>
+        <div class="container">
+            <div class="form-group row">
+                <div class="col-md-3 col-xs-6">
+                    <label for="menu-item" class="edit_text col-form-label">Search Menu Items</label>
+                </div>
+                <div class="col-md-9 col-xs-6">
+                    <input id="menu-item" type="text" class="form-control" placeholder="I'm craving for . . . "/>
+                </div>
+            </div>
+
+
+            <div class="form-group row" id="distance">
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <label for="distance-number" class="edit_text">Within </label>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <div class="input-group input-group-inline">
+                        <input type="number" id="distance-number" class="form-control" aria-label="distance"
+                               placeholder="3">
+                        <div class="input-group-btn input-group-btn-inline">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">blocks <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">blocks</a></li>
+                                <li><a href="#">miles</a></li>
+                                <li><a href="#">steps</a></li>
+                            </ul>
+                        </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <label for="location" class="edit_text"> From </label>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <input type="text" id="location" class="form-control" placeholder="my location">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <label class="edit_text">Minimum Menu Item Rating</label>
+                </div>
+                <div class="col-sm-9 stars">
+                    <input name="menuitem_asearch" type='number' class="rating" data-min='1' data-max='5' value='5'>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <label class="edit_text">Minimum Restaurant Rating</label>
+                </div>
+                <div class="col-sm-9 stars">
+                    <input name="restaurant_asearch" type='number' class="rating" data-min='1' data-max='5' value='5'>
+                </div>
+            </div>
+
+            <div class="row form-group dropdown" id="openWhenForm">
+                <!-- there is no open-when right now-->
+                <!-- <div class="input-group input-group-inline"> -->
+                <div class="col-sm-3">
+                    <label class="edit_text">Open</label>
+                </div>
+                <div class="col-sm-9">
+                    <div class="input-group-btn input-group-btn-inline" id="open-when">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="true">Now <span class="caret"></span></button>
+                        <!--********** align numbers -->
+                        <ul class="dropdown-menu scrollable-menu">
+                            <li><a href="#">10:00 am</a></li>
+                            <li><a href="#">10:30 am</a></li>
+                            <li><a href="#">11:00 am</a></li>
+                            <li><a href="#">11:30 am</a></li>
+                            <li><a href="#">12:00 pm</a></li>
+                            <li><a href="#">12:30 pm</a></li>
+                            <li><a href="#">12:00 pm</a></li>
+                            <li><a href="#">12:30 pm</a></li>
+                            <li><a href="#">1:00 pm</a></li>
+                            <li><a href="#">1:30 pm</a></li>
+                            <li><a href="#">2:00 pm</a></li>
+                            <li><a href="#">2:30 pm</a></li>
+                            <li><a href="#">3:00 pm</a></li>
+                            <li><a href="#">3:30 pm</a></li>
+                            <li><a href="#">4:00 pm</a></li>
+                            <li><a href="#">4:30 pm</a></li>
+                            <li><a href="#">5:00 pm</a></li>
+                            <li><a href="#">5:30 pm</a></li>
+                        </ul>
+                    </div><!-- /btn-group -->
+                </div>
+                <!-- </div> input-group -->
+            </div>
+
+            <div class="row form-group" id="sortByWhat">
+                <div class="col-sm-3 col-xs-3">
+                    <label class="edit_text">Sort By </label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    <div class="input-group input-group-inline">
+                        <div class="input-group-btn input-group-inline">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">Menu Items <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Menu Items</a></li>
+                                <li><a href="#">Restaurants</a></li>
+                            </ul>
+                        </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    <label class="edit_text"> that are</label>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    <div class="input-group input-group-inline">
+                        <div class="input-group-btn input-group-inline">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">Highest Rated <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Highest Rated</a></li>
+                                <li><a href="#">Closest</a></li>
+                                <li><a href="#">Most Reviewed</a></li>
+                                <li><a href="#">Best Value</a></li>
+                            </ul>
+                        </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+            </div>
+        </div>
+
+
+        <div class="rating-group">
+            <div class="accord">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#menuItemsCollapse"
+                   aria-expanded="true" aria-controls="collapseOne">Menu Items</a>
+            </div>
+            <!-- .collapse.in determines state of collapsable div; exists = not collapsed -->
+            <div id="menuItemsCollapse" class='collapse in container'>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="edit_text">Type of Food</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group dropdown" id="search-food-type">
+                            <button class="btn btn-default dropdown-toggle dropdown-label" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Choose One <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu scrollable-menu" aria-label="typeOfFood">
+                                <li><a href="#">American</a></li>
+                                <li><a href="#">Chinese</a></li>
+                                <li><a href="#">Peruvian</a></li>
+                                <li><a href="#">Mexican</a></li>
+                                <li><a href="#">Italian</a></li>
+                                <li><a href="#">Himalayan</a></li>
+                                <li><a href="#">Indian</a></li>
+                                <li><a href="#">Chifa</a></li>
+                                <li><a href="#">Japanese</a></li>
+                                <li><a href="#">Fancy</a></li>
+                                <li><a href="#">Korean</a></li>
+                                <li><a href="#">Southern</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="edit_text">Dietary Preferences</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group dropdown" id="dietaryPreferences">
+                            <button class="btn btn-default dropdown-toggle dropdown-label" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Choose <span class="caret"></span>
+                            </button>
+                            <!--***** BACKEND ***** pre-check those from profile -->
+                            <ul class="dropdown-menu scrollable-menu"
+                                aria-label="dietaryPreferences">
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Gluten</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Dairy</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Bell Peppers</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Shellfish</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Nuts</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Soy</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Grapefruit</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Alcohol</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Red Meat</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Pineapple</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Picante</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <p class="edit_text">Price Range</p>
+                    </div>
+                    <div class="col-md-9">
+                        <div id="expert" class="form-group">
+                            <input id="price_asearch" type="text" class="span2" value="" data-slider-min="1"
+                                   data-slider-max="100" data-slider-step="5" data-slider-value="[30,70]"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" id="search-diet-pref-div">
+                            <label class="checkbox-inline edit_text">
+                                <input type="checkbox" id="search-diet-pref" checked="checked"/>Consider my dietary
+                                preferences in search
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" id="search-diet-pref-div">
+                            <label class="checkbox-inline edit_text">
+                                <input type="checkbox" id="search-diet-pref" checked="checked"/>Search my ratings only
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="rating-group">
+            <div class="accord">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#restaurantCollapse"
+                   aria-expanded="true" aria-controls="collapseOne">Restaurant</a>
+            </div>
+            <!-- .collapse.in determines state of collapsable div; exists = not collapsed -->
+            <div id="restaurantCollapse" class='collapse in container'>
+                <h4 class="edit_text">Restaurant Attributes</h4>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="edit_text">Features</label>
+                    </div>
+                    <div class="col-md-9">
+                        <!--***** need to keep this menu open until all choices have been made? -->
+                        <div class="form-group dropdown" id="search-features">
+                            <button class="btn btn-default dropdown-toggle dropdown-label" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Restaurant Features <span class="caret"></span>
+                            </button>
+                            <!--******BACKEND pre-check those from profile -->
+                            <ul class="dropdown-menu scrollable-menu" aria-label="restaurantFeatures">
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Kid-Friendly</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Free WiFi</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Free Parking</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Quiet</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Great Cocktails</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Pre-Theater Menu</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Open Early</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Open Late</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Outdoor Seating</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Wheelchair Accessible</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="edit_text">Payment Method</label>
+                    </div>
+                    <div class="col-md-9">
+                        <!--***** need to keep this menu open until all choices have been made? -->
+                        <div class="form-group dropdown" id="paymentMethod">
+                            <button class="btn btn-default dropdown-toggle dropdown-label" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Choose <span class="caret"></span>
+                            </button>
+                            <!--******BACKEND pre-check those from profile -->
+                            <ul class="dropdown-menu scrollable-menu" aria-label="restaurantFeatures">
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;American Express</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Credit Card</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Cash</li>
+                                <li class=" yesPaddingLeft"><input type="checkbox"/>&nbsp;Visa</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="edit_text">Ownership</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group dropdown" id="search-food-type">
+                            <button class="btn btn-default dropdown-toggle dropdown-label" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Choose One <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu scrollable-menu" aria-label="typeOfFood">
+                                <li><a href="#">Locally Owned</a></li>
+                                <li><a href="#">Franchised </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="awards" class="edit_text">Awards</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input id="awards"  class="form-control" type="text" placeholder="Michelin Stars"/>
+                    </div>
+                </div>
+
+                <div class="row yesPaddingTop">
+                    <div class="col-md-3">
+                        <label class="edit_text">BYOB Available ? </label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="btn-group btn-group-justified">
+                            <a type="button" class="btn btn-primary">Sunday</a>
+                            <a type="button" class="btn btn-primary">Monday</a>
+                            <a type="button" class="btn btn-primary">Tuesday</a>
+                            <a type="button" class="btn btn-primary">Wednesday</a>
+                            <a type="button" class="btn btn-primary">Thursday</a>
+                            <a type="button" class="btn btn-primary">Friday</a>
+                            <a type="button" class="btn btn-primary">Saturday</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row yesPaddingTop">
+                    <div class="col-md-3">
+                        <label for="corkage" class="edit_text">Corkage Fee (no BYOB): </label>
+                    </div>
+                    <div class="col-md-9">
+                        <input id="corkage" class="form-control" type="number" placeholder="25"/>
+                    </div>
+                </div>
+
+                <div class="panel-group">
+                    <div class="panel-heading noPadding">
+                        <h4>
+                            <a data-toggle="collapse" href="#maxSeats">Maximum Seats Allowed</a>
+                        </h4>
+                    </div>
+                    <div id="maxSeats" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="entireVenue" class="edit_text">Entire Venue</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input id="entireVenue" type="number"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="entireGroup" class="edit_text">Entire Group</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input id="entireGroup" type="number"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="entireTable" class="edit_text">Entire Table</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input id="entireTable" type="number"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="adv_search_slider">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="romantic" class="edit_text">Romantic </label>
+                        </div>
+                        <div class="col-md-3">
+                            <input name="romantic" id="romantic" type="text" class="span2" value="" data-slider-min="0"
+                                   data-slider-max="100" data-slider-step="5" data-slider-value="[40,60]"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label><input id="romanticNotApp" name="romanticCB" type="checkbox" value="na"/>N/A</label>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class="col-md-3">
+                            <label for="service" class="edit_text">Service</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="service" name="service" type="text" class="span2" value="" data-slider-min="0"
+                                   data-slider-max="100" data-slider-step="5" data-slider-value="[40,60]"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label><input id="serviceNotApp" name="serviceCB" type="checkbox" value="na"/>N/A</label>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class="col-md-3">
+                            <label for="ambience" class="edit_text">Ambience</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="ambience" name="ambience" type="text" class="span2" value="" data-slider-min="0"
+                                   data-slider-max="100" data-slider-step="5" data-slider-value="[40,60]"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label><input id="ambienceNotApp" name="ambienceCB" type="checkbox" value="na"/>N/A</label>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class="col-md-3">
+                            <label for="noise_level" class="edit_text">Noise Level </label>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="noise_level" name="noise_level" type="text" class="span2" value=""
+                                   data-slider-min="0" data-slider-max="100" data-slider-step="5"
+                                   data-slider-value="[40,60]"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label><input id="noiseNotApp" name="noiseCB" type="checkbox" value="na"/>N/A</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="submitDiv yesPaddingTop">
+            <button type="button" class="btn-lg btn-block btn-danger">Find great food!</button>
+        </div>
+    </form>
+</div> <!-- page content -->
+
+
+<div id="footer">
+    <% include ../common/footer %>
+</div>
+<% include ../common/foot %>
+</body>
+</html>

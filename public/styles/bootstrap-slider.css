@@ -226,7 +226,7 @@
 }
 
 .slider-handle.round {
-    border-radius: 50%;
+    border-radius: 10%;
 }
 
 .slider-handle.triangle {

@@ -8,75 +8,128 @@
 <div id="collapseTa" class="panel-collapse collapse material_accordion_collapse" role="tabpanel" aria-labelledby="headingta">
   <div class="panel-body">
       <div class="container page-content">
-          <div id='expert'>
-              <p id='slide-fix'> Sweet</p>
+          <div id='expert' class="row">
+              <div class="col-md-3">
+                  <p id='slide-fix'> Sweet</p>
+              </div>
+              <div class="col-md-4">
+                  <input id="ex1" name="sweet" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Sweet%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Sweet%>]"/>
+              </div>
+              <div class="col-md-5">
+                <input id="sweetNotApp" name="sweetCB" type="checkbox" value="na" />N/A
+              </div>
+          </div>
+          <div id='expert' class="row">
+              <div class="col-md-3">
+                <p id='slide-fix' > Salty</p>
+              </div>
+              <div class="col-md-4">
+                <input id="ex2" name="salty" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Salty%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Salty%>]" />
+              </div>
+              <div class="col-md-5">
+                <input id="saltyNotApp" name="saltyCB" type="checkbox" value="na" />N/A
+              </div>
+          </div>
+          <div id='expert' class="row">
+              <div class="col-md-3">
+                  <p id='slide-fix'> Savory</p>
+              </div>
+              <div class="col-md-4">
+                  <input id="ex3" name="savory" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Savory%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Savory%>]" />
+              </div>
+              <div class="col-md-5">
+                  <input id="savoryNotApp" name="savoryCB" type="checkbox" value="na" />N/A
+              </div>
+          </div>
+          <div id='expert' class="row">
+              <div class="col-md-3">
+                  <p id='slide-fix'> Bitter</p>
+              </div>
+              <div class="col-md-4">
+                  <input id="ex4" name="bitter" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Bitter%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Bitter%>]" />
+              </div>
+              <div class="col-md-5">
+                  <input id="bitterNotApp" name="bitterCB" type="checkbox" value="na" />N/A
+              </div>
+          </div>
+          <div id='expert' class="row">
+              <div class="col-md-3">
+                  <p id='slide-fix'> Sour</p>
+              </div>
+              <div class="col-md-4">
+                  <input id="ex5" name="sour" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Sour%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Sour%>]" />
+              </div>
+              <div class="col-md-5">
+                  <input id="sourNotApp" name="sourCB" type="checkbox" value="na" />N/A
+              </div>
+          </div>
+          <div id='expert' class="row">
+              <div class="col-md-3">
+                  <p id='slide-fix'> Spicy</p>
+              </div>
+              <div class="col-md-4">
+                  <input id="ex6" name="spicy" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Spicy%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Spicy%>]" />
+              </div>
+              <div class="col-md-5">
+                  <input id="spicyNotApp" name="spicyCB" type="checkbox" value="na" />N/A
+              </div>
+          </div>
+          <div id='expert' class="row">
+              <div class="col-md-3">
+                  <p id='slide-fix'> Presentation</p>
+              </div>
+              <div class="col-md-4">
+                  <input id="ex7" name="presentation" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Presentation%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Presentation%>]" />
+              </div>
+              <div class="col-md-5">
+                  <input id="presentationNotApp" name="presentationCB" type="checkbox" value="na" />N/A
+              </div>
+          </div>
+          <div id='expert' class="row">
+              <div class="col-md-3">
+                  <p id='slide-fix'> Quantity</p>
+              </div>
+              <div class="col-md-4">
+                  <input id="ex8" name="quantity" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Quantity%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Quantity%>]" />
+              </div>
+              <div class="col-md-5">
+                  <p>(tiny portion -> medium entree -> 2+meals)</p>
+              </div>
+          </div>
 
-              <input id="ex1" name="sweet" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Sweet%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Sweet%>]"/>
-              <input id="sweetNotApp" name="sweetCB" type="checkbox" value="na" />N/A
+          <div id='expert' class="row">
+              <div class="col-md-3">
+                  <p> Rate Noise Level</p>
+              </div>
+              <div class="col-md-4">
+                  <input name="noise_level" id="ex9" type="text" class="span2" value="<%=userInfo[6].tasteProfile.NoiseLevel%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.NoiseLevel%>]" />
+              </div>
           </div>
-          <div id='expert'>
-              <p id='slide-fix'> Salty</p>
-              <input id="ex2" name="salty" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Salty%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Salty%>]" />
-              <input id="saltyNotApp" name="saltyCB" type="checkbox" value="na" />N/A
+
+          <div id='expert' class="row">
+              <div class="col-md-3">
+                  <p> Value for price</p>
+              </div>
+              <div class="col-md-4">
+                  <input id="ex10" name="value_for_price" type="text" class="span2" value="<%=userInfo[6].tasteProfile.ValueForPricing%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.ValueForPricing%>]" />
+              </div>
 
           </div>
-          <div id='expert'>
-              <p id='slide-fix'> Savory</p>
-              <input id="ex3" name="savory" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Savory%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Savory%>]" />
-
-              <input id="savoryNotApp" name="savoryCB" type="checkbox" value="na" />N/A
+          <div id='expert' class="row">
+              <div class="col-md-3">
+                  <p> Min Service rating</p>
+              </div>
+              <div class="col-md-4">
+                  <input id="ex11" name="service_rating" type="text" class="span2" value="<%=userInfo[6].tasteProfile.ServiceRating%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.ServiceRating%>]" />
+              </div>
           </div>
-          <div id='expert'>
-              <p id='slide-fix'> Bitter</p>
-              <input id="ex4" name="bitter" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Bitter%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Bitter%>]" />
-              <input id="bitterNotApp" name="bitterCB" type="checkbox" value="na" />N/A
-          </div>
-          <div id='expert'>
-              <p id='slide-fix'> Sour</p>
-              <input id="ex5" name="sour" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Sour%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Sour%>]" />
-              <input id="sourNotApp" name="sourCB" type="checkbox" value="na" />N/A
-
-          </div>
-          <div id='expert'>
-              <p id='slide-fix'> Spicy</p>
-              <input id="ex6" name="spicy" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Spicy%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Spicy%>]" />
-
-              <input id="spicyNotApp" name="spicyCB" type="checkbox" value="na" />N/A
-
-          </div>
-          <div id='expert'>
-              <p id='slide-fix'> Presentation</p>
-              <input id="ex7" name="presentation" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Presentation%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Presentation%>]" />
-
-              <input id="presentationNotApp" name="presentationCB" type="checkbox" value="na" />N/A
-
-          </div>
-          <div id='expert'>
-              <p id='slide-fix'> Quantity</p>
-              <input id="ex8" name="quantity" type="text" class="span2" value="<%=userInfo[6].tasteProfile.Quantity%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.Quantity%>]" />
-          </div>
-          <div id='portion'>
-              <p>tiny portion - medium entree - 2+meals</p>
-          </div>
-          <div id='ratings-past'>
-              <p> Min Service rating</p>
-              <input name="service_rating" type="number" class="rating" id="test" name="test" data-min="1" data-max="5" value="<%=userInfo[6].tasteProfile.ServiceRating%>">
-          </div>
-          <div id='ratings-past'>
-              <p> Min Classy Ambience rating</p>
-              <input name="classy_ambience" type="number" class="rating" id="test" name="test" data-min="1" data-max="5" value="<%=userInfo[6].tasteProfile.ClassyAmbience%>">
-          </div>
-          <div id='expert'>
-              <p id='noise'> Rate Noise Level</p>
-              <p>Low</p>
-              <input name="noise_level" id="ex9" type="text" class="span2" value="<%=userInfo[6].tasteProfile.NoiseLevel%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.NoiseLevel%>]" />
-              <p>High</p>
-          </div>
-          <div id='expert'>
-              <p id='noise'> Value for price</p>
-              <p>Low</p>
-              <input id="ex10" name="value_for_price" type="text" class="span2" value="<%=userInfo[6].tasteProfile.ValueForPricing%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.ValueForPricing%>]" />
-              <p>High</p>
+          <div id='expert' class="row">
+              <div class="col-md-3">
+                  <p> Min Classy Ambience rating</p>
+              </div>
+              <div class="col-md-4">
+                  <input id="ex12" name="classy_ambience" type="text" class="span2" value="<%=userInfo[6].tasteProfile.ClassyAmbience%>" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="[<%=userInfo[6].tasteProfile.ClassyAmbience%>]" />
+              </div>
           </div>
       </div>
   </div>

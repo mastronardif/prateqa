@@ -16,6 +16,11 @@ img.feeling-image{
   padding-right: 0 !important;
 }
 
+.write-review {
+  height: 42px;
+  width: 200px;
+}
+
 div.feeling-button {
     background-color: #74c046;
     background-image: none;
@@ -32,3 +37,4 @@ div.feeling-button:hover {
     color: #fff;
     text-shadow: none;
 }
+

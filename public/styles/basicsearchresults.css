@@ -63,3 +63,15 @@ div.center:hover {
 div:target{
   display: block;
 }
+
+.restaurant-info{
+  text-align: right;
+  padding-right: 16px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  margin-bottom: -2px;
+}
+
+hr {
+    border-top-color: black;
+}

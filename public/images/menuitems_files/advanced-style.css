@@ -1,0 +1,560 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300,300italic,400italic,600italic,700italic);
+
+/*normal: 400, semi-bold: 600, bold: 700; light: 300*/
+
+
+/*COLORS:
+Green (original):     #74c046;
+Green darker:         #5d9d36;
+Green light:          #d8eecb; (slider center)
+Grey (original):      #566f7d;
+Grey light:           #e5eaed;
+Grey very light:      #f3f5f7;
+Grey dark:            #41545f; (menu button type);
+Grey dark:            #528a2f; (menu button border);
+*/
+
+body {
+    background-color: #e5eaed;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding-top: 0;
+}
+
+p {
+    font-weight: 400;
+    color: #5d9d36;
+    line-height: 1.3em;
+}
+
+
+/***** HEADER *****/
+
+.header-container {
+    border: none;
+    background-color: #fff;
+    padding: 1% 2% 0 2%;
+    box-sizing: border-box;
+    max-height: 15%;
+    width: 100%;
+}
+
+.header-container .banner {
+    text-align: left;
+}
+
+.logo {
+    max-width: 140px;
+}
+
+.logo img {
+    width: 100%;
+}
+
+.banner {
+    max-width: 290px;
+}
+
+.banner img {
+    width: 100%;
+}
+
+.slogan {
+    background-color: #74c046;
+    font-size: 106%;
+    letter-spacing: -0.01em;
+    margin: 2.5% -2.5% 0 -2.5%;
+    padding: 1%;
+    text-align: center;
+    text-transform: uppercase;
+    word-spacing: 0.1em;
+}
+
+.slogan p {
+    color: #000;
+    font-weight: 600;
+    line-height: 1.8em;
+    margin: 0;
+}
+
+
+/***** PAGE CONTENT *****/
+
+.page-content {
+    background-color: #e5eaed;
+    padding-bottom: 68px;
+}
+
+h2,
+h3 {
+    color: #566f7d;
+}
+
+h2 {
+    margin-top: 14px;
+    font-size: 26px;
+}
+
+h3 {
+    font-size: 22px;
+}
+
+h4 {
+    color: #5d9d36;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+h6 {
+    margin-bottom: 0;
+}
+
+ul {
+    padding: 0 0 0 0;
+    list-style-type: none;
+}
+
+img {
+    width: 100%;
+    margin-top: .5em;
+}
+
+
+/***** VIEW SINGLE ITEM *****/
+
+.subBar {
+    background-color: #d8eecb;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    color: #41545f;
+    padding: 10px 15px;
+    text-transform: uppercase;
+}
+
+#bestHere li,
+#bestHere li a {
+    color: #5d9d36;
+}
+
+#viewTheDish {
+    margin-bottom: 3%;
+}
+
+#viewTheDish img.theDish {
+    max-width: 200px;
+    float: left;
+}
+
+#viewTheDish h4 {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.yelpSmallStars {
+    height: 26px;
+    width: 100%;
+    background-image: url('../images/stars_map@2x.png');
+}
+
+.yelpSmallStars0 {
+    background-position: 522px 4222px;
+}
+
+.yelpSmallStars1half {
+    background-position: 522px 4176px;
+}
+
+.yelpSmallStars4 {
+    background-position: 522px 4056px;
+}
+
+img.yelpLogoImg {
+    margin: 0 0 8px 0;
+    width: auto;
+}
+
+#viewTopReview img {
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+
+#viewTopReview h5 {
+    color: #5d9d36;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#viewTopReview cite {
+    color: #5d9d36;
+    display: block;
+    line-height: 1.1em;
+    margin: 3px 0;
+}
+
+.reviewBody {
+    color: #566f7d;
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+}
+
+.reviewImage {
+    padding-right: 0;
+}
+
+.reviewImageBest {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.reviewBox {
+    -webkit-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.2);
+    border: 1px solid #566f7d;
+    color: #566f7d;
+    float: right;
+    margin-left: 6px;
+}
+
+.reviewBox td {
+    border-right: 1px solid #566f7d;
+    padding: 0 4px;
+}
+
+.bestHeader {
+    margin-bottom: 10px;
+}
+
+#hours {
+    margin-top: 0;
+}
+
+
+/***** map *****/
+
+#viewMap {
+    /*background-color: rgb(229,234,237);*/
+    height: 20rem;
+    margin: 2rem 0;
+}
+
+
+/***** FORM *****/
+
+
+/*overrides bootstrap neg margin*/
+
+.form-horizontal .form-group {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.form-control,
+input {
+    background-color: #f3f5f7;
+}
+
+label,
+.dropdown-label {
+    margin-right: 8px;
+    font-weight: 600;
+    color: #5d9d36;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+    padding-left: 12px;
+}
+
+input[type="checkbox"] {
+    margin-right: 4px;
+}
+
+button.dropdown-label {
+    padding: 5px 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.dropdown-header {
+    color: #5d9d36;
+    padding-left: 0px;
+    font-size: 100%;
+    font-weight: 600;
+}
+
+#distance-number,
+#distanceIng-number {
+    width: 50px;
+    padding: 4px 4px 4px 6px;
+    display: inline-block;
+    height: 29px;
+    margin-bottom: 6px;
+}
+
+#distanceIng-number {
+    margin-right: 6px;
+}
+
+.input-group-inline,
+.input-group-btn-inline {
+    display: inline-block;
+}
+
+
+/***** DROPDOWNS, CHECKBOXES, SLIDERS, BUTTONS *****/
+
+#sortByWhat .dropdown-menu {
+    min-width: 0;
+}
+
+.dropdown-menu-right {
+    left: 0;
+}
+
+.dropdown-menu>li>a {
+    padding: 3px 13px;
+}
+
+.dropdown-toggle {
+    line-height: 1.1;
+}
+
+.checkbox-inline+.checkbox-inline {
+    margin-left: 0;
+}
+
+.checkbox-inline:last-of-type {
+    margin-right: 0;
+}
+
+.slider-selection,
+.tick-slider-selection,
+.in-selection {
+    background: #d8eecb;
+}
+
+.slideDiv {
+    color: #566f7d;
+    display: table;
+    font-weight: 700;
+    width: 100%;
+}
+
+.slider,
+.slider-horizontal,
+.slider-track,
+.sliderLabel {
+    display: table-cell;
+    vertical-align: middle;
+    width: auto;
+}
+
+.slider,
+.slider-horizontal {
+    width: 100%;
+}
+
+.sliderLabel:first-of-type {
+    padding-right: 14px;
+}
+
+.sliderLabel:last-of-type {
+    padding-left: 14px;
+}
+
+.checkbox-inline {
+    font-size: 12px;
+}
+
+button[type="submit"] {
+    background-color: #74c046;
+    background-image: none;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    text-shadow: none;
+}
+
+button[type="submit"]:hover {
+    background-color: #566f7d;
+    color: #fff;
+    text-shadow: none;
+}
+
+.submitDiv {
+    text-align: center;
+}
+
+
+/*****  *****/
+
+#moreOptionsLink {
+    text-align: center;
+}
+
+.moreCTA a {
+    color: #566f7d;
+    font-weight: 600;
+}
+
+.more {
+    font-size: 12px;
+}
+
+.more label {
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.more p {
+    margin-bottom: 0;
+}
+
+.more p:last-of-type {
+    margin-bottom: 10px;
+}
+
+span.moreLabel {
+    font-weight: 600;
+}
+
+.info p {
+    /*font-weight: */
+}
+
+#moreRestaurant,
+#view_single_item_moreOptions,
+#bestHere,
+#viewTraditional {
+    display: none;
+}
+
+span.labelCaps {
+    text-transform: uppercase;
+}
+
+
+/***** BEST MENU ITEMS AT THIS RESTAURANT *****/
+
+li.best {
+    border-bottom: 1px solid;
+    padding-bottom: 12px;
+}
+
+li.best:last-of-type {
+    border-bottom: none;
+}
+
+.ellipses {
+    /*word-wrap: break-word;*/
+    height: 110px;
+    margin-bottom: 0;
+}
+
+
+/***** font-awesome *****/
+
+.fa-chevron-circle-down:before,
+.fa-chevron-circle-right:before {
+    color: #5d9d36;
+    margin-left: 2px;
+}
+
+
+/***** star ratings ****/
+
+.starsRow {
+    margin: 6px 0 16px 0;
+}
+
+.starsDiv,
+.starsDivHalf {
+    padding: 0;
+}
+
+.starsDiv label,
+.starsDivHalf label {
+    margin: 0 0 5px 0;
+    width: 100%;
+    line-height: 16px;
+}
+
+.starsDiv i,
+.starsDivHalf i {
+    font-size: 24px;
+    color: #74c046;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+.starsDivHalf i {
+    font-size: 18px;
+}
+
+.starsDivSmall {
+    margin-bottom: -9px;
+}
+
+.starsDivSmall i {
+    font-size: 14px;
+}
+
+.starsDiv h4 {
+    margin-bottom: 2px;
+    margin-top: 0;
+}
+
+.fa-fw {
+    width: auto;
+}
+
+
+/***** FOOTER *****/
+
+
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e5eaed+0,e5eaed+100&amp;0+0,1+20 */
+
+#footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 72px;
+    padding-top: 30px;
+    text-align: center;
+    width: 100%;
+    z-index: 9999;
+    background-color: #e5eaed;
+    background: -moz-linear-gradient(top, rgba(229, 234, 237, 0) 0%, rgba(229, 234, 237, 1) 30%, rgba(229, 234, 237, 1) 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(229, 234, 237, 0)), color-stop(30%, rgba(229, 234, 237, 1)), color-stop(100%, rgba(229, 234, 237, 1)));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(229, 234, 237, 0) 0%, rgba(229, 234, 237, 1) 30%, rgba(229, 234, 237, 1) 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(229, 234, 237, 0) 0%, rgba(229, 234, 237, 1) 30%, rgba(229, 234, 237, 1) 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(229, 234, 237, 0) 0%, rgba(229, 234, 237, 1) 30%, rgba(229, 234, 237, 1) 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, rgba(229, 234, 237, 0) 0%, rgba(229, 234, 237, 1) 30%, rgba(229, 234, 237, 1) 100%);
+    /* W3C */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#00e5eaed', endColorstr='#e5eaed', GradientType=0);
+    /* IE6-9 */
+}
+
+.menu-button {
+    background-color: #74c046;
+    height: 42px;
+    border-right: 2px solid #528a2f;
+    padding: 11px 0 0 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #41545f;
+}
+
+.menu-button:last-of-type {
+    border-right: none;
+}
