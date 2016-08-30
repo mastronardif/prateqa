@@ -2,6 +2,10 @@
   margin-top: 5px;
 }
 
+#listBtn, #mapBtn {
+    background-color: #F1831D;
+}
+
 .alignedP{
   margin-top: 10px;
 }

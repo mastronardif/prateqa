@@ -1,6 +1,6 @@
-var util    = require('util'),
-    session = require('client-sessions'),
-    assert  = require('assert');
+var util    = require('util');
+var session = require('client-sessions');
+var assert  = require('assert');
 
 
 module.exports.advancedSearch = function(req, res) {

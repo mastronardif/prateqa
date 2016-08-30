@@ -9,17 +9,22 @@ var session     = require('client-sessions');
 var MongoClient = require('mongodb').MongoClient;
 
 //the controller(s).
+
 var profileController = require('./controllers/profile-controller');
 var searchController  = require('./controllers/search-controller');
 var ratingsController = require('./controllers/ratings-controller');
 var ssController      = require('./controllers/socialshare-controller');
 var pingController    = require('./controllers/ping-controller');
+var menuItemController   = require('./controllers/menu-item-controller');
 var advSearchController = require('./controllers/advSearch-controller');
 var restaurantController    = require('./controllers/search-restaurant-controller');
+var menuItemController = require('./controllers/menu-item-controller');
 
 app.use(express.static('./public'));
 app.use(bodyp.urlencoded({ extended: false }));
-//mongodb://admin:admin@ds057254.mongolab.com:57254/platerate
+
+//mongodb://ling:ling@ds023694.mlab.com:23694/bubblevan
+//mongo ds023694.mlab.com:23694/bubblevan
 var dev_connection_string = 'mongodb://localhost:27017/platerate';
 var connection_string =  process.env.DB_PR || dev_connection_string;
 // TEST print env vars.
@@ -83,10 +88,13 @@ app.use(stormpath.init(app, {
 }));
 
 app.set('trust proxy', true);
+
 app.set('view engine','ejs');
+
 app.get('/profile', function(req, res) {
     res.render('profile/index');
 });
+
 app.get('/profile/edit',stormpath.loginRequired,profileController.viewProfile);
 
 // for testing.!!!
@@ -97,13 +105,14 @@ app.get('/',stormpath.loginRequired,profileController.loadProfile);
 
 app.post('/profile/update',profileController.editProfile);
 
-
 app.get('/ratings/new',stormpath.loginRequired, ratingsController.newRatings);
 
 // Loading Basic_Search_page/Home_page
 app.get('/basicsearch', searchController.showForm);
 
 //search for menu items
+app.get('/menuitems/:entryId', menuItemController.loadItem);
+app.post('/menuitems/updateValues', menuItemController.updateValues);
 app.post('/basicsearch/submit', searchController.searchMenuItems);
 
 app.post('/advancedSearch', advSearchController.advancedSearch);
@@ -120,24 +129,23 @@ app.get('/socialshare', stormpath.loginRequired, function (req, res){
 //socialshare/send
 app.post('/socialshare/send',  ssController.sendemail);
 
-//add a controller for this
-app.get('/menuItems', function (req, res){
-  res.render('menuItems/new');
-});
-/**
- * Start the web server.
+//menuItemPage
+app.post('/menuitems/:entryId', menuItemController.loadItem);
+app.post('/menuitems/updateValues', menuItemController.updateValues);
+
+ /* Start the web server.
  */
 app.on('stormpath.ready',function () {
   console.log('Stormpath Ready');
   var port = process.env.PORT || 1337;
   app.listen(port, function () {
-    console.log('Application running at http://localhost:'+port);
+    console.log('Application running at http://localhost:'+ port);
   });
 });
 
 //put this app.use last.  The last .use.
 app.use(function(err, req, res, next) {
-    console.error("\t ***** MY error function.");
+  console.error("\t ***** MY error function.");
   console.error(err.stack);
   res.status(500).send('WTF Something broke!');
 });

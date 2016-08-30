@@ -19,6 +19,54 @@ $(function() {
           $(e.target).toggleClass(newClass);
         });
 
+         $('#sweet_expert').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
+         $('#salty_expert').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
+         $('#savory_expert').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
+         $('#bitter_expert').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
+         $('#sour_expert').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
+         $('#spicy_expert').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
+         $('#presentation_expert').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
+         $('#quantity_expert').bootstrapSlider({
+            formatter: function(value) {
+                return;
+            }
+        });
+
         $('#romantic').bootstrapSlider({
             formatter: function(value) {
                 return;
@@ -204,6 +252,12 @@ $(function() {
             }
         });
 
+       $("select").change(function() {
+           
+           $( "select option:selected" ).each(function() {
+           });
+       })
+
 
         $("#datepicker").datepicker({
             changeMonth: true, //this option for allowing user to select month
@@ -354,8 +408,6 @@ $(function() {
         $('.edit').remove();
         e.preventDefault();
     });
-
-
 });
 
 

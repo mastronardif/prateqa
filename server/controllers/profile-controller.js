@@ -3,66 +3,64 @@ var util = require('util');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var session = require('client-sessions');
-var assert = require('assert');
 
-module.exports.viewProfile = function(req, res) {
+module.exports.viewProfile = function (req, res) {
     res.render('profile/edit');
 };
 
 //for setting the values
-module.exports.editProfile = function(req, res) {
-  var diet = req.body.diet;
-  var selectedDiets = [];
-  if(diet === undefined){
-    console.log("No dietary preferences selected!");
-  }
-  else{
-    for(var i=0; i < diet.length;i++){
-      selectedDiets.push(diet[i]);
+module.exports.editProfile = function (req, res) {
+    var diet = req.body.diet;
+    var selectedDiets = [];
+    if (diet === undefined) {
+        console.log("No dietary preferences selected!");
     }
-    console.log("These are selected:"+ selectedDiets);
-  }
-  console.log("this is the req.body.user ");
-  var email = req.body.email;
-  var theBody = req.body.firstname;
-  console.log("Here is the req.firstname");
-  console.log(theBody);
-  var updatedProfile = req.body;
-  req.db.collection('profile').updateOne(
-    {"email": email},
-      { $set:
+    else {
+        for (var i = 0; i < diet.length; i++) {
+            selectedDiets.push(diet[i]);
+        }
+        console.log("These are selected:" + selectedDiets);
+    }
+    console.log("this is the req.body.user ");
+    var email = req.body.email;
+    var theBody = req.body.firstname;
+    console.log("Here is the req.firstname");
+    console.log(theBody);
+    var updatedProfile = req.body;
+    req.db.collection('profile').updateOne(
+        {"email": email},
         {
-          "firstname": updatedProfile.firstname,
-          "lastname": updatedProfile.lastname,
-          "Street": updatedProfile.street,
-          "City": updatedProfile.city,
-          "PostalCode": updatedProfile.postal,
-          "Country": updatedProfile.country,
-          "Phone": updatedProfile.phone,
-          "Birthday": updatedProfile.datepicker,
-          "GuruTasterProfile":
-             {
-                "Sweet": updatedProfile.sweet,
-                "Salty": updatedProfile.salty,
-                "Savory": updatedProfile.savory,
-                "Bitter": updatedProfile.bitter,
-                "Sour": updatedProfile.sour,
-                "Spicy": updatedProfile.spicy,
-                "Presentation": updatedProfile.presentation,
-                "Quantity": updatedProfile.quantity,
-                "NoiseLevel": updatedProfile.noise_level,
-                "ValueForPricing": updatedProfile.value_for_price,
-                "ServiceRating": updatedProfile.service_rating,
-                "ClassyAmbience": updatedProfile.classy_ambience
-             },
-             "DietaryPreferences": selectedDiets
-         }
-      }, //set
-      {
-        upsert: false //do not create a doc if the id doesn't exist
-      }
+            $set: {
+                "firstname": updatedProfile.firstname,
+                "lastname": updatedProfile.lastname,
+                "Street": updatedProfile.street,
+                "City": updatedProfile.city,
+                "PostalCode": updatedProfile.postal,
+                "Country": updatedProfile.country,
+                "Phone": updatedProfile.phone,
+                "Birthday": updatedProfile.datepicker,
+                "GuruTasterProfile": {
+                    "Sweet": updatedProfile.sweet,
+                    "Salty": updatedProfile.salty,
+                    "Savory": updatedProfile.savory,
+                    "Bitter": updatedProfile.bitter,
+                    "Sour": updatedProfile.sour,
+                    "Spicy": updatedProfile.spicy,
+                    "Presentation": updatedProfile.presentation,
+                    "Quantity": updatedProfile.quantity,
+                    "NoiseLevel": updatedProfile.noise_level,
+                    "ValueForPricing": updatedProfile.value_for_price,
+                    "ServiceRating": updatedProfile.service_rating,
+                    "ClassyAmbience": updatedProfile.classy_ambience
+                },
+                "DietaryPreferences": selectedDiets
+            }
+        }, //set
+        {
+            upsert: false //do not create a doc if the id doesn't exist
+        }
     ); //updateOne
-  res.redirect('/basicsearch');
+    res.redirect('/basicsearch');
 };
 
 //checks if the user exist if
@@ -98,6 +96,7 @@ module.exports.loadProfile = function(req,res) {
          found.Country == null    ||
          found.Phone == null      ||
          found.Birthday == null){
+        
         var userInfo = [
           { street: "" },
           { city: ""},
@@ -126,13 +125,10 @@ module.exports.loadProfile = function(req,res) {
         return;
       }
       else {
-        console.log("this is the found object");
-        console.dir(found);
+
         req.user.givenName = found.firstname;
         req.user.surname   = found.lastname;
         var userInfo = [
-         // { firstname: found.firstname },
-         // { lastname: found.lastname   },
           { street: found.Street       },
           { city: found.City           },
           { postalCode: found.PostalCode },

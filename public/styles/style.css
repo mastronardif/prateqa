@@ -1,8 +1,3 @@
-#logoutbtn {
-  width:100%;
-  margin-top: 10px;
-  opacity: 0.8;
-}
 
 .wrapper {
   position: relative;
@@ -10,12 +5,6 @@
   display: flex;
   flex-direction: column;
   height: 190px;
-}
-
-#second {
-  display: flex;
-  flex-direction: row;
-  padding: 10px;
 }
 
 .part2 {
@@ -37,13 +26,8 @@
   justify-content: space-around;
 }
 
-.item-pic {
-  width: 240px;
-  height: 190px;
-}
-
-.item-pic {
-  padding: 5px;
+.user-pic {
+  text-align: center;
 }
 
 .user-pic img {
@@ -77,11 +61,17 @@
 .panel-title a {
   text-decoration: none;
   display: block;
+  color: #fff;
   padding: 10px 15px;
   margin: -10px -15px;
 }
 
 .panel-title a:hover {
+  color: #6EC1C2;
+  text-decoration: none;
+}
+
+.panel-title a:visited {
   text-decoration: none;
 }
 
@@ -92,7 +82,8 @@
 }
 
 .accord {
-  background-color: #74c046;
+  /*background-color: #74c046;*/
+  background-color: #F1831D;
   font-size: 106%;
   letter-spacing: -0.01em;
   margin: 5px 0;
@@ -222,10 +213,6 @@ p a {
   margin-bottom: 0.8%;
 }
 
-.row {
-  cursor: pointer;
-}
-
 .tooltip-inner {
   padding-top: 0rem !important;
   margin-top: -10rem;
@@ -280,7 +267,7 @@ p a {
 span.review-author {
   position: relative;
   bottom: 21px;
-  left: 80px; 
+  left: 80px;
 }
 img.detailed-review {
   height: 50%;
@@ -303,7 +290,7 @@ img.detailed-review {
 .addRestDetailsButton {
   background-color: #4CAF50;
   color: white;
-  
+
  }
 
 .individualRatingStyle {

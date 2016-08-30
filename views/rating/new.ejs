@@ -5,18 +5,16 @@
 	<link rel="stylesheet" href="/styles/rating-new.css" media="screen">
 </head>
 <body>
-	<div class="container header-container">
+	<div class="container-fluid header-container">
 		<% include ../common/header %>
 	</div>
 	<!-- End Header-Container -->
-
-	<div id='main' class="page-content">
+	<div id='main' class="container-fluid page-content">
 		<div class="container">
 			<div class="row">
 				<h1 class='action'><%-title%></h1>
 			</div>
 		</div>
-
 		<div class="rating-form" id="restaurantForm">
 			<form action="/submitRestaurant/<%=restaurant.id%>" method="POST">
 				<!-- RESTAURANT Rating -->
@@ -42,7 +40,7 @@
 		<script>
 		function hideForm() {
 			document.getElementById('restaurantForm').style.display = "none";
-		};
+		}
 		// converts into single slider bar
 		$(function() {
 			$('.flat-slider').bootstrapSlider({

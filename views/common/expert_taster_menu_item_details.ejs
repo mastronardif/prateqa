@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 <div class="panel-group material_accordion" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="container">
         <div class="row accord" role="tab" id="headingThree">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -7,57 +7,105 @@
                 </a>
             </h4>
         </div>
-
-        <div id="collapseThree" class="panel-collapse collapse material_accordion_collapse menu_item_style" role="tabpanel" aria-labelledby="headingThree">
-            <div class="panel-body">
-                <div class="container page-content">
-                  <div id='expert'>
-                    <p id='slide-fix'> Sweet</p>
-                    <input id="ex1" name="sweet" type="text" class="flat-slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50"/>
-                    <input id="sweetNotApp" name="sweetCB" type="checkbox" value="na" />N/A
+    </div>
+</div>
+<div id="collapseThree" class="panel-collapse collapse material_accordion_collapse menu_item_style" role="tabpanel" aria-labelledby="headingThree">
+    <div class="container page-content">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-3">
+                    <p> Sweet</p>
                 </div>
-                <div id='expert'>
-                    <p id='slide-fix'> Salty</p>
-                    <input id="ex2" name="salty" type="text" class="flat-slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50" />
-                    <input id="saltyNotApp" name="saltyCB" type="checkbox" value="na" />N/A
+                <div class="col col-xs-6 pad-right-0">
+                    <!-- you can remove the right padding from this parent's div to make it look better -->
+                    <input class="flat-slider" id="sweet_expert" name='sweet_expert' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="<%=sliders[0]%>" />
                 </div>
-                <div id='expert'>
-                    <p id='slide-fix'> Savory</p>
-                    <input id="ex3" name="savory" type="text" class="flat-slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50" />
-                    <input id="savoryNotApp" name="savoryCB" type="checkbox" value="na" />N/A
+                <div class="col-xs-3">
+                    <input id="sweetNotApplicable" name="sweetNA" type="checkbox" value="" />N/A
                 </div>
-                <div id='expert'>
-                    <p id='slide-fix'> Bitter</p>
-                    <input id="ex4" name="bitter" type="text" class="flat-slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50" />
-                    <input id="bitterNotApp" name="bitterCB" type="checkbox" value="na" />N/A
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p> Salty</p>
                 </div>
-                <div id='expert'>
-                    <p id='slide-fix'> Sour</p>
-                    <input id="ex5" name="sour" type="text" class="flat-slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50" />
-                    <input id="sourNotApp" name="sourCB" type="checkbox" value="na" />N/A
+                <div class="col col-xs-6 pad-right-0">
+                    <!-- you can remove the right padding from this parent's div to make it look better -->
+                    <input class="flat-slider" id="salty_expert" name='salty_expert' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="<%=sliders[1]%>" />
                 </div>
-                <div id='expert'>
-                    <p id='slide-fix'> Spicy</p>
-                    <input id="ex6" name="spicy" type="text" class="flat-slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50" />
-                    <input id="spicyNotApp" name="spicyCB" type="checkbox" value="na" />N/A
+                <div class="col-xs-3">
+                    <input id="saltyNotApplicable" name="saltyNA" type="checkbox" value="na" />N/A
                 </div>
-                <div id='expert'>
-                    <p id='slide-fix'> Presentation</p>
-                    <input id="ex7" name="presentation" type="text" class="flat-slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50" />
-                    <input id="presentationNotApp" name="presentationCB" type="checkbox" value="na" />N/A
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p> Savory</p>
                 </div>
-                <div id='expert'>
-                   <p id='slide-fix'> Quantity</p>
-                     <input id="ex8" name="quantity" type="text" class="flat-slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50" />
-                     <div class="" style="margin-left:0px; position: relative">
-                        <br>
-                        <br>
-                        <p class="col col-xs-4 selected">tiny portion</p>
-                        <p class="col col-xs-4 text-center selected">medium portion</p>
-                        <p class="col col-xs-4 text-right selected">2+ meals</p>
-                    </div>  
+                <div class="col col-xs-6 pad-right-0">
+                    <!-- you can remove the right padding from this parent's div to make it look better -->
+                    <input class="flat-slider" id="savory_expert" name='savory_expert' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="<%=sliders[2]%>" />
                 </div>
+                <div class="col-xs-3">
+                    <input id="savoryNotApplicable" name="savoryNA" type="checkbox" value="na" />N/A
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p> Bitter</p>
+                </div>
+                <div class="col col-xs-6 pad-right-0">
+                    <!-- you can remove the right padding from this parent's div to make it look better -->
+                    <input class="flat-slider" id="bitter_expert" name='bitter_expert' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="<%=sliders[3]%>" />
+                </div>
+                <div class="col-xs-3">
+                    <input id="bitterNotApplicable" name="bitterNA" type="checkbox" value="na" />N/A
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p> Sour</p>
+                </div>
+                <div class="col col-xs-6 pad-right-0">
+                    <!-- you can remove the right padding from this parent's div to make it look better -->
+                    <input class="flat-slider" id="sour_expert" name='sour_expert' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="<%=sliders[4]%>" />
+                </div>
+                <div class="col-xs-3">
+                    <input id="sourNotApplicable" name="sourNA" type="checkbox" value="na" />N/A
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p> Spicy</p>
+                </div>
+                 <div class="col col-xs-6 pad-right-0">
+                    <!-- you can remove the right padding from this parent's div to make it look better -->
+                    <input class="flat-slider" id="spicy_expert" name='spicy_expert' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="<%=sliders[5]%>" />
+                </div>
+                
+                <div class="col-xs-3">
+                    <input id="spicyNotApplicable" name="spicyNA" type="checkbox" value="na" />N/A
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p> Presentation</p>
+                </div>
+                <div class="col col-xs-6 pad-right-0">
+                    <!-- you can remove the right padding from this parent's div to make it look better -->
+                    <input class="flat-slider" id="presentation_expert" name='presentation_expert' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="<%=sliders[6]%>" />
+                </div>
+                <div class="col-xs-3">
+                    <input id="presentationNotApplicable" name="presentationNA" type="checkbox" value="na" />N/A
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p> Quantity</p>
+                </div>
+                <div class="col col-xs-6 pad-right-0">
+                    <!-- you can remove the right padding from this parent's div to make it look better -->
+                    <input class="flat-slider" id="quantity_expert" name='quantity_expert' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="<%=sliders[7]%>" />
                 </div>
             </div>
         </div>
+    </div>
 </div>

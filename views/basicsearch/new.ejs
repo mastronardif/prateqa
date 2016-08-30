@@ -5,33 +5,80 @@
     <% include ../common/head %>
     <link rel="stylesheet" href="/styles/basicsearch.css" media="screen" title="no title" charset="utf-8">
 </head>
-<body>
-<div class="container header-container">
-    <div id="welcomediv">
-        <p class="floatright">You are logged in as <%- account.fullName %> ! </p>
+<body onload="geoFindMe()">
+<div class="container-fluid header-container">
+    <div id="welcomediv" class="row">
+        <div class="col-xs-9 col-md-11">
+            <p class="floatright">You are logged in as <%- account.fullName %> ! </p>
+        </div>
+        <div class="col-xs-3 col-md-1">
+            <form action="/logout" method="post">
+                <button class="btn btn-xs" type="submit"><span class="glyphicon glyphicon-off"></span> Logout</button>
+            </form>
+        </div>
     </div>
-    <div id="registerorlogindiv" class="floatright">
-        <a href="/register" class="btn btn-lg btn-danger">Register</a>
-        <a href="/login" class="btn btn-lg btn-danger">Login</a>
+    <div class="row">
+        <div id="registerorlogindiv" class="col-xs-12">
+            <a href="/register" class="btn btn-md btn-danger floatright">Register</a>
+            <a href="/login" class="btn btn-md btn-danger floatright yesMarginRight">Login</a>
+        </div>
     </div>
     <% include ../common/header %>
 </div><!-- End Header-Container -->
 
 <div class="container">
     <form action="/basicsearch/submit" method="POST">
-        <h1>Search Menu Items</h1>
-        <div class="yesMarginX">
-            <input name="basicsearchinput" type="text" class="form-control" placeholder="Search">
+        <h2>Search Menu Items</h2>
+        <div class="row">
+            <div class="col-xs-4 col-md-6">
+                <input name="basicsearchinput" type="text" class="form-control" placeholder="Search"/>
+            </div>
+            <div class="col-xs-4 col-md-4">
+                <input name="locationinput" type="text" class="form-control" placeholder="Current Location"/>
+            </div>
+            <div class="col-xs-4 col-md-2">
+                <button class="feeling-button btn btn-block" type="submit"><span
+                            class="glyphicon glyphicon-search"></span>Search
+                </button>
+            </div>
         </div>
-        <div class="yesMarginX">
-            <button class="feeling-button btn btn-block btn-primary" type="button">Search</button>
-        </div>
+
+        <!--For geoNear MongoDB query. Lat/Long is hidden.-->
+        <input type="text" id="lat" class="form-control"/>
+        <input type="text" id="long" class="form-control"/>
+
+
     </form>
     <form action="/advancedSearch" method="POST">
-        <input id="advancedSearch" type="submit" class="btn btn-link" value="Advanced Search" />
+        <input id="advancedSearch" type="submit" class="btn btn-link" value="Advanced Search"/>
     </form>
+
+
 </div><!-- End Page-Content -->
 <script>
+    function geoFindMe() {
+//    var output = document.getElementById("testing");
+        var lat = document.getElementById("lat");
+        var long = document.getElementById("long");
+        if (!navigator.geolocation) {
+            output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+            return;
+        }
+        function success(position) {
+            lat.value = position.coords.latitude;
+            lat.placeholder = position.coords.latitude;
+            long.value = position.coords.longitude;
+            long.placeholder = position.coords.longitude;
+        }
+
+        function error() {
+            lat.placeholder = "Unable to retrieve your location";
+        }
+
+        lat.placeholder = "Locating…";
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
+
     $(document).ready(function () {
         if ("<%- account %>" === "null") {
             $('#registerorlogindiv').show();
@@ -41,7 +88,6 @@
             $('#registerorlogindiv').hide();
             $('#welcomediv').show();
         }
-
     });
 </script>
 <div id="footer">

@@ -21,6 +21,10 @@ img.feeling-image{
   width: 200px;
 }
 
+#registerorlogindiv a {
+  display: inline-block;
+}
+
 div.feeling-button {
     background-color: #74c046;
     background-image: none;
@@ -37,4 +41,3 @@ div.feeling-button:hover {
     color: #fff;
     text-shadow: none;
 }
-

@@ -22,7 +22,7 @@ body {
 
 p {
     font-weight: 400;
-    color: #000;
+    color: #000000;
     line-height: 1.3em;
 }
 
@@ -39,12 +39,30 @@ p {
     padding-top: 1em;
 }
 
+.yesPaddingBottom {
+    padding-bottom: 1em;
+}
+
 .yesPaddingLeft {
     margin-left: 1em;
 }
 
+.yesMarginY {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.yesMarginRight {
+    margin-right: 1em;
+}
+
 .yesMarginX {
-    margin: 1em 0;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.padToCenter {
+    padding-left: 23%;
 }
 
 .noPaddingX {
@@ -52,24 +70,29 @@ p {
     padding-right: 0;
 }
 
+.editForAddRestDet {
+    color: blue;
+}
+
 a {
     text-decoration: none;
-    color: #0a68b4;
+    display: block;
+    color: #111111;
 }
-a:hover, a:visited{
+
+a:hover {
     text-decoration: none;
-    color: #5e2400;
+    display: block;
+    color: #0c8da0;
 }
-
-
-
 
 /***** HEADER *****/
 
 .header-container {
     border: none;
     background-color: #fff;
-    padding: 1% 2% 0 2%;
+    padding: 1em 2em 0 2em;
+    margin: 0;
     box-sizing: border-box;
     max-height: 15%;
     width: 100%;
@@ -96,10 +119,11 @@ a:hover, a:visited{
 }
 
 .slogan {
-    background-color: #74c046;
+    /*background-color: #74c046;*/
+    background-color:  #6EC1C2;
     font-size: 106%;
     letter-spacing: -0.01em;
-    margin: 2.5% -2.5% 0 -2.5%;
+    margin: 1em -2em 0 -2em;
     padding: 1%;
     text-align: center;
     text-transform: uppercase;
@@ -118,12 +142,12 @@ a:hover, a:visited{
 
 .page-content {
     background-color: #e5eaed;
-    padding-bottom: 68px;
+    padding-bottom: 6em;
 }
 
 h2,
 h3 {
-    color: #566f7d;
+    color: #000;
 }
 
 h2 {
@@ -136,7 +160,7 @@ h3 {
 }
 
 h4 {
-    color: #5d9d36;
+    color: #000;
     font-size: 14px;
     font-weight: 600;
 }
@@ -295,7 +319,7 @@ label,
 .dropdown-label {
     margin-right: 8px;
     font-weight: 600;
-    color: #5d9d36;
+    color: #000;
 }
 
 .scrollable-menu {
@@ -411,27 +435,32 @@ ul.dropdown-menu {
 }
 
 button[type="submit"] {
-    background-color: #74c046;
+    background-color: #e41a6a;
     background-image: none;
-    color: #fff;
-    font-weight: 600;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 1em;
     letter-spacing: 1px;
     text-align: center;
     text-shadow: none;
+    text-transform: uppercase;
 }
 
 button[type="submit"]:hover {
-    background-color: #566f7d;
-    color: #fff;
+    color: #ffffff;
+    font-weight: 400;
+    opacity: 0.9;
+    font-size: 1em;
     text-shadow: none;
+    text-transform: uppercase;
 }
+
 
 .submitDiv {
-    text-align: center;
+  text-align: center;
 }
 
-
-/*****  *****/
+/**********/
 
 #moreOptionsLink {
     text-align: center;
@@ -586,13 +615,25 @@ li.best:last-of-type {
 }
 
 .menu-button {
-    background-color: #74c046;
+    /*background-color: #74c046;*/
+    background-color: #6EC1C2;
     height: 42px;
-    border-right: 2px solid #528a2f;
+    border-right: 2px solid #004447;
     padding: 11px 0 0 0;
     text-transform: uppercase;
-    font-weight: 600;
-    color: #41545f;
+    font-weight: 700;
+    display: inline-block;
+}
+div.menu-button a {
+    text-decoration: none;
+    display: block;
+    color: #111111;
+}
+
+div.menu-button a:hover {
+    text-decoration: none;
+    display: block;
+    color: #C93413;
 }
 
 .menu-button:last-of-type {

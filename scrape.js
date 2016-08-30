@@ -9,29 +9,31 @@ var mongo = {
   }
 };
 
-// Decimal degrees and Plus/minus—Latitude and longitude coordinates are represented as decimal numbers. 
-// The latitude is preceded by a minus sign ( – ) if it is south of the equator (a positive number implies north), 
-// and the longitude is preceded by a minus sign if it is west of the prime meridian 
+
+// Decimal degrees and Plus/minus—Latitude and longitude coordinates are represented as decimal numbers.
+// The latitude is preceded by a minus sign ( – ) if it is south of the equator (a positive number implies north),
+// and the longitude is preceded by a minus sign if it is west of the prime meridian
+
 // (a positive number implies east); for example, 37.68455° –97.34110°.
 // Latitude measurements range from 0° to (+/–)90°.
 //  Longitude measurements range from 0° to (+/–)180°.
 
 if (process.argv.length < 4) {
-    console.log("Usage: " + __filename + " latitude, longitude");
-    process.exit(-1);
+  console.log("Usage: " + __filename + " latitude, longitude");
+  process.exit(-1);
 }
- 
+
 var latitude =  process.argv[2];
 var longitude = process.argv[3];
 
 if (90 < Math.abs(latitude)) {
   console.log("latitude out of range")
   process.exit(-1);
-} 
+}
 
 if (180 < Math.abs(longitude)) {
-    console.log("longitude out of range")  
-    process.exit(-1);
+  console.log("longitude out of range")
+  process.exit(-1);
 }
 
 
@@ -46,10 +48,15 @@ var oldThirty = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24 * 30);
 
 
 // MongoClient.connect("mongodb://test123:test123@ds053688.mongolab.com:53688/heroku_app32366298", function(err, db) {
+var dev_connection_string = 'mongodb://localhost:27017/platerate';
+var connection_string =  process.env.DB_PR || dev_connection_string;
 
-MongoClient.connect("mongodb://localhost:27017/platerate", function(err, db) {
-    if(err == null && db!=null) {
+//MongoClient.connect("mongodb://localhost:27017/platerate", function(err, db) {
+MongoClient.connect(connection_string, function(err, db) {
+
+  if(err == null && db!=null) {
     mongo = db.collection("venues");
+
     doScrape(db);
   } else {
     throw("Didn't connect to mongo");
@@ -113,6 +120,7 @@ function doScrape(db) {
   function processVenueResp(error, response, body) {
     console.log("starting processVenueResp");
     if (!error && response.statusCode == 200) {
+        
       decodeVenueResponse(body);
       eachVenueMenu();
     } else {
@@ -126,9 +134,11 @@ function doScrape(db) {
   // console.log("at line 120");
   function decodeVenueResponse(json) {
     console.log("starting decodeVenueResponse");
-
+console.log(JSON.stringify(JSON.parse(json), null, 2) );
     var data = JSON.parse(json).response;
+
     var venues = data.venues;
+
     var venues_buf = "";
 
     if (!venues) {
@@ -136,70 +146,73 @@ function doScrape(db) {
       return;
     }
     for(var venueIndex=0; venueIndex < venues.length; ++venueIndex) {
-        var venue = venues[venueIndex];
-        venue._id = venue.id;
-        // venue["order"] = (1 + venueIndex).toString(10);
-        delete venue.id;
-        // console.log(venueIndex, venue.name);
-        venues_buf += JSON.stringify(venue) + "\n";
-        mongo.insert(venue);
-        //console.log(util.inspect(mongo.insert(venue)));
+      var venue = venues[venueIndex];
+      venue._id = venue.id;
+      // venue["order"] = (1 + venueIndex).toString(10);
+      delete venue.id;
+      // console.log(venueIndex, venue.name);
+      venues_buf += JSON.stringify(venue) + "\n";
+      mongo.insert(venue);
+      //console.log(util.inspect(mongo.insert(venue)));
+    }
+
+    //  we're writing a file that can be used for mongoimport
+    //  mongoimport --db platerate --collection venues --file menus/venus.json
+
+    fs.writeFile("menus/venus.json", venues_buf, function(err) {
+      if(err) {
+        console.log("Error from writeFile venus.json")
+        console.log(err);
+        return;
+
       }
+      console.log("The venus.json file was saved!");
+    });
 
-      //  we're writing a file that can be used for mongoimport
-      //  mongoimport --db platerate --collection venues --file menus/venus.json
 
-      fs.writeFile("menus/venus.json", venues_buf, function(err) {
-        if(err) {
-          console.log("Error from writeFile venus.json")
-          console.log(err);
-          return;
-        }
-        console.log("The venus.json file was saved!");
-      });
 
-    
-    
     console.log("finished decodeVenueResponse")
-    
-       }
+
+  }
 
 
   function eachVenueMenu(){
-      console.log("starting eachVenueMenu");
-      mongo.find(
+
+    console.log("starting eachVenueMenu");
+    mongo.find(
         {$or: [{"menu_date" : { $exists: false }}, {"menu_date" : { $lte: oldThirty }} ]},
         { _id: 1, name: 1}, function (err, resultCursor) {
 
-              function processItem(err, item) {
-                console.log("in here");
-                console.dir(item);
-                if (item === null) {  
-                  console.log("ALL DONE");  // not really, mongodb writes still happening
-                  // db.close();
-                  return;   // all done
-                } 
-                
-                reqVenueMenu(item, function(err) {
-                    console.log("calling again")
-                    resultCursor.nextObject(processItem);
-                });
 
-              };
+          function processItem(err, item) {
+            console.log("in here");
+            console.dir(item);
+            if (item === null) {
+              console.log("ALL DONE");  // not really, mongodb writes still happening
+              // db.close();
+              return;   // all done
+            }
 
-
-              // myVenues.forEach(reqVenueMenu);
-              console.log("call once")
+            reqVenueMenu(item, function(err) {
+              console.log("calling again")
               resultCursor.nextObject(processItem);
+            });
+
+          };
 
 
-      // console.log(mongo.find());
-    });
+          // myVenues.forEach(reqVenueMenu);
+          console.log("call once")
+          resultCursor.nextObject(processItem);
 
-    };
+
+          // console.log(mongo.find());
+        });
+
+  };
 
   function reqVenueMenu(venue, callback) {
-
+    console.log("\t reqVenueMenu venue => ", venue);
     if (!venue) {
       console.log("no venue");
       // db.close();
@@ -207,10 +220,10 @@ function doScrape(db) {
     }
 
     if (!venue._id || !venue.name) {
-        console.log("missing venue._id or venue.name");
-        console.error(util.inspect(response, false, null));
-        return callback();
-        }
+      console.log("missing venue._id or venue.name");
+      console.error(util.inspect(response, false, null));
+      return callback();
+    }
 
     console.log("starting reqVenueMenu for " + venue.name);
     var menuQueryString = menuReqOpts.urlPrefix + venue._id + menuReqOpts.urlSuffix;
@@ -227,44 +240,46 @@ function doScrape(db) {
         console.log("statusCode of " + response.statusCode + " not 200 at get menuQueryString");
         return callback();
       }
-      
+
       data = JSON.parse(json).response;
       if (!data.menu || !data.menu.menus || !data.menu.menus.items) {
         console.log("couldn't get menus from JSON.parse for " + venue.name);
         console.dir(data);
         return; // return callback();
-        }
+      }
 
       menu_row = {
         fourSquareId : venue._id,
         name : venue.name,
         menus : data.menu.menus.items
-        }
+      }
       var fn = "menus/" + venue.name.trim().split(/\\\/:/).join("_") + ".json";
       fs.writeFile(fn, JSON.stringify(menu_row), function(err) {
         if (err)  {
           console.log("err on writefile. fn: " + fn);
           console.log(err);
           return callback();
-          }
+        }
 
         console.log("The " + fn + " file was saved!");
         var mongo2 = db.collection("venueMenus");
         console.log(venue.name);
         mongo2.insert(menu_row, function(err, r) {
-           if (err) console.log("error on mongo2.insert");
-         });
+          if (err) console.log("error on mongo2.insert");
+        });
         mongo.updateOne({"_id": venue._id}, {$set: {"menu_date": new Date()} }, function(err, r) {
-           if (err) console.log("error on mongo menu_date setting");
-         });
+          if (err) console.log("error on mongo menu_date setting");
+        });
 
+
+        
 
       });
 
-      });
+    });
     console.log("finished reqVenueMenu for " + venue.name)
     return callback();
-}
+  }
 
 
   if(process.env.FROM_DISK) {
@@ -282,5 +297,5 @@ function doScrape(db) {
     request.get(venueReqOpts.url, processVenueResp);
   }
 
-console.log("end of doScrape")
+  console.log("end of doScrape")
 }

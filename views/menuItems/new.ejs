@@ -1,205 +1,81 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <% include ../common/head %>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <% include ../common/head %>
 
-  <link rel="stylesheet" href="/styles/new-menu-item.css" media="screen">
-  <!-- Facebook & Google+ open graph (og) protocol properties to customize what you share-->
-  <!-- Once hosted to a site, update this info and Facebook/G+/LinkedIn will build a share dialog box with it. It does not pull info correctly on localhost, but works once deployed-->
-  <meta property="og:url"           content="https://eatablez.herokuapp.com/socialshare" />
-  <meta property="og:type"          content="website" />
-  <meta property="og:title"         content="Plate Rate" />
-  <meta property="og:description"   content="PlateRate is a great app to help you find food you love - Find the highest rated menu items - wherever you are!" />
-  <meta property="og:image"         content="/images/logo_platerate.png" />
+      <link rel="stylesheet" href="/styles/new-menu-item.css" media="screen">
+      <!-- Facebook & Google+ open graph (og) protocol properties to customize what you share-->
+      <!-- Once hosted to a site, update this info and Facebook/G+/LinkedIn will build a share dialog box with it. It does not pull info correctly on localhost, but works once deployed-->
+      <meta property="og:url"           content="https://eatablez.herokuapp.com/socialshare" />
+      <meta property="og:type"          content="website" />
+      <meta property="og:title"         content="Plate Rate" />
+      <meta property="og:description"   content="PlateRate is a great app to help you find food you love - Find the highest rated menu items - wherever you are!" />
+      <meta property="og:image"         content="/images/logo_platerate.png" />
 
-  <!-- LinkedIn SDK, which must be in head tag according to documentation -->
-<!--   <script type="text/javascript" src="//platform.linkedin.com/in.js">
+    <!-- LinkedIn SDK, which must be in head tag according to documentation -->
+    <!--   <script type="text/javascript" src="//platform.linkedin.com/in.js">
     //Create an api key in LinkedIn for the site and update the current test one and store it as an environmental variable
-    api_key:   75cad1rwxl5dug
-    authorize: true
-    onLoad:    onLinkedInLoad
-  </script> -->
-   <!-- Include jQuery and jQuery UI -->
-   <!--  <script src="//code.jquery.com/jquery-1.12.1.min.js" type="text/javascript"></script>
-     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script> -->
-  <!-- Include Fancytree skin and library -->
+      api_key:   75cad1rwxl5dug
+      authorize: true
+      onLoad:    onLinkedInLoad
+    </script> -->
+    <!-- Include jQuery and jQuery UI -->
+    <!--  <script src="//code.jquery.com/jquery-1.12.1.min.js" type="text/javascript"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script> -->
+    <!-- Include Fancytree skin and library -->
+    <script src="../../js/app.js" type="text/javascript"></script>
+    <link href="../../styles/ui.fancytree.css" rel="stylesheet" type="text/css">
+    <script src="../../js/jquery.fancytree-all.js" type="text/javascript"></script>
+    <script src="../../js/jquery.fancytree.gridnav.js" type="text/javascript"></script>
+    <script src="../../js/jquery.fancytree.table.js" type="text/javascript"></script>
+    <script src="../../js/jquery.fancytree.glyph.js" type="text/javascript"></script>
+    <script src="../../js/menu-item-page.js"></script>
+    <!-- Google+ -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  </head>
 
-
-  <link href="../../styles/ui.fancytree.css" rel="stylesheet" type="text/css">
-  <script src="../../js/jquery.fancytree-all.js" type="text/javascript"></script>
-  <script src="../../js/jquery.fancytree.gridnav.js" type="text/javascript"></script>
-  <script src="../../js/jquery.fancytree.table.js" type="text/javascript"></script>
-   <script src="../../js/jquery.fancytree.glyph.js" type="text/javascript"></script>
-   <!-- Google+ -->
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-</head>
-<body id="menu_items">
-  <div class="container header-container">
-    <% include ../common/header %>
-  </div>
-  <!-- page content  -->
-  <div class="container page-content">
-    <div class="row">
-      <% include ../common/menu_item.ejs %>
-      <div class="col-md-4">
-      <h2>Buddha Bodai</h2>
-      <div class='yelp-rating' id='ratings-past'>
-        <div class='fixed-rating' id='4'></div>
-        <p id="yelp-rating">Yelp rating</p>
-      </div>
-      <p>$$</p>
-      <p>7 blocks away</p>
-      <p>5 Mott St., New York, NY 10002</p>
-      <a id="get-directions" href="https://www.google.com/maps/dir//Buddha+Bodai,+5+Mott+St,+New+York,+NY+10013/@40.7138632,-73.998859,15z/data=!4m15!1m6!3m5!1s0x0:0x279e9cecc8191e1a!2sBuddha+Bodai!8m2!3d40.7138632!4d-73.998859!4m7!1m0!1m5!1m1!1s0x89c25a26942e76c3:0x279e9cecc8191e1a!2m2!1d-73.998859!2d40.7138632" target="_blank">Get directions</a>
-      <br>
-      <br>
-  
-      </div>
-      <br>
-      <br>
-      <br>
-      <div class="row form-top-container">
-        <div align="center" class="col-xs-12 col-md-12 col-lg-12 feeling-button">
-          <button class="write-review write-review-btn" href="/ratings/new">Write Review</button>
-        </div>
-      </div>
-      <div class="row form-top-container">
-        <div class="col-xs-12 col-md-12 col-lg-12">
-          <% include ../common/menu_item_and_diet_pref         %>
-          <% include ../common/detailed_reviews                %>
-          <% include ../common/expert_taster_menu_item_details %>
-          <% include ../common/add_restaurant_details          %>
-          <% include ../common/highest_rated_menu_items        %>
-          <% include ../common/traditional_menu                %>
-          <% include ../common/myRatings                       %>
-        </div>
-      </div>
-
+  <body id="menu_items" >
+    <div class="container header-container">
+      <% include ../common/header %>
     </div>
-
+    <!-- page content  -->
+    <form action="/menuitems/updateValues" method="post">
+    <div class="container page-content">
+      <div class="row">
+        <% include ../common/menu_item.ejs %>
+        <div class="col-md-4">
+          <h2><%= venue.name %></h2>
+          <div class='yelp-rating' id='ratings-past'>
+            <div class='fixed-rating' id='4'></div>
+            <p id="yelp-rating">Yelp rating</p>
+          </div>
+          <p><%=venue.price || "Price tier unavailable"%></p>
+          <p><%=venue.location.address%></p>
+          <a id="get-directions" href="https://www.google.com/maps/dir/Current+Location/<%=venue.location.address%>" target="_blank">Get directions</a>
+          <br>
+          <br>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="row form-top-container">
+          <div class="col-xs-12 col-md-12 col-lg-12">
+            <% include ../common/menu_item_and_diet_pref         %>
+            <% include ../common/detailed_reviews                %>
+            <% include ../common/expert_taster_menu_item_details %>
+            <% include ../common/add_restaurant_details          %>
+            <% include ../common/highest_rated_menu_items        %>
+            <% include ../common/traditional_menu                %>
+            <% include ../common/myRatings                       %>
+          </div>
+        </div>
+        <input type="submit"  value="SAVE" class="btn btn-lg btn-primary btn-block" id="menuItemSubmit"/>
+      </div><!-- this is the end of row -->
+      </form>
+    </div>  
     <div id="footer">
       <% include ../common/footer %>
     </div>
-    <% include ../common/foot %>
-    <script>
-
-       var source = [
-            {"title": "Appetizers", "rating": 4, "reviews": 23, "price": "$2-3", "folder": true, "children": [
-              {"title": "Miso soup", "rating": 5, "reviews": 10, "price": "$3"},
-              {"title": "Egg roll", "rating": 4, "reviews": 17, "price": "$2"},
-              {"title": "Spring roll", "rating": 3, "reviews": 6, "price": "$2"}
-            ]},
-            {"title": "Entrees", "rating": 4, "reviews": 29, "price": "$10-15", "folder": true, "children": [
-              {"title": "General Tso's chicken", "rating": 3, "reviews": 8, "price": "$13-15"},
-              {"title": "Mushu chicken", "rating": 5, "reviews": 9, "price": "$10-14"},
-              {"title": "Sushi platter", "rating": 4, "reviews": 12, "price": "$13"}
-            ]},
-            {"title": "Desserts", "rating": 3, "reviews": 25, "price": "$3-8", "folder": true, "children": [
-              {"title": "Ice cream", "rating": 2, "reviews": 7, "price": "$3"},
-              {"title": "Mochi", "rating": 5, "reviews": 11, "price": "$5"},
-              {"title": "Cheesecake", "rating": 4, "reviews": 10, "price": "$8"}
-            ]},
-            {"title": "Beverages", "rating": 4, "reviews": 15, "price": "$1-$1.50", "folder": true, "children": [
-              {"title": "Soda", "rating": 4, "reviews": 7, "price": "$1.50"},
-              {"title": "Tea", "rating": 4, "reviews": 5, "price": "$1"},
-              {"title": "Coffee", "rating": 3, "reviews": 9, "price": "$1.50"}
-            ]}
-          ];
-    $(function(){
-      // Create the tree inside the <div id="tree"> element.
-        $("#tree").fancytree({
-
-          source: source,
-          extensions: ["table"],
-          table: {
-              // indent every node level by 16px
-              nodeColumnIdx: 1         // render node expander, icon, and title to this column (default: #0)
-          },
-          click: function(event, data){
-            if (!data.node.folder && data.targetType === "title"){
-            var itemName = data.node.title.replace(/<(?:.|\n)*?>/gm, '')
-            var ratingHTML = getRatingHTML(data.node.data.rating)
-            var reviewCount = data.node.data.reviews
-            var id = 'tso'
-            updateData(itemName, ratingHTML, reviewCount, id)
-            }
-          },
-          expand: function(event, data){
-            data.node.children.forEach(function(child){
-              var title = child.title
-              child.setTitle('<span style="color:blue; text-decoration:underline">' + title + '</span>')
-            })
-            $('.fancytree-icon').hide()
-          },
-          renderColumns: function(event, data) {
-        var node = data.node,
-            $tdList = $(node.tr).find(">td");
-            
-        // (index #0 is rendered by fancytree by adding the checkbox)
-        var properties = node.data;
-        $tdList.eq(0)
-          .html('<td><input type="checkbox" name=""></td>')
-        // (index #2 is rendered by fancytree)
-        // Make the title cell span the remaining columns, if it is a "folder:"
-        $tdList.eq(2)
-            .html(getRatingHTML(properties.rating))
-            .addClass("alignRight");
-        $tdList.eq(3)
-            .text(properties.reviews)
-            .addClass("alignRight");
-         $tdList.eq(4)
-            .text(properties.price)
-            .addClass("alignRight");
-      }
-
-      });
-      });
-      $(window).bind("load", function(){
-        $.getScript('/js/socialshare.js', function(){})
-      })
-      
-      $(document).ready(function(){
-        setRatings()
-        updateMain()
-        $('.fancytree-icon').hide()
-      });
-      var setRatings = function(){
-        $('.fixed-rating').each(function(index, div){
-          var rating = div.id
-          var html = getRatingHTML(rating)
-          $(div).html(html)
-        })
-      }
-      var updateMain = function(){
-        $('tr').click(function(){
-        if (!$(this).hasClass('fancytree-folder')){ 
-        var itemName = $(this).find('.item-name').text();
-        var ratingHTML = $(this).find('.fixed-rating').html();
-        var reviewCount = $(this).find('.number-of-reviews').text();
-        var id = this.id
-        updateData(itemName, ratingHTML, reviewCount, id);
-      }})
-      };
-      var getRatingHTML = function(rating){
-        var html = ""
-        for (i = 0; i < rating; i++){
-            html += '<span class="glyphicon glyphicon-star"></span>'
-        }
-        for (i = 0; i < (5 - rating); i++){
-            html += '<span class="glyphicon glyphicon-star glyphicon-star-empty"></span>'
-        }
-        return html
-      };
-      var updateData = function(itemName, ratingHTML, reviewCount, id){
-        var displayedItem = $('#menu-item-info')
-        displayedItem.find('h2').text(itemName)
-        displayedItem.find('.fixed-rating').html(ratingHTML)
-        displayedItem.find('#review-count').text(reviewCount + ' reviews')
-        displayedItem.find('img').attr('src', '../../images/' + id + '.jpg')
-        $('html, body').animate({scrollTop : 0},800);
-      }
-      
-    </script>
-   
+      <% include ../common/foot %>
   </body>
-  </html>
+</html>

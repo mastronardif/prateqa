@@ -27,87 +27,88 @@ expert_rate_form.ejs
 <foodId>_peppers
 -->
 
-<div class="rating-group">
-	<div class="accord">
-		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=index%>" aria-expanded="false" aria-controls="collapse<%=index%>"><%= food.foodName %></a>
-	</div>
+<!--<div class="rating-group">-->
+<div class="accord row">
+    <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index %>" aria-expanded="false"
+           aria-controls="collapse<%= index %>"><%= food.foodName %>
+        </a>
+    </h4>
+</div>
+<!-- .collapse should be set on collapse sections for all proceeding .rating-groups -->
+<div id="collapse<%= index %>" class='collapse'>
+    <div class="container">
+        <div class="food-info sub-section row">
+            <div class="col col-xs-6">
+                <p><%= food.foodName %></p>
+                <input name="ItemId" type='text' class="hidden" value="<%= food.foodId %>"/>
+                <input name="ItemName" type='text' class="hidden" value="<%= food.foodName %>"/>
+                <!-- STATIC RATING FROM DATABASE -->
+                <input name="StarRating" type='number' class="rating" data-min='1' data-max='5' value='4'/>
+                <span>12 reviews</span> <br>
 
-	<!-- .collapse should be set on collapse sections for all proceeding .rating-groups -->
-	<div id="collapse<%=index%>" class='collapse'>
-		<div class="container">
+                $ <input name='ItemPrice' type="number" class='price' value='' placeholder='Price'>
+            </div>
+            <div class="col col-xs-6">
+                <div class="image">
+                    <!-- <img src="http://placehold.it/1000x500"> -->
+                    <img src="/images/sushi.jpg">
+                </div>
+            </div>
+        </div>
 
-			<div class="food-info sub-section row">
-				<div class="col col-xs-6">
-					<p><%= food.foodName %></p>
-					<input name="ItemId" type='text' class="hidden" value="<%= food.foodId %>">
-					<input name="ItemName" type='text' class="hidden" value="<%= food.foodName %>">
-					<!-- STATIC RATING FROM DATABASE -->
-					<input name="StarRating" type='number' class="rating" data-min='1' data-max='5' value='4'>
-					<span>12 reviews</span> <br>
+        <div class="food-review">
+            <div class="sub-section user-info row">
+                <div class="user-details col col-xs-8">
+                    <div class="row">
+                        <div class="col col-xs-12">
+                            <!-- should this be editable? -->
+                            <input name="UserRating" type='number' class="rating" data-min='1' data-max='5' value='4'>
+                            <span>by USERNAME</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- number of user's upvoted reviews -->
+                        <div class="col col-xs-8 upvoted-count">
+                            <span>50 upvoted reviews</span>
+                        </div>
+                        <div class="col col-xs-4 friend-count">
+                            <span>6 friends</span>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end .user-info -->
+            <div class="sub-section row">
+                <div class="col col-xs-10 col-xs-offset-1">
+                    <textarea name="ItemReview" id="" class='text-review' rows='5'
+                              placeholder='What did you think about <%= food.foodName %>?'></textarea>
+                </div>
+            </div>
 
-					$ <input name='ItemPrice' type="number" class='price' value='' placeholder='Price'>
-				</div>
-				<div class="col col-xs-6">
-					<div class="image">
-						<!-- <img src="http://placehold.it/1000x500"> -->
-						<img src="/images/sushi.jpg">
-					</div>
-				</div>
-			</div>
+            <div class="sub-section sliders">
+                <!-- create conditional for if (expert) -->
+                <% include ../common/expert_rate_form.ejs %>
+                <% include ../common/basic_rate_form.ejs %>
 
-			<div class="food-review">
-				<div class="sub-section user-info row">
-					<div class="user-image col col-xs-4">
-						<img src="/images/garett.jpg">
-					</div>
-					<div class="user-details col col-xs-8">
-						<div class="row">
-							<div class="col col-xs-12">
-								<!-- should this be editable? -->
-								<input name="UserRating" type='number' class="rating" data-min='1' data-max='5' value='4'>
-								<span>by USERNAME</span>
-							</div>
-						</div>
-						<div class="row">
-							<!-- number of user's upvoted reviews -->
-							<div class="col col-xs-8 upvoted-count">
-								<span>50 upvoted reviews</span>
-							</div>
-							<div class="col col-xs-4 friend-count">
-								<span>6 friends</span>
-							</div>
-						</div>
-					</div>
-				</div> <!-- end .user-info -->
-				<div class="sub-section row">
-					<div class="col col-xs-10 col-xs-offset-1">
-						<textarea name="ItemReview" id="" class='text-review' rows='5' placeholder='What did you think about <%=food.foodName%>?'></textarea>
-					</div>
-				</div>
+            </div> <!-- end .sliders -->
+        </div> <!-- end .food-review -->
+        <div class="questions sub-section">
+            <label>Does this dish have cooked peppers?</label> <br>
+            <select name="ItemPeppers" id="peppers" class="form-control">
+                <option value="2">Ask to remove</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+        <div class="expert-review sub-section">
+            <!-- NEED TO ADD A DATA-TARGET VALUE -->
+            <span class="toggle-expert-review" data-target=".expert-form-<%= food.foodId %>">Expert Review</span>
+        </div>
+        <!-- SUBMIT BUTTON -->
+        <div class="submit">
+            <button class='btn btn-danger submit-button'>Submit</button>
+        </div>
+    </div> <!-- end container for .collapse section -->
+</div>
 
-  			<div class="sub-section sliders">
-  				<!-- create conditional for if (expert) -->
-  				<% include ../common/expert_rate_form.ejs %>
-  				<% include ../common/basic_rate_form.ejs %>
 
-  			</div> <!-- end .sliders -->
-			</div> <!-- end .food-review -->
-			<div class="questions sub-section">
-				<label>Does this dish have cooked peppers?</label> <br>
-				<select name="ItemPeppers" id="peppers" class="form-control">
-					<option value="2">Ask to remove</option>
-					<option value="1">Yes</option>
-					<option value="0">No</option>
-				</select>
-			</div>
-			<div class="expert-review sub-section">
-				<!-- NEED TO ADD A DATA-TARGET VALUE -->
-				<span class="toggle-expert-review" data-target=".expert-form-<%=food.foodId%>">Expert Review</span>
-			</div>
-				<!-- SUBMIT BUTTON -->
-			<div class="submit">
-				<button class='btn btn-danger submit-button'>Submit</button>
-			</div>
-		</div> <!-- end container for .collapse section -->
-	</div>
-</div> <!-- end .rating-group -->

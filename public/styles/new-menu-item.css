@@ -12,8 +12,17 @@
 }
 
 
-.write-review-btn{
+.add-to-list-btn{
   height: 50px;
   width: 300px;
   font-size:25px;
+}
+
+.rate-items-btn{
+  height: 50px;
+  width: 300px;
+  font-size:25px;
+}
+.wrap-btn{
+  text-align: center;
 }
