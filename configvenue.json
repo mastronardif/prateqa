@@ -1,0 +1,10 @@
+{
+    "client_id": "5GYLC30XGL2N2BUGP5MUQLE0M40XI32TIYNDGPGOFESLOP3D",
+    "client_secret": "ISLE2CKXBYCGUO4FRN0B2WKKGZ2GXLRO04U4KMRCZTDWNEPA",
+    "v": "20160101",
+    "categoryId": "4d4b7105d754a06374d81259",
+    "urlVenues": "https://api.foursquare.com/v2/venues/",
+    "urlVenue": "https://api.foursquare.com/v2/venues/{VENUE_ID}",
+    "urlVenueMenu": "https://api.foursquare.com/v2/venues/{VENUE_ID}/menu",    
+    "urlVenuesExplore": "https://api.foursquare.com/v2/venues/explore"
+}

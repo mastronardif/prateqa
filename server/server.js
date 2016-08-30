@@ -8,6 +8,8 @@ var app         = express();
 var session     = require('client-sessions');
 var MongoClient = require('mongodb').MongoClient;
 
+// FM new routes begin
+var venues = require('./routes/venues');
 //the controller(s).
 
 var profileController = require('./controllers/profile-controller');
@@ -142,6 +144,9 @@ app.on('stormpath.ready',function () {
     console.log('Application running at http://localhost:'+ port);
   });
 });
+// FM new routes begin
+app.use('/v1/api/venues', venues);
+// FM new routes end
 
 //put this app.use last.  The last .use.
 app.use(function(err, req, res, next) {
