@@ -34,9 +34,10 @@ module.exports.testRefresh = function (req, res) {
             qq.lat = data.results.loc.lat;
             qq.lon = data.results.loc.lng;
             console.log( qq);
-            res.json({msg: "writting s for ",data:data});
+            //res.json({msg: "writting s for ", data:data});
             
             TEST.wtf(req.db, qq, null);
+            res.json({msg: "REreshing for ",data:data});
             return;
         }  
         });
@@ -44,21 +45,17 @@ module.exports.testRefresh = function (req, res) {
     else {
        TEST.wtf(req.db, qq, null); 
     }
+    res.json({msg: "Refreshing for ", data:qq});
     return;
     
-    
-    
-    
-    
-    
-    console.log(req.query);
-    console.log(JSON.stringify(req.body) );
+    // console.log(req.query);
+    // console.log(JSON.stringify(req.body) );
 
-//router.post ('/test/refresh', bodyp.json(), venueController.testRefresh);
-//    var qq = {"lat": myParms.lat, "lon": myParms.lon, "radius": myParms.radius, "adr": myParms.address };
-console.dir('TEST = ' + TEST.wtf);
-TEST.wtf(req.db, qq, null);
-    res.json({name: "testRefresh"});
+// //router.post ('/test/refresh', bodyp.json(), venueController.testRefresh);
+// //    var qq = {"lat": myParms.lat, "lon": myParms.lon, "radius": myParms.radius, "adr": myParms.address };
+// console.dir('TEST = ' + TEST.wtf);
+// TEST.wtf(req.db, qq, null);
+    // res.json({name: "testRefresh"});
 };
 
 module.exports.listMenu = function (req, res) {
