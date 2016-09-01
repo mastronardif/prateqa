@@ -22,6 +22,7 @@ module.exports.testRefresh = function (req, res) {
         if (err) { 
             console.log(err); //return; 
             res.json({}); 
+            return;
         }
         else {
             console.log('\t**** data = ' + JSON.stringify(data) );
@@ -37,8 +38,8 @@ module.exports.testRefresh = function (req, res) {
             //res.json({msg: "writting s for ", data:data});
             
             TEST.wtf(req.db, qq, null);
-            res.json({msg: "REreshing for ",data:data});
-            return;
+            //res.json({msg: "REreshing for ",data:data});
+            //return;
         }  
         });
     }
