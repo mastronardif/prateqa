@@ -6,5 +6,8 @@
     "urlVenues": "https://api.foursquare.com/v2/venues/",
     "urlVenue": "https://api.foursquare.com/v2/venues/{VENUE_ID}",
     "urlVenueMenu": "https://api.foursquare.com/v2/venues/{VENUE_ID}/menu",    
-    "urlVenuesExplore": "https://api.foursquare.com/v2/venues/explore"
+    "urlVenuesExplore": "https://api.foursquare.com/v2/venues/explore",
+    
+    "urlGooglepiLatLong": "http://maps.googleapis.com/maps/api/geocode/json", 
+    "GOOGLE_API_KEY": "TBD"
 }

@@ -2,9 +2,64 @@
 var util = require('util');
 var request = require("request");
 var venue = require('./myvenue');
+var TEST  = require('../../scrape0a');
+
 //var session = require('client-sessions');
 var assert = require('assert');
 
+module.exports.testRefresh = function (req, res) {
+    var qq = req.body;
+    var bValidLatLon = venue.HelperIsValidLatLong(qq.lat, qq.lon);
+    console.log('bValidLatLon = ', bValidLatLon);    
+
+    if (qq.address && !bValidLatLon) {
+        console.log("if (req.body.locationinput && !req.body.lat && !req.body.long) ");
+        //var qq = {"address": req.body.address};
+        
+        venue.GetLatLongFromAddress({"address": qq.address}, function cb(err, data) {
+        console.log('\tcb(err, data)');
+    
+        if (err) { 
+            console.log(err); //return; 
+            res.json({}); 
+        }
+        else {
+            console.log('\t**** data = ' + JSON.stringify(data) );
+            var jsonData = JSON.stringify(data);
+            //var objData = JSON.parse(jsonData);  
+//console.log( data );            
+            
+            //var qq = {lat: , lon, radius: , address: };
+            qq.address = data.results.address;
+            qq.lat = data.results.loc.lat;
+            qq.lon = data.results.loc.lng;
+            console.log( qq);
+            res.json({msg: "writting s for ",data:data});
+            
+            TEST.wtf(req.db, qq, null);
+            return;
+        }  
+        });
+    }
+    else {
+       TEST.wtf(req.db, qq, null); 
+    }
+    return;
+    
+    
+    
+    
+    
+    
+    console.log(req.query);
+    console.log(JSON.stringify(req.body) );
+
+//router.post ('/test/refresh', bodyp.json(), venueController.testRefresh);
+//    var qq = {"lat": myParms.lat, "lon": myParms.lon, "radius": myParms.radius, "adr": myParms.address };
+console.dir('TEST = ' + TEST.wtf);
+TEST.wtf(req.db, qq, null);
+    res.json({name: "testRefresh"});
+};
 
 module.exports.listMenu = function (req, res) {
     

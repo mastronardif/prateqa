@@ -5,6 +5,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/platerate';
 var session = require('client-sessions');
 var assert = require('assert');
+var venue = require('./myvenue');
 var options = {
     caseSensitive: false,
     includeScore: true,
@@ -42,6 +43,7 @@ module.exports.searchFood = function (req, res) {
     console.log('search-controller.js, module.exports.searchFood');
     var results = {'query': req.query, 'body': req.body};
     console.log(JSON.stringify(results));
+
     //console.log('req.db = ', req.db.getName());
     console.log('req.myParisite = ', req.myParisite);
     //var collection = req.db.get('ratings');
@@ -97,6 +99,9 @@ function printError(error) {
 
 //call Scrape.js before venueMenu Query
 var venueMenusAggregate = function (db, userInput, callback) {
+    ///
+
+    ///
     console.log("The user input is: " + userInput);
     //Using aggregate Mongodb Aggregation Pipeline
     db.collection("venueMenus").aggregate([
@@ -131,6 +136,36 @@ var venueMenusAggregate = function (db, userInput, callback) {
 };
 
 module.exports.searchMenuItems = function (req, res) {
+    ///////
+    console.log("module.exports.searchMenuItems");    
+    console.log(req.query);    
+    console.log(JSON.stringify(req.body) );
+    
+    var bValidLatLon = venue.HelperIsValidLatLong(req.body.lat, req.body.long);
+    console.log('bValidLatLon = ', bValidLatLon);
+    
+    if (req.body.locationinput && !bValidLatLon) {
+        console.log("if (req.body.locationinput && !req.body.lat && !req.body.long) ");
+        var qq = {"address": req.body.locationinput};
+        venue.GetLatLongFromAddress(qq, function cb(err, data) {
+        console.log('\tcb(err, data)');
+    
+        if (err) { 
+            console.log(err); //return; 
+            res.json({}); 
+        }
+        else {
+            console.log('\t**** data = ' + JSON.stringify(data) );
+            //var jsonData = JSON.stringify(data);
+            //var javascriptObject = JSON.parse(jsonData);        
+            //res.json(javascriptObject);
+        }  
+        });
+    }
+    //////
+    
+
+
     var userInput = req.body.basicsearchinput;
     venueMenusAggregate(req.db, userInput, function (err, result) {
         console.log("inside the other function"+ result);

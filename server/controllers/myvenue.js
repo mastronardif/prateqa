@@ -31,6 +31,46 @@ var Config  = require('../../configvenue.json');
         } );
     }
     
+    var app_user_ck_lat = /^(-?[1-8]?\d(?:\.\d{1,18})?|90(?:\.0{1,18})?)$/;
+    var app_user_ck_lon = /^(-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,18})?|180(?:\.0{1,18})?)$/;
+    Venue.prototype.HelperIsValidLatLong = function (lat, lon) {
+        var validLat = app_user_ck_lat.test(lat);
+        var validLon = app_user_ck_lon.test(lon);
+        if(validLat && validLon) {
+            return true;
+        } else {
+            return false;
+        }      
+    }
+    
+    Venue.prototype.GetLatLongFromAddress = function (qry, cb) {
+        var callback = (typeof cb === 'function') ? cb : function() {};
+        var address = (qry.address) ? qry.address : "";
+        //http://maps.googleapis.com/maps/api/geocode/json?address='311 lenox Ave Westfield, NJ 07090'
+        var options = { method: 'GET',
+        url: Config.urlGooglepiLatLong,
+        qs: { address: address },
+            headers: 
+            { 'cache-control': 'no-cache' } };
+        
+        request(options, function (error, response, body) {
+            if (error) return error;
+            
+            //console.log(JSON.stringify(response) );
+            var res = JSON.parse(body);
+            //console.log(res.results[0].formatted_address);
+            
+            //console.log(JSON.stringify(res.results[0].formatted_address));
+            //console.log(JSON.stringify(res.results[0].geometry.location));
+            var results = {"address": res.results[0].formatted_address, 
+                           "loc":     res.results[0].geometry.location};
+            //var obj = JSON.parse(response.body.results);
+            //var aResults = obj.results.status;
+            callback(null, {results: results});
+        }); 
+            
+    }
+    
     Venue.prototype.list = function (qry, cb) {
         var callback = (typeof cb === 'function') ? cb : function() {};
         // Minimum vitals

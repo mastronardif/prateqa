@@ -115,7 +115,7 @@ app.get('/basicsearch', searchController.showForm);
 //search for menu items
 app.get('/menuitems/:entryId', menuItemController.loadItem);
 app.post('/menuitems/updateValues', menuItemController.updateValues);
-app.post('/basicsearch/submit', searchController.searchMenuItems);
+app.post('/basicsearch/submit', bodyp.json(), searchController.searchMenuItems);
 
 app.post('/advancedSearch', advSearchController.advancedSearch);
 
