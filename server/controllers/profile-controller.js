@@ -25,7 +25,7 @@ module.exports.editProfile = function (req, res) {
     var email = req.body.email;
     var theBody = req.body.firstname;
     console.log("Here is the req.firstname");
-    console.log(theBody);
+    console.log("req.body = " + JSON.stringify(req.body) );
     var updatedProfile = req.body;
     req.db.collection('profile').updateOne(
         {"email": email},
@@ -66,10 +66,19 @@ module.exports.editProfile = function (req, res) {
 //checks if the user exist if
 module.exports.loadProfile = function(req,res) {
   //sets a cookie with the user's info
+  //console.log("loadProfile, req = ", JSON.stringify(req));
+  console.log("\nloadProfile, req.user.customData = \n", req.user.customData);   
+  console.log("\nloadProfile, req.user.customData = \n", req.user.customData.ReferralId); 
+  //console.log("\nloadProfile, req.user.customData = \n", JSON.stringify(req.user.customData));
+  console.log("\nloadProfile, req.user = ", JSON.stringify(req.user));
   req.session.user = req.user;
   req.db.collection('profile').findOne({'href': req.user.href})
     .then(function (found){
     if(!found) {
+        console.log("\n insertOne begin\n");
+        console.log("\n\t customData \n" + req.user.customData);
+        console.log("\n insertOne end\n");
+        
     	req.db.collection('profile').insertOne(req.user);
 			res.render('basicsearch/new', {account:req.user});
       return;
