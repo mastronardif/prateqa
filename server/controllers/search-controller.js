@@ -175,7 +175,12 @@ module.exports.searchMenuItems = function (req, res) {
             return;
         }
         else {
-            res.render('basicsearchresults/new', {result: result});
+            console.log('\n\n\n\n');
+            console.log(result);
+            console.log('\n********\n');
+            
+            //res.render('basicsearchresults/new', {result: result});
+            res.render('basicsearchresults/prplateview', {result: result});
         }
     });
 };

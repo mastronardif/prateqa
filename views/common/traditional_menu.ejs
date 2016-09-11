@@ -9,6 +9,27 @@
     </div>
     <div id="collapseSix" class="panel-collapse collapse material_accordion_collapse" role="tabpanel" aria-labelledby="headingSix">
         <div class="panel-body">
+        
+        <!-- FM, test to show other menus -->        
+        <div class="container-fluid">
+            <div class="row">
+            <div class="col-md-3 col-sm-6">
+            <i class="fa fa-heart"></i>
+            </div>
+            <div class="col-md-3 col-sm-6">
+            <a href="<%=venue.menu.mobileUrl%>"> mobile </a>
+            </div>
+                <div class="col-md-3 col-sm-6">
+            <a href="<%=venue.menu.url%>"> desktop</a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+            <a href="<%=venue.url%>"> root</a>
+            </div>
+            </div>
+        </div>
+        
+        
+        
             <table class='table' id='tree' data='<%=tree%>'>
                     <form action="">
                     <thead>

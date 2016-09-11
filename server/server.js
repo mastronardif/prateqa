@@ -204,6 +204,69 @@ app.get('/profile', function(req, res) {
 app.get('/profile/edit',stormpath.loginRequired,profileController.viewProfile);
 
 // fm new referral registration begin
+//app.get('/referralid/:id',  bodyp.json(), function(req,res,next){
+app.get('/referralid/:id', function(req,res,next){    
+    var id = "asdf";
+
+    var referralID = req.params.id; //(req.query.rfid) ? req.query.rfid : '';
+    console.log(req.headers.host);
+var requrl = url.format({
+    protocol: req.protocol,
+    host: req.get('host'),
+    pathname: req.originalUrl,
+});
+console.log("requrl = " +  requrl);
+var regUrl = url.format({protocol: req.protocol, host: req.get('host'), pathname: "register"});
+console.log("regUrl = " +  regUrl);    
+    
+    var options = { method: 'GET',
+	  //url: 'http://localhost:3003/register',
+      url: regUrl//, //'http://localhost:3003/register',
+	  // headers: 
+	   // { //'cache-control': 'no-cache',
+	     // 'content-type': 'application/json' }
+         };
+
+	request(options, function (error, response, body) {
+	  if (error) throw new Error(error);
+
+      // add form action = "./register"
+      var $document = cheerio.load(body);
+      
+      var fuck = $document('form').attr('method');
+      $document('form').attr('action', './register');
+      var action = $document('form').attr('action');
+      console.log("action = "+ action);
+      
+            // search pattern
+      var pattern = /ReferralId/i;
+      //for (var idx = 0, len = 3; idx < len; idx++) {
+      for (var idx = 0, len = $document('input[type="text"]').length; idx < len; idx++) {
+          console.log( $document('input[type="text"]')[idx].attribs.name); 
+          
+        if (pattern.test($document('input[type="text"]')[idx].attribs.name) ) {
+            $document('input[type="text"]')[idx].attribs.value = referralID; //'your mommoy';
+        }
+          
+          // console.log('\n'+ $document('input[type="text"]')[idx].attribs.value);   
+          // console.log( '\n\n');   
+        // console.log( $document('input[type="text"]')[idx]);       
+      };
+      
+      
+      //$document.getElementById("form").action = "form_action.asp";
+      $document('body').append('<p>form mod</p>');
+	  //res.send(body);
+      res.send($document.html());
+      //res.send(response);
+      
+	  //console.log("\n\n");
+	  //console.log(response.body);
+	});     
+    //next();
+});
+
+
 app.get('/referralid',  bodyp.json(), function(req,res,next){
     console.log("app.get('/referralid', function(req,res,next){");
     //res.send('<h1>what the fuck</h1>');
@@ -262,21 +325,10 @@ console.log("regUrl = " +  regUrl);
       
 	  //console.log("\n\n");
 	  //console.log(response.body);
-	});  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-      //next();
+	});     
+    //next();
 });
+
 app.get('/myRegisterWithNoHands', function(req,res,next){
 
 var options = { method: 'POST',

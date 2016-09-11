@@ -1,0 +1,85 @@
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <% include ../common/head %>
+
+      <link rel="stylesheet" href="/styles/new-menu-item.css" media="screen">
+      <!-- Facebook & Google+ open graph (og) protocol properties to customize what you share-->
+      <!-- Once hosted to a site, update this info and Facebook/G+/LinkedIn will build a share dialog box with it. It does not pull info correctly on localhost, but works once deployed-->
+      <meta property="og:url"           content="https://eatablez.herokuapp.com/socialshare" />
+      <meta property="og:type"          content="website" />
+      <meta property="og:title"         content="Plate Rate" />
+      <meta property="og:description"   content="PlateRate is a great app to help you find food you love - Find the highest rated menu items - wherever you are!" />
+      <meta property="og:image"         content="/images/logo_platerate.png" />
+
+    <!-- LinkedIn SDK, which must be in head tag according to documentation -->
+    <!--   <script type="text/javascript" src="//platform.linkedin.com/in.js">
+    //Create an api key in LinkedIn for the site and update the current test one and store it as an environmental variable
+      api_key:   75cad1rwxl5dug
+      authorize: true
+      onLoad:    onLinkedInLoad
+    </script> -->
+    <!-- Include jQuery and jQuery UI -->
+    <!--  <script src="//code.jquery.com/jquery-1.12.1.min.js" type="text/javascript"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script> -->
+    <!-- Include Fancytree skin and library -->
+    <script src="../../js/app.js" type="text/javascript"></script>
+    <link href="../../styles/ui.fancytree.css" rel="stylesheet" type="text/css">
+    <script src="../../js/jquery.fancytree-all.js" type="text/javascript"></script>
+    <script src="../../js/jquery.fancytree.gridnav.js" type="text/javascript"></script>
+    <script src="../../js/jquery.fancytree.table.js" type="text/javascript"></script>
+    <script src="../../js/jquery.fancytree.glyph.js" type="text/javascript"></script>
+    <script src="../../js/menu-item-page.js"></script>
+    <!-- Google+ -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  </head>
+
+  <body id="menu_items" >
+    <div class="container header-container">
+      <% include ../common/header %>
+    </div>
+    <!-- page content  -->
+    <form action="/menuitems/updateValues" method="post">
+    <div class="container page-content">
+      <div class="row">
+        <% include ../common/menu_item.ejs %>
+        <div class="col-md-4">
+          <h2><%= venue.name %>(<%= venue._id %>)</h2>
+          <!-- FM for testing begin -->
+          <intput type="hidden" name="fld_venueId" value="<%= venue._id %>"/>
+          
+          <!-- FM for testing prvenueview.ejs end -->
+          <div class='yelp-rating' id='ratings-past'>
+            <div class='fixed-rating' id='4'></div>
+            <p id="yelp-rating">Yelp rating</p>
+          </div>
+          <p><%=venue.price || "Price tier unavailable"%></p>
+          <p><%=venue.location.address%></p>
+          <a id="get-directions" href="https://www.google.com/maps/dir/Current+Location/<%=venue.location.address%>" target="_blank">Get directions</a>
+          <br>
+          <br>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="row form-top-container">
+          <div class="col-xs-12 col-md-12 col-lg-12">
+            <% include ../common/menu_item_and_diet_pref         %>
+            <% include ../common/detailed_reviews                %>
+            <% include ../common/expert_taster_menu_item_details %>
+            <% include ../common/add_restaurant_details          %>
+            <% include ../common/highest_rated_menu_items        %>
+            <% include ../common/traditional_menu                %>
+            <% include ../common/myRatings                       %>
+          </div>
+        </div>
+        <input type="submit"  value="SAVE" class="btn btn-lg btn-primary btn-block" id="menuItemSubmit"/>
+      </div><!-- this is the end of row -->
+      </form>
+    </div>  
+    <div id="footer">
+      <% include ../common/footer %>
+    </div>
+      <% include ../common/foot %>
+  </body>
+</html>

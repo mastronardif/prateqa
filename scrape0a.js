@@ -193,8 +193,10 @@ console.log(JSON.stringify(JSON.parse(json), null, 2) );
       delete venue.id;
       // console.log(venueIndex, venue.name);
       venues_buf += JSON.stringify(venue) + "\n";
+      console.log("\n\t ******* venue = \n");
+      console.log(venue);
       mongo.insert(venue);
-      //console.log(util.inspect(mongo.insert(venue)));
+      console.log(util.inspect(mongo.insert(venue)));
     }
 
     //  we're writing a file that can be used for mongoimport
@@ -290,9 +292,10 @@ if (bLogfiles) {
       }
 
       menu_row = {
-        fourSquareId : venue._id,
-        name : venue.name,
-        menus : data.menu.menus.items
+        fourSquareId: venue._id,
+        venueId: venue._id,
+        name: venue.name,
+        menus: data.menu.menus.items
       }
       var fn = "menus/" + venue.name.trim().split(/\\\/:/).join("_") + ".json";
 if (bLogfiles) { 

@@ -1,0 +1,10 @@
+poulate old fancy tree data?
+-- clear collections(2) venues, venumenus
+$ node ./scrape.js 40.783843  -73.977828
+
+
+venues cache
+{{url}}/v1/api/venues/list/menu/todb - list a menu to DB fancytree format, *flattened format.
+
+{{url}}/v1/api/venues/list/menu
+{{url}}/v1/api/venues/test/refresh - refreshes the db

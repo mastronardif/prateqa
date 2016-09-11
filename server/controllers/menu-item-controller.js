@@ -4,14 +4,20 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var session = require('client-sessions');
 var miOptions;
-
-
+var venue = require('./myvenue');
+    
 module.exports.loadItem = function(req, res) {
 
 console.log('module.exports.loadItem ');
   var entryId = req.params.entryId;
-      
-  req.db.collection('venueMenus').find({"menus.entries.items.entries.items.entryId": entryId})
+  
+  console.log('\n\t\t **** entryId = ' + entryId);
+  //console.log(req);
+  console.log(req.query);
+  console.log(JSON.stringify(req.body) );
+
+  var col =  "testMenu"; //"";// "testMenu"; // "venueMenus";
+  req.db.collection(col).find({"menus.entries.items.entries.items.entryId": entryId})
                 .toArray(function(err, menu){      
   
       if(err) {
@@ -35,13 +41,18 @@ console.log('module.exports.loadItem ');
       }
       
       
-    //console.log('Menu found! Name: ' + menu[0].name);
+    console.log('Menu found! Name: ' + menu[0].name, "venueId = ", menu[0].venueId);
     //req.db.collection('venues').findOne({"name": menu[0].name}).then(function(venue){
-    req.db.collection('venues').findOne({"name": menu[0].name}).then(function(venue){
+        // use venueId !!!!!!!!!!!!!!!!
+    //req.db.collection('venues').findOne({"name": menu[0].name}).then(function(venue){
+    req.db.collection('venues').findOne({"venueId": menu[0].venueId}).then(function(venue){
       
-    //console.log('Venue found! Name: ' + venue.name);
+    console.log('\n\nVenue found! Name: ' + venue.name);
+    //console.log(venue);
+    //console.log(venue.venueId);
+    
     var item = findItem(menu[0], entryId);
-    //console.log('Item found! Name: ' + item.name);
+    console.log('Item found! Name: ' + item.name);
     //var tree = createFancyTreeMenu(menu[0]);
     var tree = createFancyTreeMenu(menu[0]);
     //console.log('tree = ', tree);
@@ -53,15 +64,17 @@ console.log('module.exports.loadItem ');
    };
     
     var sliders = [10,20,30,40,50,60,70,80];
-    res.render('menuItems/new', {
+    //res.render('menuItems/new', {
+    res.render('menuItems/prvenueview', {
         venue: venue, 
         item: item,
+        //tree: tree00,
         tree: tree,
         sliders: sliders,
         miOptions: miOptions
       });
     });
-  });
+  });   // end to array
 };
 
 module.exports.updateValues = function(req, res) {
@@ -78,7 +91,8 @@ module.exports.updateValues = function(req, res) {
 
 var findItem = function(menu, entryId){
   var foundItem;
-  //console.log('findItem ', menu, entryId); 
+  console.log('findItem ', menu, entryId); 
+  console.log(menu);
   //menu[0].menus.forEach(function (menu){
   menu.menus.forEach(function (menu22){
       //console.log('menu22 ', menu22);
@@ -97,6 +111,9 @@ var findItem = function(menu, entryId){
 }
 
 var createFancyTreeMenu = function(data){
+    console.log("\n **** createFancyTreeMenu\n");
+    console.log(data);
+    
   var tree = [];
   data.menus.forEach(function(menu){
     if (menu.entries.count > 0){

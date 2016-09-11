@@ -223,8 +223,15 @@ var Config  = require('../../configvenue.json');
         { 
         'cache-control': 'no-cache' } };
 
-        request(options, function (error, response, body) {        
+        request(options, function (error, res, body) {        
             if (error) return error; //throw new Error(error);
+            console.log(JSON.parse(body).meta.code);
+            console.log("\n***\n"+JSON.stringify(res.headers));
+            
+            if (res.statusCode == 400) {
+                cb(null, res);
+                return; 
+            }
         
             var obj = JSON.parse(body);
             //console.log(JSON.stringify(obj) );
@@ -239,6 +246,9 @@ var Config  = require('../../configvenue.json');
     function parseMenuResults(obj) {
         console.log('\tfunction parseMenuResults(obj)' );
     try {
+        console.log("\n\n *************** obj = \n");
+        console.log(obj);
+        var cntMenus = (obj.response.menu && obj.response.menu.menus) ? obj.response.menu.menus.length : 0;
         console.log("zzzz.. count = " + obj.response.menu.menus.count);
     
         console.log('item[0] len = ' +  obj.response.menu.menus.items.length);

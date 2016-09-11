@@ -34,7 +34,10 @@ router.get ('/:id', function(req, res) {
 
 router.post ('/list', bodyp.json(), venueController.list);
 router.post ('/list/menu', bodyp.json(), venueController.listMenu);
-router.post ('/test/refresh', bodyp.json(), venueController.testRefresh);
+router.post ('/list/menu/tofancytreeDB', bodyp.json(), venueController.listMenu_tofancytreeDB);
+router.post ('/list/menu/loadItemWithNoDB', bodyp.json(), venueController.loadItemWithNoDB);
+//router.post ('/test/refresh', bodyp.json(), venueController.testRefresh);
+
 router.post ('/list11', bodyp.json(), function(req, res) {
     console.log(JSON.stringify(req.body.lat) );
     console.log('sssss ' + req.params); 

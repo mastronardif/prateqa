@@ -147,7 +147,8 @@ console.log(JSON.stringify(JSON.parse(json), null, 2) );
     }
     for(var venueIndex=0; venueIndex < venues.length; ++venueIndex) {
       var venue = venues[venueIndex];
-      venue._id = venue.id;
+      venue._id = venue.id;  // dont touch the mongo ID.
+      venue.venueId = venue.id;      
       // venue["order"] = (1 + venueIndex).toString(10);
       delete venue.id;
       // console.log(venueIndex, venue.name);
@@ -249,9 +250,10 @@ console.log(JSON.stringify(JSON.parse(json), null, 2) );
       }
 
       menu_row = {
-        fourSquareId : venue._id,
-        name : venue.name,
-        menus : data.menu.menus.items
+        fourSquareId: venue._id,
+        venueId: venue._id,
+        name: venue.name,
+        menus: data.menu.menus.items
       }
       var fn = "menus/" + venue.name.trim().split(/\\\/:/).join("_") + ".json";
       fs.writeFile(fn, JSON.stringify(menu_row), function(err) {

@@ -1,62 +1,112 @@
 'use strict';
 var util = require('util');
 var request = require("request");
-var venue = require('./myvenue');
+var Venue = require('./myvenue');
 var TEST  = require('../../scrape0a');
 
 //var session = require('client-sessions');
 var assert = require('assert');
 
-module.exports.testRefresh = function (req, res) {
-    var qq = req.body;
-    var bValidLatLon = venue.HelperIsValidLatLong(qq.lat, qq.lon);
-    console.log('bValidLatLon = ', bValidLatLon);    
-
-    if (qq.address && !bValidLatLon) {
-        console.log("if (req.body.locationinput && !req.body.lat && !req.body.long) ");
-        //var qq = {"address": req.body.address};
-        
-        venue.GetLatLongFromAddress({"address": qq.address}, function cb(err, data) {
+module.exports.loadItemWithNoDB = function (req, res) {
+    console.log('module.exports.loadItemWithNoDB ');
+    //console.log(req);
+    console.log(req.query);
+    console.log(JSON.stringify(req.body) );
+    
+    var resluts = {
+                    venue: "", 
+                    item: "",
+                    tree: "",
+                    sliders: "",
+                    miOptions: ""
+                  };
+    
+    
+    var entryId = req.body.entryId;
+     console.log('\n\t\t **** entryId = ' + entryId); 
+    // // FM 9/8/16 begin
+    var venue;
+    var item;
+    var tree;
+    var sliders = "wtf";
+    var miOptions;
+    
+    // load menu from foursquare.
+    var qq = {"venueid": req.body.venueid, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius, "venueName": req.body.venueName };
+    var venueId = req.body.venueid;
+    var venueName = req.body.venueName;
+    
+    Venue.listMenu(qq, function cb(err, data) {
         console.log('\tcb(err, data)');
     
         if (err) { 
             console.log(err); //return; 
             res.json({}); 
-            return;
         }
         else {
-            console.log('\t**** data = ' + JSON.stringify(data) );
+            //console.log("data = ", data.join('\n'));
             var jsonData = JSON.stringify(data);
-            //var objData = JSON.parse(jsonData);  
-//console.log( data );            
+            var javascriptObject = JSON.parse(jsonData); 
+            var menu = javascriptObject;//.response.menu;
+            var myCol = 'testMenu';
+            console.log(menu); //return;
             
-            //var qq = {lat: , lon, radius: , address: };
-            qq.address = data.results.address;
-            qq.lat = data.results.loc.lat;
-            qq.lon = data.results.loc.lng;
-            console.log( qq);
-            //res.json({msg: "writting s for ", data:data});
-            
-            TEST.wtf(req.db, qq, null);
-            //res.json({msg: "REreshing for ",data:data});
-            //return;
-        }  
-        });
-    }
-    else {
-       TEST.wtf(req.db, qq, null); 
-    }
-    res.json({msg: "Refreshing for ", data:qq});
-    return;
-    
-    // console.log(req.query);
-    // console.log(JSON.stringify(req.body) );
+            var mmenus = [menu[2].response.menu.menus.items[0]];            
+            //var tree = createFancyTreeMenu(menu[0]);
+            var tree = mmenus;
 
-// //router.post ('/test/refresh', bodyp.json(), venueController.testRefresh);
-// //    var qq = {"lat": myParms.lat, "lon": myParms.lon, "radius": myParms.radius, "adr": myParms.address };
-// console.dir('TEST = ' + TEST.wtf);
-// TEST.wtf(req.db, qq, null);
-    // res.json({name: "testRefresh"});
+            res.json({
+                venue: venue, 
+                item: item,
+                tree: tree,
+                sliders: sliders,
+                miOptions: miOptions
+            });
+      
+        }  
+    });
+};
+
+module.exports.listMenu_tofancytreeDB = function (req, res) {
+    var qq = {"venueid": req.body.venueid, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius, "venueName": req.body.venueName };
+    var venueId = req.body.venueid;
+    var venueName = req.body.venueName;
+    
+    Venue.listMenu(qq, function cb(err, data) {
+        console.log('\tcb(err, data)');
+    
+        if (err) { 
+            console.log(err); //return; 
+            res.json({}); 
+        }
+        else {
+            //console.log("data = ", data.join('\n'));
+            var jsonData = JSON.stringify(data);
+            var javascriptObject = JSON.parse(jsonData); 
+            var menu = javascriptObject;//.response.menu;
+            var myCol = 'testMenu';
+            console.log(menu); //return;
+            // write to DB.
+            {
+                req.db.collection(myCol).updateOne(
+                {venueId: venueId},
+                
+                {
+                    modifiedDate: new Date(),
+                    venueId: venueId,
+                    name: venueName,
+                    fsq_menu: menu,
+                    // make it fit the fancy tree for now.  
+                    menus: [menu[2].response.menu.menus.items[0]] // menu[2].response.menu.menus.items[0]
+                },               
+                {
+                    upsert: true
+                }
+                )
+            }
+            res.json(javascriptObject);
+        }  
+    });
 };
 
 module.exports.listMenu = function (req, res) {
@@ -64,7 +114,7 @@ module.exports.listMenu = function (req, res) {
     var qq = {"venueid": req.body.venueid, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius };
     var venuId = req.body.venueid;
     
-    venue.listMenu(qq, function cb(err, data) {
+    Venue.listMenu(qq, function cb(err, data) {
         console.log('\tcb(err, data)');
     
         if (err) { 
@@ -86,7 +136,7 @@ module.exports.list = function (req, res) {
     //var idd = 'wtf'; //req.params.id;
     //{"lat":"119SSSS898","lon":"229SSSS898","radius":"160"}
     var qq = {"lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius };
-    venue.list(qq, function cb(err, data) {
+    Venue.list(qq, function cb(err, data) {
     console.log('\tcb(err, data)');
     
     if (err) { 
