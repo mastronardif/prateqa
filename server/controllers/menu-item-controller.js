@@ -5,11 +5,38 @@ var assert = require('assert');
 var session = require('client-sessions');
 var miOptions;
 //var Venue = require('./myvenue');
-    
+var venueController    = require('./venue-controller');
+
 module.exports.loadItem = function(req, res) {
 
-console.log('module.exports.loadItem ');
-  var entryId = req.params.entryId;
+    console.log(req.query);
+    console.log(JSON.stringify(req.body) );
+    
+//    req.body.entryId = req.params.entryId;
+
+  // req.body.lat = "40.652315";
+  // req.body.lon": -74.344705,
+  // req.body.radius": 460,
+    req.body.venueid = req.body.fld_venueID;
+    req.body.venueName = "The Great Burrito";
+    req.body.entryId = req.params.entryId; //fld_menuItemID
+    
+    venueController.loadItemWithNoDB(req, res, function(err, results){
+        if(err) {
+            console.log("s not found");
+            res.send('<h1>An Error Occurred </h1>');
+            //res.json({err: err, results: results});
+        }
+        else {
+            res.render('menuItems/prvenueview', results);
+            //res.json(results);            
+        }
+    });
+};
+    
+module.exports.loadItem00 = function(req, res) {
+    console.log('module.exports.loadItem ');
+    var entryId = req.params.entryId;
   
   console.log('\n\t\t **** entryId = ' + entryId);
   //console.log(req);
