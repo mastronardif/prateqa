@@ -4,7 +4,7 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var session = require('client-sessions');
 var miOptions;
-var venue = require('./myvenue');
+//var Venue = require('./myvenue');
     
 module.exports.loadItem = function(req, res) {
 
