@@ -38,7 +38,7 @@ module.exports.loadFromFsq = function (req, res, cb) {
     var venueId = req.body.venueid;
     var qry = {id: venueId};
     
-    var venue = {venueId: venueId, name: "", price: "9.99", location: {address: "tbd"},
+    var venue = {venueId: venueId, name: "", location: {address: "tbd"},
                  url: "tbd", menu: {mobileUrl: "tbd", url: "tbd" }    
     };
 
@@ -63,7 +63,8 @@ module.exports.loadFromFsq = function (req, res, cb) {
              console.log(data.response.venue.menu.url);
              console.log(data.response.venue.menu.mobileUrl);
              
-             venue.name =               data.response.venue.name;
+             venue.name  = data.response.venue.name;             
+             
              venue.location = {address: data.response.venue.location.address};
              venue.url            = data.response.venue.url;
              venue.menu.mobileUrl = data.response.venue.menu.mobileUrl;
@@ -108,19 +109,17 @@ console.log("\n\n ********* item ***********\n");
 console.log(entryId);
 console.log(item);            
 console.log("\n\n ********* item ***********\n");            
-
+            //venue.price = item.price;
             results.venue = venue;
             
             //var tree = createFancyTreeMenu({menus: [menu[2].response.menu.menus.items[0]]});
             var tree22 = createFancyTreeMenu22(menu[2].response.menu.menus);
             console.log("\n\t ******** tree22\n");
-            console.log(tree22);
+            //console.log(tree22);
             
             results.tree = tree22;
             //results.tree = tree;
             
-            console.log("\n callback \n");
-            console.log(callback);
             callback(err, results);
             }  
             });
@@ -353,10 +352,10 @@ function createFancyTreeMenu22 (data){
     var tree = [];
     
     data.items.forEach(function(menu) {
-        console.log(menu);
-        console.log("\n _________________ \n");
+        //console.log(menu);
+        //console.log("\n _________________ \n");
         if (menu.entries.count > 0) {
-            console.log("\n",  menu.entries.count);
+            //console.log("\n",  menu.entries.count);
             
             var menuObj = {};
             menuObj.title = menu.name;
@@ -364,7 +363,7 @@ function createFancyTreeMenu22 (data){
             menuObj.children = [];
             
             menu.entries.items.forEach(function(innerMenu) {
-                console.log(innerMenu.name);
+                //console.log(innerMenu.name);
                 if (innerMenu.entries.count > 0){
                     var innerMenuObj = {};
                     innerMenuObj.title = innerMenu.name;
@@ -390,35 +389,6 @@ function createFancyTreeMenu22 (data){
     });
     
     return JSON.stringify(tree);;
-    
-  var tree = [];
-  data.menus.forEach(function(menu){
-    if (menu.entries.count > 0){
-    var menuObj = {};
-    menuObj.title = menu.name;
-    menuObj.folder = true;
-    menuObj.children = [];
-    menu.entries.items.forEach(function(innerMenu){
-      if (innerMenu.entries.count > 0){
-      var innerMenuObj = {};
-      innerMenuObj.title = innerMenu.name;
-      innerMenuObj.folder = true;
-      innerMenuObj.children = [];
-      innerMenu.entries.items.forEach(function(menuItem){
-        menuItem.title = menuItem.name
-        innerMenuObj = setMinandMax(innerMenuObj, menuItem)
-        menuItem.price = "$".concat(menuItem.price)
-        innerMenuObj.children.push(menuItem);
-        });
-      innerMenuObj = setRange(innerMenuObj)
-      menuObj = setMinandMax(menuObj, innerMenuObj)
-      menuObj.children.push(innerMenuObj);
-    }
-  });
-    menuObj = setRange(menuObj)
-    tree.push(menuObj)
-  }});
-  return JSON.stringify(tree);
 };
 
 function createFancyTreeMenu (data){

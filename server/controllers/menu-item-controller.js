@@ -38,9 +38,9 @@ module.exports.loadItem = function(req, res) {
         miOptions: results.miOptions
       });
             //res.json(results);
-            console.log("\n\n \t ********** results = \n");
-            console.log(results.venue);
-            console.log(results);
+            //console.log("\n\n \t ********** results = \n");
+            //console.log(results.venue);
+            //console.log(results);
         }
     });
 };
