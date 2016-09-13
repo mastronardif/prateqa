@@ -9,6 +9,46 @@ var Config  = require('../../configvenue.json');
         console.log('myvenu!');
     };
     
+    
+    Venue.prototype.getVenue = function (qry, cb) {
+        console.log("\tfunction getVenueMenu(", qry, ', cb', ")");
+
+        var callback = (typeof cb === 'function') ? cb : function() {};
+
+        var id = qry.id;
+        var url = Config.urlVenue;
+        url = url.replace(/{.*:?}/i,  id);
+        
+        var options = { method: 'GET',
+        url: url,
+        qs: 
+        { 
+            client_id: Config.client_id,
+            client_secret: Config.client_secret,
+            v: Config.v},
+            headers: 
+        { 
+        'cache-control': 'no-cache' } };
+
+        request(options, function (error, res, body) {        
+            if (error) return error; 
+            console.log(JSON.parse(body).meta.code);
+            console.log("\n***\n"+JSON.stringify(res.headers));
+            
+            if (res.statusCode == 400) {
+                cb(null, res);
+                return; 
+            }
+
+            var obj = JSON.parse(body);
+            //console.log(JSON.stringify(obj) );
+            console.log("id = " + id);
+
+            cb(error, obj); //srcID);
+        });
+    }
+ 
+ 
     Venue.prototype.listMenu = function (qry, cb) {
         console.log('Venue.prototype.listMenu ' + JSON.stringify(qry) );
         var callback = (typeof cb === 'function') ? cb : function() {};
@@ -202,8 +242,8 @@ var Config  = require('../../configvenue.json');
         
         return aRetval;
     }
+       
     
-    //function bobo(srcID, cb) {
     function getVenueMenu(qry, cb) {
         console.log("\tfunction getVenueMenu(", qry, ', cb', ")");
 

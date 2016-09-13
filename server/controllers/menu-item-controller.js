@@ -20,16 +20,27 @@ module.exports.loadItem = function(req, res) {
     req.body.venueid = req.body.fld_venueID;
     req.body.venueName = "The Great Burrito";
     req.body.entryId = req.params.entryId; //fld_menuItemID
-    
-    venueController.loadItemWithNoDB(req, res, function(err, results){
+
+    venueController.loadFromFsq(req, res, function(err, results){
         if(err) {
             console.log("s not found");
             res.send('<h1>An Error Occurred </h1>');
             //res.json({err: err, results: results});
         }
         else {
-            res.render('menuItems/prvenueview', results);
-            //res.json(results);            
+            //res.render('menuItems/prvenueview', results);
+            res.render('menuItems/prvenueview', {
+        venue: results.venue, 
+        item: results.item,
+        //tree: tree00,
+        tree: results.tree,
+        sliders: results.sliders,
+        miOptions: results.miOptions
+      });
+            //res.json(results);
+            console.log("\n\n \t ********** results = \n");
+            console.log(results.venue);
+            console.log(results);
         }
     });
 };

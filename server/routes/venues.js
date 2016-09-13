@@ -33,12 +33,11 @@ router.get ('/:id', function(req, res) {
 
 
 router.post ('/list', bodyp.json(), venueController.list);
+router.post ('/info/:id', bodyp.json(), venueController.venueInfo);
 router.post ('/list/menu', bodyp.json(), venueController.listMenu);
 router.post ('/list/menu/tofancytreeDB', bodyp.json(), venueController.listMenu_tofancytreeDB);
-//router.post ('/list/menu/loadItemWithNoDB', bodyp.json(), venueController.loadItemWithNoDB);
-router.post ('/list/menu/loadItemWithNoDB', bodyp.json(), function(req, res) {
-    console.log('\n\n\t aaaaaaaaaaaaaaaaaaaaaaaaa\n');
-    venueController.loadItemWithNoDB(req, res, function(err, results){
+router.post ('/list/menu/loadfromfsq', bodyp.json(), function(req, res) {
+    venueController.loadFromFsq(req, res, function(err, results){
         if(err) {
             res.json({err: err, results: results});
         }

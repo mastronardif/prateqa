@@ -44,7 +44,7 @@
       <div class="row">
         <% include ../common/menu_item.ejs %>
         <div class="col-md-4">
-          <h2><%= venue.name %>(<%= venue._id %>)</h2>
+          <h2><%= venue.name %>(<%= venue.venueId %>)</h2>
           <!-- FM for testing begin -->
           <intput type="hidden" name="fld_venueId" value="<%= venue._id %>"/>
           

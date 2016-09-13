@@ -3,13 +3,14 @@ var util = require('util');
 var request = require("request");
 var Venue = require('./myvenue');
 var TEST  = require('../../scrape0a');
+var _ = require('underscore');
 
 //var session = require('client-sessions');
 var assert = require('assert');
 
-module.exports.loadItemWithNoDB = function (req, res, cb) {
+module.exports.loadFromFsq = function (req, res, cb) {
     var callback = (typeof cb === 'function') ? cb : function() {};
-    console.log('module.exports.loadItemWithNoDB ');
+    console.log('module.exports.loadFromFsq ');
     //console.log(req);
     console.log(req.query);
     console.log(JSON.stringify(req.body) );
@@ -28,19 +29,60 @@ module.exports.loadItemWithNoDB = function (req, res, cb) {
                     miOptions: miOptions
                   };
     
-    
+    //var item = findItem(menu[0], entryId);
     var entryId = req.body.entryId;
      console.log('\n\t\t **** entryId = ' + entryId); 
      
-    // load Venue from foursquare.    
-    
-    // load Menu from foursquare.
-    var qq = {"venueid": req.body.venueid, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius, "venueName": req.body.venueName };
+    // 1. load Venue from foursquare. 
+    // "urlVenue": "https://api.foursquare.com/v2/venues/{VENUE_ID}", 
     var venueId = req.body.venueid;
-    var venueName = req.body.venueName;
-    var venue = {venueId: venueId, name: venueName, price: "9.99", location: {address: "tbd"},
+    var qry = {id: venueId};
+    
+    var venue = {venueId: venueId, name: "", price: "9.99", location: {address: "tbd"},
                  url: "tbd", menu: {mobileUrl: "tbd", url: "tbd" }    
     };
+
+    
+    
+    Venue.getVenue(qry, function cb(err, data) {
+        console.log(" \n\n\t ***** ***** Venue.getVenue \n");
+        if (err) { 
+
+            console.log(err); //return; 
+            //res.json({}); 
+        }
+        else {
+             //res.json(data);
+             //console.log(" Venue.getVenue ");
+             //console.log(data);
+             console.log(data.response.venue.name);
+             //console.log(data.response.venue.location);
+             console.log(data.response.venue.location.address);
+             
+             console.log(data.response.venue.url);
+             console.log(data.response.venue.menu.url);
+             console.log(data.response.venue.menu.mobileUrl);
+             
+             venue.name =               data.response.venue.name;
+             venue.location = {address: data.response.venue.location.address};
+             venue.url            = data.response.venue.url;
+             venue.menu.mobileUrl = data.response.venue.menu.mobileUrl;
+             venue.menu.url       = data.response.venue.menu.url;
+             
+            //console.log("data = ", data.join('\n'));
+            //var jsonData = JSON.stringify(data);
+            //var javascriptObject = JSON.parse(jsonData);        
+            //res.json(javascriptObject);
+            
+            //2.)
+            /************************** begin ***************************************/
+    // load Menu from foursquare.
+    var qq = {"venueid": req.body.venueid, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius, "venueName": req.body.venueName };
+    //var venueId = req.body.venueid;
+    var venueName = req.body.venueName;
+    // var venue = {venueId: venueId, name: venueName, price: "9.99", location: {address: "tbd"},
+                 // url: "tbd", menu: {mobileUrl: "tbd", url: "tbd" }    
+    // };
     
     Venue.listMenu(qq, function cb(err, data) {
         console.log('\tcb(err, data)');
@@ -57,16 +99,32 @@ module.exports.loadItemWithNoDB = function (req, res, cb) {
             
             var mmenus = [menu[2].response.menu.menus.items[0]];       
             
-            var item = findItem({menus: [menu[2].response.menu.menus.items[0]]}, entryId);      
-            results.item = item;            
-            results.venue = venue;
-            var tree = createFancyTreeMenu({menus: [menu[2].response.menu.menus.items[0]]});
+            var item = findItem22(menu[2], entryId);      
+            
+            //var item = findItem({menus: [menu[2].response.menu.menus.items[0]]}, entryId);      
+            //var item = findItem({menus: [menu[2].response.menu.menus.items]}, entryId);      
+            results.item = item; 
+console.log("\n\n ********* item ***********\n");            
+console.log(entryId);
+console.log(item);            
+console.log("\n\n ********* item ***********\n");            
 
-            results.tree = tree;
+            results.venue = venue;
+            
+            //var tree = createFancyTreeMenu({menus: [menu[2].response.menu.menus.items[0]]});
+            var tree22 = createFancyTreeMenu22(menu[2].response.menu.menus);
+            console.log("\n\t ******** tree22\n");
+            console.log(tree22);
+            
+            results.tree = tree22;
+            //results.tree = tree;
             
             console.log("\n callback \n");
             console.log(callback);
             callback(err, results);
+            }  
+            });
+            /************************** End ***************************************/
         }  
     });
 };
@@ -111,6 +169,29 @@ module.exports.listMenu_tofancytreeDB = function (req, res) {
             res.json(javascriptObject);
         }  
     });
+};
+
+module.exports.venueInfo = function (req, res) {
+    var idd = req.params.id;
+    console.log(req.query);
+    console.log(JSON.stringify(req.body) );
+    var qry = {id: idd};
+
+    Venue.getVenue(qry, function cb(err, data) {
+    
+        if (err) { 
+            console.log(err); //return; 
+            res.json({}); 
+        }
+        else {
+             res.json(data);
+            //console.log("data = ", data.join('\n'));
+            //var jsonData = JSON.stringify(data);
+            //var javascriptObject = JSON.parse(jsonData);        
+            //res.json(javascriptObject);
+        }  
+    });
+
 };
 
 module.exports.listMenu = function (req, res) {
@@ -172,6 +253,76 @@ module.exports.list = function (req, res) {
 };
 
 
+var findItem22 = function(menu, entryId){
+    var foundItem;
+    console.log('\n \t\t******* findItem22 \n'); 
+ 
+    //console.log('findItem22 ', menu.menus.items.length, entryId); 
+    console.log(JSON.stringify(menu.response.menu) + "\n\n");
+  
+    console.log(menu.response.menu.menus);
+  
+  // var item = _.findWhere(menu.response.menu.menus.items, {
+  // items.entryId: "85762484"
+// });
+// if (!_.isUndefined(item)) {
+  // console.log('NAME =>', item.name);
+// }
+
+    //menu.response.menu.menus.items.forEach(function(row) {
+    for (var iii = 0, len = menu.response.menu.menus.items.length; iii < len; iii++) {
+        console.log('row iii ', menu.response.menu.menus.items[iii].name);  
+        // //row.entries.items.forEach(function(row22) {
+        for (var jjj = 0, len2 = menu.response.menu.menus.items[iii].entries.items.length;  jjj < len2; jjj++) {
+            console.log('\t row jjj ', menu.response.menu.menus.items[iii].entries.items[jjj].name);
+            // //row22.entries.items.forEach(function(row33) {
+            for (var kkk =0, len3 = menu.response.menu.menus.items[iii].entries.items[jjj].entries.items.length;  kkk < len3;  kkk++) {
+                console.log('\t\t row33 ', menu.response.menu.menus.items[iii].entries.items[jjj].entries.items[kkk].name);      
+                if (menu.response.menu.menus.items[iii].entries.items[jjj].entries.items[kkk].entryId && 
+                    menu.response.menu.menus.items[iii].entries.items[jjj].entries.items[kkk].entryId == entryId) {
+                    console.log(menu.response.menu.menus.items[iii].entries.items[jjj].entries.items[kkk]);
+                    
+                    return menu.response.menu.menus.items[iii].entries.items[jjj].entries.items[kkk];
+                }
+            }
+        }
+    }
+    
+    // menu.response.menu.menus.items.forEach(function(row) {
+        // console.log('row ', row.name);  
+        // row.entries.items.forEach(function(row22) {
+            // console.log('\t row22 ', row22.name);
+            // row22.entries.items.forEach(function(row33) {
+                // console.log('\t\t row33 ', row33.name);      
+                // if (row33.entryId && row33.entryId == entryId) {
+                    // console.log(row33);
+                    
+                    // return row33;
+                // }
+            // })
+        // })
+    // })
+  
+    //console.log('findItem22 ', menu.length, entryId);
+  return {};
+  
+  
+  menu.menus.forEach(function (menu22){
+      //console.log('menu22 ', menu22);
+    menu22.entries.items.forEach(function(item){
+      item.entries.items.forEach(function(item22){
+        if (item22.entryId === entryId){
+          foundItem = item22;
+          //console.log('item22 ', item22);
+        }
+      })
+    })
+  })
+  
+  //console.log('foundItem ', foundItem);
+  return foundItem
+}
+
 var findItem = function(menu, entryId){
   var foundItem;
   //console.log('findItem ', menu, entryId); 
@@ -194,9 +345,85 @@ var findItem = function(menu, entryId){
   return foundItem
 }
 
+function createFancyTreeMenu22 (data){
+    console.log("\n **** createFancyTreeMenu22 \n");
+    console.log(data);
+    //console.log("data.menus.length = " + data.menus[0].items.length);
+    
+    var tree = [];
+    
+    data.items.forEach(function(menu) {
+        console.log(menu);
+        console.log("\n _________________ \n");
+        if (menu.entries.count > 0) {
+            console.log("\n",  menu.entries.count);
+            
+            var menuObj = {};
+            menuObj.title = menu.name;
+            menuObj.folder = true;
+            menuObj.children = [];
+            
+            menu.entries.items.forEach(function(innerMenu) {
+                console.log(innerMenu.name);
+                if (innerMenu.entries.count > 0){
+                    var innerMenuObj = {};
+                    innerMenuObj.title = innerMenu.name;
+                    innerMenuObj.folder = true;
+                    innerMenuObj.children = [];
+                    
+                    innerMenu.entries.items.forEach(function(menuItem){
+                    menuItem.title = menuItem.name
+                    innerMenuObj = setMinandMax(innerMenuObj, menuItem)
+                    menuItem.price = "$".concat(menuItem.price)
+                    innerMenuObj.children.push(menuItem);
+                    });
+                    
+                    innerMenuObj = setRange(innerMenuObj)
+                    menuObj = setMinandMax(menuObj, innerMenuObj)
+                    menuObj.children.push(innerMenuObj);
+                }
+            });
+            
+            menuObj = setRange(menuObj)
+            tree.push(menuObj)
+        }
+    });
+    
+    return JSON.stringify(tree);;
+    
+  var tree = [];
+  data.menus.forEach(function(menu){
+    if (menu.entries.count > 0){
+    var menuObj = {};
+    menuObj.title = menu.name;
+    menuObj.folder = true;
+    menuObj.children = [];
+    menu.entries.items.forEach(function(innerMenu){
+      if (innerMenu.entries.count > 0){
+      var innerMenuObj = {};
+      innerMenuObj.title = innerMenu.name;
+      innerMenuObj.folder = true;
+      innerMenuObj.children = [];
+      innerMenu.entries.items.forEach(function(menuItem){
+        menuItem.title = menuItem.name
+        innerMenuObj = setMinandMax(innerMenuObj, menuItem)
+        menuItem.price = "$".concat(menuItem.price)
+        innerMenuObj.children.push(menuItem);
+        });
+      innerMenuObj = setRange(innerMenuObj)
+      menuObj = setMinandMax(menuObj, innerMenuObj)
+      menuObj.children.push(innerMenuObj);
+    }
+  });
+    menuObj = setRange(menuObj)
+    tree.push(menuObj)
+  }});
+  return JSON.stringify(tree);
+};
+
 function createFancyTreeMenu (data){
     console.log("\n **** createFancyTreeMenu\n");
-    //console.log(data);
+    console.log(data);
     
   var tree = [];
   data.menus.forEach(function(menu){
