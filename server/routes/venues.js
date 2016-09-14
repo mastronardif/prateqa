@@ -31,7 +31,7 @@ router.get ('/:id', function(req, res) {
   //res.send('<h1 style="color:pink">Venues home page</h1>' + idd);
 });
 
-
+router.post ('/dbupdatevenues', bodyp.json(), venueController.UpdateVenuesInDBbyLocation);
 router.post ('/list', bodyp.json(), venueController.list);
 router.post ('/info/:id', bodyp.json(), venueController.venueInfo);
 router.post ('/list/menu', bodyp.json(), venueController.listMenu);

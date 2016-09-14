@@ -214,43 +214,96 @@ module.exports.listMenu = function (req, res) {
     });
 };
 
+module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
+    console.log(req.query);
+    console.log(JSON.stringify(req.body) );
+    
+    // 1. get data from foursquare.
+    var qq = {"address": req.body.address, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius};
+    //Venue.list(qq, function cb(err, data) {
+    Venue.listDBobjs(qq, function cb(err, data) {    
+        if (err) { 
+            console.log(err); //return; 
+            //res.json({}); 
+            res.status(500).json({});
+        }
+        else {
+            // 2. Save data.            
+            // 2a. Save Venue data.          
+            var myCol = 'testVenu';
+            //console.log(menu); //return;
+            // write to DB.
+            //var iii = 1;
+            for (var iii = 1, len = data.length; iii < len; iii++) {
+                //console.log(data[iii].id);
+                
+                var vd = {
+                    modifiedDate: new Date(),
+                    venueId: data[iii].id,
+                    venue: data[iii] 
+                };                
+                    
+                //console.log("\n \t vd = \n");
+                console.log(vd.venueId);
+                //console.log(vd);
+                
+                req.db.collection(myCol).updateOne(
+                    {venueId: vd.venueId},                
+                    vd,               
+                    { upsert: true }
+                );
+            }
+            
+            // 2b. Save Plate / Menu data. 
+            //db.collection('testvenueMenus').inser 
+            for (var iii = 1, len = data.length; iii < len; iii++) { 
+                if (!data[iii].hasMenu) {
+                    continue;
+                }
+                console.log(iii + ") get menu for venueId: " +  data[iii].id);
+            }           
+            
+            /* for testing.
+            //db.getCollection('testVenu').find({})
+db.getCollection('testVenu').find({}, {'_id': 0, 'venueId':1, "modifiedDate": 1, 
+    'venue.name': 1, 'venue.hasMenu': 1, "venue.location": 1}  ).pretty()
+            */
+            //console.log("data = ", data.join('\n'));
+            //console.log("data = ", JSON.stringify(data));
+            //console.log("data = \n", data);
+            //res.json(JSON.stringify(data));
+            var jsonData = JSON.stringify(data);
+            //var javascriptObject = JSON.parse(jsonData); 
+
+            
+            res.json(data);
+            //res.json(javascriptObject);
+        }  
+        //console.timeEnd('test');
+    });
+};
+
 module.exports.list = function (req, res) {
-//console.log('XXXXX'+JSON.stringify(req.body) );
- //console.log(req.body.lat);
-    //var idd = 'wtf'; //req.params.id;
     //{"lat":"119SSSS898","lon":"229SSSS898","radius":"160"}
     var qq = {"lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius };
     Venue.list(qq, function cb(err, data) {
-    console.log('\tcb(err, data)');
-    
-    if (err) { 
+        
+        if (err) { 
         console.log(err); //return; 
         res.json({}); 
-    }
-    else {
-        console.log("data = ", data.join('\n'));
-        //console.log("data = ", JSON.stringify(data));
-        //console.log("data = \n", data);
-        //res.json(JSON.stringify(data));
-        var jsonData = JSON.stringify(data);
-        var javascriptObject = JSON.parse(jsonData);        
-        res.json(javascriptObject);
-    }  
-    //console.timeEnd('test');
-});
-
-    // if(req.params.id === undefined ||  req.params.id == 0) {
-        // res.json({"message" : "You must pass ID other than 0"});   
-        // return;    
-    // }
-    //var wtf = require('../../venues.json');
-    //console.log(wtf);
-    //res.json(wtf); 
-    
-    //res.json({"id" : idd});   
-  //res.send('<h1 style="color:pink">Venues home page</h1>' + idd);
+        }
+        else {
+            console.log("data = ", data.join('\n'));
+            //console.log("data = ", JSON.stringify(data));
+            //console.log("data = \n", data);
+            //res.json(JSON.stringify(data));
+            var jsonData = JSON.stringify(data);
+            var javascriptObject = JSON.parse(jsonData);        
+            res.json(javascriptObject);
+        }  
+        //console.timeEnd('test');
+    });
 };
-
 
 var findItem22 = function(menu, entryId){
     var foundItem;

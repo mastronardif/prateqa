@@ -111,6 +111,59 @@ var Config  = require('../../configvenue.json');
             
     }
     
+    Venue.prototype.listDBobjs = function (qry, cb) {
+        var callback = (typeof cb === 'function') ? cb : function() {};
+        // Minimum vitals
+        var ll = qry.lat + ',' + qry.lon;
+        var radius = (qry.radius) ? qry.radius : 360;
+        console.log('list for '+ JSON.stringify(qry) );
+
+        var options = { method: 'GET',
+        url: Config.urlVenuesExplore,
+         qs: { ll: ll,
+             radius: radius,
+             client_id: Config.client_id,
+             client_secret: Config.client_secret,
+             section: 'food',
+             v: Config.v 
+             },
+            headers: 
+            { 'cache-control': 'no-cache' } 
+            };
+        request(options, function (error, response, body) {
+            if (error) return error;
+            
+            // put a try block around JSON.parse
+            //var obj = JSON.parse(body);  
+
+
+            //var aResults = parseVenueResults(JSON.stringify(qry), JSON.parse(body));
+            try {
+                var bodyOjb = JSON.parse(body)
+                if (bodyOjb.meta.code !== 200 ) {
+                    callback(body.meta.code, aResults);
+                    return;
+                }
+// console.log("\n\t ____________ begin ________________ \n");            
+// //console.log(JSON.parse(JSON.parse(body)) );      
+// var wtf = JSON.parse(body)
+// console.log(JSON.parse(body));
+// console.log(wtf.meta);
+// console.log(wtf.response.groups[0].items[2]);
+
+// console.log("\n\t _____________ end _______________ \n");
+
+                var aResults = parseVenueResultsForDBojs(JSON.stringify(qry), JSON.parse(body));
+                callback(null, aResults);
+            } catch (err) {
+                console.log('err = ', err);
+                callback(err, aResults);
+                //return; // throw new Error(err); 
+            }
+            
+        });                        
+    }
+    
     Venue.prototype.list = function (qry, cb) {
         var callback = (typeof cb === 'function') ? cb : function() {};
         // Minimum vitals
@@ -135,6 +188,9 @@ var Config  = require('../../configvenue.json');
             if (error) return error;
             
             var obj = JSON.parse(body);
+            // for testing. get venue info.
+            // parseVenueResults_forDB(obj);
+            
             var aResults = parseVenueResults(JSON.stringify(qry), JSON.parse(body));
             callback(null, aResults);
         });                
@@ -206,6 +262,26 @@ var Config  = require('../../configvenue.json');
         //console.timeEnd('test');    
     }
     
+    function parseVenueResultsForDBojs(qry, obj) {
+        var results = [{qry}]; // tope row is the header.
+        
+        console.log('\n parseVenueResultsForDBojs \n');
+        
+        console.log(obj.response.totalResults); console.log("\n\n");
+        //console.log(obj);
+        //console.log("\n - - - - - - -\n"+ JSON.stringify(obj)
+        for(var row = "", iii = 0, len = obj.response.groups[0].items.length; iii < len; iii++) {
+            //console.log("iii ", iii, "");
+            //console.log(obj.response.groups[0].items[iii].venue);
+            //console.log("\n");
+            //obj.response.groups[0].items[iii].venue
+            
+            results.push(obj.response.groups[0].items[iii].venue);
+        }
+
+        return results;    
+    }
+    
     function parseVenueResults(qry, obj) {
         var aRetval = [qry];
         try {
@@ -229,6 +305,8 @@ var Config  = require('../../configvenue.json');
                         // //obj.response.groups[0].items[iii].venue.hasMenu
                   + ((obj.response.groups[0].items[iii].venue.hasMenu) ? '[hasMenu]':'[-]')
                   + obj.response.groups[0].items[iii].venue.id
+                  + " ("+ obj.response.groups[0].items[iii].venue.location.lat
+                  + ", "+ obj.response.groups[0].items[iii].venue.location.lat + ")"
                   ;
                         //""        
             //) + 'zzz';             
