@@ -259,9 +259,9 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
                 if (!data[jjj].hasMenu) {
                     continue;   // skip no menu
                 }
-                console.log(jjj + ") get menu for venueId: " +  data[jjj].id);
+                console.log('\n', jjj + ") get menu for venueId: " +  data[jjj].id);
                 var qry = {venueId: data[jjj].id, jjj: jjj, THEname: data[jjj].name, THEloc: data[jjj].location };
-                console.log("qry = " + JSON.stringify(qry) );
+                //console.log("qry = " + JSON.stringify(qry) );
                 
                 Venue.listMenu(qry, function cb(err, data){
                     if (err) {
@@ -274,8 +274,8 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
                     );                                             
                     }
                     else {
-                     console.log("\n \t ****** data begin *******");                    
-                     console.log(data); 
+                     //console.log("\n \t ****** data begin *******");                    
+                     //console.log(data); 
                     var mn = {
                         modifiedDate: new Date(),
                         venueId: data[0].venueId, //data.id,
@@ -297,6 +297,7 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
                     );                     
                      console.log("\n \t ****** data end   ********");                    
                     }
+                    console.timeEnd('time_UpdateVenuesInDBbyLocation');
                 });
             }           
             
@@ -311,7 +312,7 @@ db.getCollection('testVenu').find({}, {'_id': 0, 'venueId':1, "modifiedDate": 1,
             //res.json(JSON.stringify(data));
             var jsonData = JSON.stringify(data);
             res.json(data);
-            console.timeEnd('time_UpdateVenuesInDBbyLocation');
+            //console.timeEnd('time_UpdateVenuesInDBbyLocation');
         }  
     });
 };

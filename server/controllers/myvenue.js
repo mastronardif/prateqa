@@ -51,7 +51,7 @@ var _ = require('lodash');
  
  
     Venue.prototype.listMenu = function (qry, cb) {
-        console.log('Venue.prototype.listMenu ' + JSON.stringify(qry) );
+        //console.log('Venue.prototype.listMenu ' + JSON.stringify(qry) );
         var callback = (typeof cb === 'function') ? cb : function() {};
         // fm now a json obj 9/13/16 var aResults = [JSON.stringify(qry), " "];
         var aResults = [qry, " "];
@@ -117,7 +117,7 @@ var _ = require('lodash');
         // Minimum vitals
         var ll = qry.lat + ',' + qry.lon;
         var radius = (qry.radius) ? qry.radius : 360;
-        console.log('list for '+ JSON.stringify(qry) );
+        console.log('\t **** list for '+ JSON.stringify(qry) );
 
         var options = { method: 'GET',
         url: Config.urlVenuesExplore,
@@ -268,7 +268,7 @@ var _ = require('lodash');
         
         console.log('\n parseVenueResultsForDBojs \n');
         
-        console.log(obj.response.totalResults); console.log("\n\n");
+        //console.log(obj.response.totalResults); console.log("\n\n");
         //console.log(obj);
         //console.log("\n - - - - - - -\n"+ JSON.stringify(obj)
         for(var row = "", iii = 0, len = obj.response.groups[0].items.length; iii < len; iii++) {
@@ -363,10 +363,9 @@ var _ = require('lodash');
                 // Stacys flatten menu items strucure to make plate search easier.
                 var stacy = [];
                 stacy = StacysFlattenMenuItems(id, obj);
-                console.log("\n\t BEGIN stacy = \n");
-                console.log(stacy);
-                console.log("\n\t END stacy = \n");
-                
+                //console.log("\n\t BEGIN stacy = \n");
+                //console.log(stacy);
+                //console.log("\n\t END stacy = \n");               
                 
                 //var err = parseMenuResults(obj);
                 //cb(err, obj); //srcID);
