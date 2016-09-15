@@ -2,6 +2,7 @@
 "use strict";
 var request = require("request");
 var Config  = require('../../configvenue.json');
+var _ = require('lodash');
    
     var Venue = function () {};
     
@@ -11,7 +12,7 @@ var Config  = require('../../configvenue.json');
     
     
     Venue.prototype.getVenue = function (qry, cb) {
-        console.log("\tfunction getVenueMenu(", qry, ', cb', ")");
+        console.log("\tfunction getVenue(", qry, ', cb', ")");
 
         var callback = (typeof cb === 'function') ? cb : function() {};
 
@@ -52,12 +53,12 @@ var Config  = require('../../configvenue.json');
     Venue.prototype.listMenu = function (qry, cb) {
         console.log('Venue.prototype.listMenu ' + JSON.stringify(qry) );
         var callback = (typeof cb === 'function') ? cb : function() {};
-        var aResults = [JSON.stringify(qry), " "];// [{"left":"right"}];
+        // fm now a json obj 9/13/16 var aResults = [JSON.stringify(qry), " "];
+        var aResults = [qry, " "];
         
         //getVenueMenu(menuIds[iNdex], cbNext);
         //srcID.id; qry.
-        //4b1c3c13f964a520cb0424e3 4b4ba4faf964a520b7a226e3
-        var venue = {id: qry.venueid, desc: "bob rest stop!"};
+        var venue = {id: qry.venueId, desc: "bob rest stop!"};
         //getVenueMenu(menuIds[iNdex], cbNext);
         //getVenueMenu(venue, callback);
         getVenueMenu(venue, function (err, data){
@@ -342,25 +343,83 @@ var Config  = require('../../configvenue.json');
         'cache-control': 'no-cache' } };
 
         request(options, function (error, res, body) {        
-            if (error) return error; //throw new Error(error);
-            console.log(JSON.parse(body).meta.code);
-            console.log("\n***\n"+JSON.stringify(res.headers));
+            if (error) {
+                cb(error, null);
+                return error; //throw new Error(error);
+            }
             
             if (res.statusCode == 400) {
-                cb(null, res);
+                cb({err: "res.statusCode == 400"}, res);
                 return; 
             }
-        
-            var obj = JSON.parse(body);
-            //console.log(JSON.stringify(obj) );
-            console.log("id = " + id);
+            
+            try {
+                var obj = JSON.parse(body);
+                //console.log(JSON.stringify(obj) );
+                console.log("id = " + id);
+                //console.log(JSON.parse(body).meta.code);
+                //console.log("\n***\n"+JSON.stringify(res.headers));
 
-            var err = parseMenuResults(obj);
-
-            cb(err, obj); //srcID);
+                // Stacys flatten menu items strucure to make plate search easier.
+                var stacy = [];
+                stacy = StacysFlattenMenuItems(id, obj);
+                console.log("\n\t BEGIN stacy = \n");
+                console.log(stacy);
+                console.log("\n\t END stacy = \n");
+                
+                
+                //var err = parseMenuResults(obj);
+                //cb(err, obj); //srcID);
+                //cb(null, obj);
+                cb(null, {obj, stacy: stacy});
+            }
+            catch (err) {
+                cb(err, null);                
+            }
         });
     }
 
+    function StacysFlattenMenuItems(venue, menu) {
+        //var items = [];
+        var menuList = {};            
+        if (menu.response.menu.menus.count)  { //obj.response.menu) {
+            //var menu = obj.response.menu; //JSON.parse(data);
+            var menusCount = menu.response.menu.menus.count;
+            //var menuList = {};
+            if (menusCount > 0) {
+                var menuItemList = [];
+                _.forOwn(menu.response.menu.menus.items, function (menuItems) {
+                    _.forOwn(menuItems.entries.items, function (entryItems) {
+                        _.forOwn(entryItems, function (entryItemsMenu, key) {
+                            if (key == 'entries') {
+                                _.forOwn(entryItemsMenu, function (entryItemMenuItems) {
+                                    _.forOwn(entryItemMenuItems, function (items) {
+                                        menuItemList.push({
+                                            menuItemId: items.entryId,
+                                            name: items.name,
+                                            menuName: menuItems.name,
+                                            sectionName: entryItems.name,
+                                            description: items.description,
+                                            price: items.price
+                                        });
+                                    });
+                                });
+                            }
+                        });
+                    });
+                });
+               // menuList = _.assign(venue, {"menuitem": menuItemList});
+                menuList = _.assign({venueId: venue}, {"menuitem": menuItemList});
+            }
+            // else{
+            // 	menuList = _.assign(venue, {"menuitem": "No Menu Found"});
+            // }
+            //  wtf deferred.resolve(menuList);
+        } 
+        
+        return menuList;
+    }
+    
     function parseMenuResults(obj) {
         console.log('\tfunction parseMenuResults(obj)' );
     try {

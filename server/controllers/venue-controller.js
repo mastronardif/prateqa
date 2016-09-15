@@ -4,6 +4,7 @@ var request = require("request");
 var Venue = require('./myvenue');
 var TEST  = require('../../scrape0a');
 var _ = require('underscore');
+var uuid = require('uuid');
 
 //var session = require('client-sessions');
 var assert = require('assert');
@@ -78,7 +79,7 @@ module.exports.loadFromFsq = function (req, res, cb) {
             //2.)
             /************************** begin ***************************************/
     // load Menu from foursquare.
-    var qq = {"venueid": req.body.venueid, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius, "venueName": req.body.venueName };
+    var qq = {"venueId": req.body.venueid, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius, "venueName": req.body.venueName };
     //var venueId = req.body.venueid;
     var venueName = req.body.venueName;
     // var venue = {venueId: venueId, name: venueName, price: "9.99", location: {address: "tbd"},
@@ -86,7 +87,6 @@ module.exports.loadFromFsq = function (req, res, cb) {
     // };
     
     Venue.listMenu(qq, function cb(err, data) {
-        console.log('\tcb(err, data)');
     
         if (err) { 
             console.log(err); //return; 
@@ -129,7 +129,7 @@ console.log("\n\n ********* item ***********\n");
 };
 
 module.exports.listMenu_tofancytreeDB = function (req, res) {
-    var qq = {"venueid": req.body.venueid, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius, "venueName": req.body.venueName };
+    var qq = {"venueId": req.body.venueid, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius, "venueName": req.body.venueName };
     var venueId = req.body.venueid;
     var venueName = req.body.venueName;
     
@@ -195,12 +195,10 @@ module.exports.venueInfo = function (req, res) {
 
 module.exports.listMenu = function (req, res) {
     
-    var qq = {"venueid": req.body.venueid, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius };
+    var qq = {"venueId": req.body.venueid, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius };
     var venuId = req.body.venueid;
     
-    Venue.listMenu(qq, function cb(err, data) {
-        console.log('\tcb(err, data)');
-    
+    Venue.listMenu(qq, function cb(err, data) {   
         if (err) { 
             console.log(err); //return; 
             res.json({}); 
@@ -217,7 +215,7 @@ module.exports.listMenu = function (req, res) {
 module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
     console.log(req.query);
     console.log(JSON.stringify(req.body) );
-    
+    console.time('time_UpdateVenuesInDBbyLocation');
     // 1. get data from foursquare.
     var qq = {"address": req.body.address, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius};
     //Venue.list(qq, function cb(err, data) {
@@ -256,11 +254,50 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
             
             // 2b. Save Plate / Menu data. 
             //db.collection('testvenueMenus').inser 
-            for (var iii = 1, len = data.length; iii < len; iii++) { 
-                if (!data[iii].hasMenu) {
-                    continue;
+            //for (var iii = 1, len = data.length; iii < len; iii++) { 
+            for (var jjj = 1, len = data.length; jjj < len; jjj++) { 
+                if (!data[jjj].hasMenu) {
+                    continue;   // skip no menu
                 }
-                console.log(iii + ") get menu for venueId: " +  data[iii].id);
+                console.log(jjj + ") get menu for venueId: " +  data[jjj].id);
+                var qry = {venueId: data[jjj].id, jjj: jjj, THEname: data[jjj].name, THEloc: data[jjj].location };
+                console.log("qry = " + JSON.stringify(qry) );
+                
+                Venue.listMenu(qry, function cb(err, data){
+                    if (err) {
+                        //console.log("\n\terr = \n"+ err);
+                        var errObj = {err: err, mark: 123};                    
+                        req.db.collection("testMenuFM").updateOne(
+                        {venueId: uuid.v1()},                
+                            errObj,               
+                        { upsert: true }
+                    );                                             
+                    }
+                    else {
+                     console.log("\n \t ****** data begin *******");                    
+                     console.log(data); 
+                    var mn = {
+                        modifiedDate: new Date(),
+                        venueId: data[0].venueId, //data.id,
+                        name: data[0].THEname,
+                        // extra data passed along.(the header info)
+                        jjj: data[0].jjj,
+                        location: data[0].THEloc,
+                        
+                        row0: data[0], 
+                        row1: data[1], 
+                        data: data,
+                        menuitem: data[2].stacy.menuitem,
+                        menu: data[2] 
+                    };  
+                    req.db.collection("testMenuFM").updateOne(
+                        {venueId: mn.venueId},                
+                        mn,               
+                        { upsert: true }
+                    );                     
+                     console.log("\n \t ****** data end   ********");                    
+                    }
+                });
             }           
             
             /* for testing.
@@ -273,13 +310,9 @@ db.getCollection('testVenu').find({}, {'_id': 0, 'venueId':1, "modifiedDate": 1,
             //console.log("data = \n", data);
             //res.json(JSON.stringify(data));
             var jsonData = JSON.stringify(data);
-            //var javascriptObject = JSON.parse(jsonData); 
-
-            
             res.json(data);
-            //res.json(javascriptObject);
+            console.timeEnd('time_UpdateVenuesInDBbyLocation');
         }  
-        //console.timeEnd('test');
     });
 };
 
