@@ -5,8 +5,6 @@ var Venue = require('./myvenue');
 var TEST  = require('../../scrape0a');
 var _ = require('underscore');
 var uuid = require('uuid');
-
-//var session = require('client-sessions');
 var assert = require('assert');
 
 module.exports.loadFromFsq = function (req, res, cb) {
@@ -233,13 +231,10 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
         else {
             // 2. Save data.            
             // 2a. Save Venue data.          
-            //var myCol = 'testVenu';
-            //console.log(menu); //return;
+
             // write to DB.
-            //var iii = 1;
             for (var iii = 1, len = data.length; iii < len; iii++) {
-                //console.log(data[iii].id);
-                
+                //console.log(data[iii].id);                
                 var vd = {
                     modifiedDate: new Date(),
                     venueId: data[iii].id,
@@ -250,7 +245,6 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
                 console.log(vd.venueId);
                 //console.log(vd);
                 
-                //req.db.collection(myCol).updateOne(
                 req.db.collection("venues").updateOne(
                     {venueId: vd.venueId},                
                     vd,               
@@ -259,7 +253,6 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
             }
             
             // 2b. Save Plate / Menu data. 
-            //db.collection('testvenueMenus').inser 
             for (var jjj = 1, len = data.length; jjj < len; jjj++) { 
                 if (!data[jjj].hasMenu) {
                     continue;   // skip no menu
@@ -272,7 +265,6 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
                     if (err) {
                         //console.log("\n\terr = \n"+ err);
                         var errObj = {err: err, mark: 123};                    
-                        //req.db.collection("testMenuFM").updateOne(
                         req.db.collection("venueMenus").updateOne(
                         {venueId: uuid.v1()},                
                             errObj,               
@@ -282,7 +274,7 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
                     else {
                      //console.log("\n \t ****** data begin *******");                    
                      //console.log(data); 
-                    var mn = {
+                        var mn = {
                         modifiedDate: new Date(),
                         venueId: data[0].venueId, //data.id,
                         name: data[0].THEname,
@@ -299,7 +291,7 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
                         // end
                         menu: data[2] 
                     };  
-                    //req.db.collection("testMenuFM").updateOne(
+
                     req.db.collection("venueMenus").updateOne(
                         {venueId: mn.venueId},                
                         mn,               
@@ -322,7 +314,6 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
 };
 
 module.exports.list = function (req, res) {
-    //{"lat":"119SSSS898","lon":"229SSSS898","radius":"160"}
     var qq = {"lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius };
     Venue.list(qq, function cb(err, data) {
         
@@ -343,7 +334,6 @@ module.exports.list = function (req, res) {
 };
 
 var findItem22 = function(menu, entryId){
-    var foundItem;
     console.log('\n \t\t******* findItem22 \n'); 
  
     //console.log('findItem22 ', menu.menus.items.length, entryId); 
@@ -369,36 +359,9 @@ var findItem22 = function(menu, entryId){
         }
     }
     
-    // menu.response.menu.menus.items.forEach(function(row) {
-        // console.log('row ', row.name);  
-        // row.entries.items.forEach(function(row22) {
-            // console.log('\t row22 ', row22.name);
-            // row22.entries.items.forEach(function(row33) {
-                // console.log('\t\t row33 ', row33.name);      
-                // if (row33.entryId && row33.entryId == entryId) {
-                    // console.log(row33);
-                    
-                    // return row33;
-                // }
-            // })
-        // })
-    // })
-  
-    //console.log('findItem22 ', menu.length, entryId);
-  //return {};
-  
-  
-  // menu.menus.forEach(function (menu22){
-    // menu22.entries.items.forEach(function(item){
-      // item.entries.items.forEach(function(item22){
-        // if (item22.entryId === entryId){
-          // foundItem = item22;
-        // }
-      // })
-    // })
-  // })
-
-  // return foundItem
+    // not found.
+    return {};
+    
 }
 
 // var findItem = function(menu, entryId){
