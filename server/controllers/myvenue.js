@@ -254,7 +254,7 @@ var _ = require('lodash');
         }
         //else 
         {
-            console.log("data = ", data, ", ", iNdex); 
+            //console.log("data = ", data, ", ", iNdex); 
             if (iNdex < limit) {                        
             getVenueMenu(menuIds[iNdex], cbNext);
             //cbNext(null, 'from');
@@ -423,7 +423,7 @@ var _ = require('lodash');
         console.log('\tfunction parseMenuResults(obj)' );
     try {
         console.log("\n\n *************** obj = \n");
-        console.log(obj);
+        //console.log(obj);
         var cntMenus = (obj.response.menu && obj.response.menu.menus) ? obj.response.menu.menus.length : 0;
         console.log("zzzz.. count = " + obj.response.menu.menus.count);
     

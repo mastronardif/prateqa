@@ -14,7 +14,7 @@ module.exports.loadFromFsq = function (req, res, cb) {
     console.log('module.exports.loadFromFsq ');
     //console.log(req);
     console.log(req.query);
-    console.log(JSON.stringify(req.body) );
+    //console.log(JSON.stringify(req.body) );
     
     //this is an object created to represent the information that was querid from the db about the menu
     var miOptions = {        
@@ -60,16 +60,11 @@ module.exports.loadFromFsq = function (req, res, cb) {
             return; 
         }
         else {
-             //res.json(data);
-             //console.log(" Venue.getVenue ");
-             //console.log(data);
-             console.log(data.response.venue.name);
-             //console.log(data.response.venue.location);
-             console.log(data.response.venue.location.address);
-             
-             console.log(data.response.venue.url);
-             console.log(data.response.venue.menu.url);
-             console.log(data.response.venue.menu.mobileUrl);
+             // console.log(data.response.venue.name);
+             // console.log(data.response.venue.location.address);            
+             // console.log(data.response.venue.url);
+             // console.log(data.response.venue.menu.url);
+             // console.log(data.response.venue.menu.mobileUrl);
              
              venue.name  = data.response.venue.name;             
              
@@ -85,13 +80,8 @@ module.exports.loadFromFsq = function (req, res, cb) {
             
             //2.)
             /************************** begin ***************************************/
-    // load Menu from foursquare.
-    var qq = {"venueId": req.body.venueId, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius, "venueName": req.body.venueName };
-    //var venueId = req.body.venueid;
-    //var venueName = req.body.venueName;
-    // var venue = {venueId: venueId, name: venueName, price: "9.99", location: {address: "tbd"},
-                 // url: "tbd", menu: {mobileUrl: "tbd", url: "tbd" }    
-    // };
+        // load Menu from foursquare.
+        var qq = {"venueId": req.body.venueId, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius, "venueName": req.body.venueName };
 
     Venue.listMenu(qq, function cb(err, data) {
     
@@ -106,25 +96,23 @@ module.exports.loadFromFsq = function (req, res, cb) {
             var javascriptObject = JSON.parse(jsonData); 
             var menu = javascriptObject;
                 console.log("\n YYYYYYYYYYYYYYYYYY\n");
-                console.log(menu);
+                //console.log(menu);
                 
-                console.log("\n\n");
-                console.log(menu[2].obj.response.menu);
-                console.log("\n\n");
-                console.log(menu[2].obj.response.menu.menus);
-            //var mmenus = [menu[2].response.menu.menus.items[0]];   
-            //var mmenus = [menu[2].obj.response.menu.menus.items[0]];             
-            
+                //console.log("\n\n");
+                //console.log(menu[2].obj.response.menu);
+                //console.log("\n\n");
+                //console.log(menu[2].obj.response.menu.menus);
+                      
             //var item = findItem22(menu[2], entryId);
             var item = findItem22(menu[2].obj, entryId);      
             
             //var item = findItem({menus: [menu[2].response.menu.menus.items[0]]}, entryId);      
             //var item = findItem({menus: [menu[2].response.menu.menus.items]}, entryId);      
             results.item = item; 
-console.log("\n\n ********* item ***********\n");            
-console.log(entryId);
-console.log(item);            
-console.log("\n\n ********* item ***********\n");            
+            console.log("\n\n ********* item ***********\n");            
+            console.log(entryId);
+            //console.log(item);            
+            console.log("\n\n ********* item ***********\n");            
             //venue.price = item.price;
             results.venue = venue;
             
@@ -272,7 +260,6 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
             
             // 2b. Save Plate / Menu data. 
             //db.collection('testvenueMenus').inser 
-            //for (var iii = 1, len = data.length; iii < len; iii++) { 
             for (var jjj = 1, len = data.length; jjj < len; jjj++) { 
                 if (!data[jjj].hasMenu) {
                     continue;   // skip no menu
@@ -330,7 +317,6 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
             //res.json(JSON.stringify(data));
             //var jsonData = JSON.stringify(data);
             res.json(data);
-            //console.timeEnd('time_UpdateVenuesInDBbyLocation');
         }  
     });
 };
@@ -353,7 +339,6 @@ module.exports.list = function (req, res) {
             var javascriptObject = JSON.parse(jsonData);        
             res.json(javascriptObject);
         }  
-        //console.timeEnd('test');
     });
 };
 
@@ -362,29 +347,21 @@ var findItem22 = function(menu, entryId){
     console.log('\n \t\t******* findItem22 \n'); 
  
     //console.log('findItem22 ', menu.menus.items.length, entryId); 
-    console.log(JSON.stringify(menu.response.menu) + "\n\n");
-  
-    console.log(menu.response.menu.menus);
-  
-  // var item = _.findWhere(menu.response.menu.menus.items, {
-  // items.entryId: "85762484"
-// });
-// if (!_.isUndefined(item)) {
-  // console.log('NAME =>', item.name);
-// }
+    //console.log(JSON.stringify(menu.response.menu) + "\n\n");  
+    //console.log(menu.response.menu.menus);
 
     //menu.response.menu.menus.items.forEach(function(row) {
     for (var iii = 0, len = menu.response.menu.menus.items.length; iii < len; iii++) {
-        console.log('row iii ', menu.response.menu.menus.items[iii].name);  
+        //console.log('row iii ', menu.response.menu.menus.items[iii].name);  
         // //row.entries.items.forEach(function(row22) {
         for (var jjj = 0, len2 = menu.response.menu.menus.items[iii].entries.items.length;  jjj < len2; jjj++) {
-            console.log('\t row jjj ', menu.response.menu.menus.items[iii].entries.items[jjj].name);
+            //console.log('\t row jjj ', menu.response.menu.menus.items[iii].entries.items[jjj].name);
             // //row22.entries.items.forEach(function(row33) {
             for (var kkk =0, len3 = menu.response.menu.menus.items[iii].entries.items[jjj].entries.items.length;  kkk < len3;  kkk++) {
-                console.log('\t\t row33 ', menu.response.menu.menus.items[iii].entries.items[jjj].entries.items[kkk].name);      
+                //console.log('\t\t row33 ', menu.response.menu.menus.items[iii].entries.items[jjj].entries.items[kkk].name);      
                 if (menu.response.menu.menus.items[iii].entries.items[jjj].entries.items[kkk].entryId && 
                     menu.response.menu.menus.items[iii].entries.items[jjj].entries.items[kkk].entryId == entryId) {
-                    console.log(menu.response.menu.menus.items[iii].entries.items[jjj].entries.items[kkk]);
+                    //console.log(menu.response.menu.menus.items[iii].entries.items[jjj].entries.items[kkk]);
                     
                     return menu.response.menu.menus.items[iii].entries.items[jjj].entries.items[kkk];
                 }
@@ -408,50 +385,47 @@ var findItem22 = function(menu, entryId){
     // })
   
     //console.log('findItem22 ', menu.length, entryId);
-  return {};
+  //return {};
   
   
-  menu.menus.forEach(function (menu22){
-      //console.log('menu22 ', menu22);
-    menu22.entries.items.forEach(function(item){
-      item.entries.items.forEach(function(item22){
-        if (item22.entryId === entryId){
-          foundItem = item22;
-          //console.log('item22 ', item22);
-        }
-      })
-    })
-  })
-  
-  //console.log('foundItem ', foundItem);
-  return foundItem
+  // menu.menus.forEach(function (menu22){
+    // menu22.entries.items.forEach(function(item){
+      // item.entries.items.forEach(function(item22){
+        // if (item22.entryId === entryId){
+          // foundItem = item22;
+        // }
+      // })
+    // })
+  // })
+
+  // return foundItem
 }
 
-var findItem = function(menu, entryId){
-  var foundItem;
-  //console.log('findItem ', menu, entryId); 
-  //console.log(menu);
+// var findItem = function(menu, entryId){
+  // var foundItem;
+  // //console.log('findItem ', menu, entryId); 
+  // //console.log(menu);
   
-  //menu[0].menus.forEach(function (menu){
-  menu.menus.forEach(function (menu22){
-      //console.log('menu22 ', menu22);
-    menu22.entries.items.forEach(function(item){
-      item.entries.items.forEach(function(item22){
-        if (item22.entryId === entryId){
-          foundItem = item22;
-          //console.log('item22 ', item22);
-        }
-      })
-    })
-  })
+  // //menu[0].menus.forEach(function (menu){
+  // menu.menus.forEach(function (menu22){
+      // //console.log('menu22 ', menu22);
+    // menu22.entries.items.forEach(function(item){
+      // item.entries.items.forEach(function(item22){
+        // if (item22.entryId === entryId){
+          // foundItem = item22;
+          // //console.log('item22 ', item22);
+        // }
+      // })
+    // })
+  // })
   
-  //console.log('foundItem ', foundItem);
-  return foundItem
-}
+  // //console.log('foundItem ', foundItem);
+  // return foundItem
+// }
 
 function createFancyTreeMenu22 (data){
     console.log("\n **** createFancyTreeMenu22 \n");
-    console.log(data);
+    //console.log(data);
     //console.log("data.menus.length = " + data.menus[0].items.length);
     
     var tree = [];
@@ -498,7 +472,7 @@ function createFancyTreeMenu22 (data){
 
 function createFancyTreeMenu (data){
     console.log("\n **** createFancyTreeMenu\n");
-    console.log(data);
+    //console.log(data);
     
   var tree = [];
   data.menus.forEach(function(menu){

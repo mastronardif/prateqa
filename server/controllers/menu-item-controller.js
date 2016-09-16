@@ -7,7 +7,7 @@ var miOptions;
 //var Venue = require('./myvenue');
 var venueController    = require('./venue-controller');
 
-module.exports.loadItem = function(req, res) {
+module.exports.loadItem11 = function(req, res) {
     console.log("module.exports.loadItem");
     console.log(req.query);
     console.log(JSON.stringify(req.body) );
@@ -31,7 +31,7 @@ module.exports.loadItem = function(req, res) {
         else {
             //res.render('menuItems/prvenueview', results);
             console.log("\n\n results = \n");
-            console.log(results);
+            //console.log(results);
             res.render('menuItems/prvenueview', {
         venue: results.venue, 
         item: results.item,
@@ -48,7 +48,7 @@ module.exports.loadItem = function(req, res) {
     });
 };
     
-module.exports.loadItem00 = function(req, res) {
+module.exports.loadItem = function(req, res) {
     console.log('module.exports.loadItem ');
     var entryId = req.params.entryId;
   
@@ -92,7 +92,7 @@ module.exports.loadItem00 = function(req, res) {
     //console.log(venue);
     //console.log(venue.venueId);
     
-    var item = findItem(menu[0], entryId);
+    var item = findItem(menu[0], entryId); //{}; //findItem(menu[0], entryId);
     console.log('Item found! Name: ' + item.name);
     //var tree = createFancyTreeMenu(menu[0]);
     var tree = createFancyTreeMenu(menu[0]);
@@ -132,8 +132,8 @@ module.exports.updateValues = function(req, res) {
 
 var findItem = function(menu, entryId){
   var foundItem;
-  console.log('findItem ', menu, entryId); 
-  console.log(menu);
+  //console.log('\n\t **** findItem ', menu, entryId); 
+  //console.log(menu);
   //menu[0].menus.forEach(function (menu){
   menu.menus.forEach(function (menu22){
       //console.log('menu22 ', menu22);
@@ -141,19 +141,19 @@ var findItem = function(menu, entryId){
       item.entries.items.forEach(function(item22){
         if (item22.entryId === entryId){
           foundItem = item22;
-          console.log('item22 ', item22);
+          //////////////////////console.log('item22 ', item22);
         }
       })
     })
   })
   
-  //console.log('foundItem ', foundItem);
+  console.log('\n\t foundItem = ', foundItem);
   return foundItem
 }
 
 var createFancyTreeMenu = function(data){
-    console.log("\n **** createFancyTreeMenu\n");
-    console.log(data);
+    console.log("\n\t **** var createFancyTreeMenu = function(data){ \n");
+    //console.log(data);
     
   var tree = [];
   data.menus.forEach(function(menu){
