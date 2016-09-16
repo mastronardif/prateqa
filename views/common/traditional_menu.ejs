@@ -17,13 +17,20 @@
             <i class="fa fa-heart"></i>
             </div>
             <div class="col-md-3 col-sm-6">
+            <!--
             <a href="<%=venue.menu.mobileUrl%>"> mobile </a>
+            -->
+            <%= (!!venue.menu.mobileUrl) ? venue.menu.mobileUrl : [UNDEF] %>
             </div>
                 <div class="col-md-3 col-sm-6">
+                <!--
             <a href="<%=venue.menu.url%>"> desktop</a>
+            -->
             </div>
             <div class="col-md-3 col-sm-6">
+            <!--
             <a href="<%=venue.url%>"> root</a>
+            -->
             </div>
             </div>
         </div>

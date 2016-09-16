@@ -8,7 +8,7 @@ var miOptions;
 var venueController    = require('./venue-controller');
 
 module.exports.loadItem = function(req, res) {
-
+    console.log("module.exports.loadItem");
     console.log(req.query);
     console.log(JSON.stringify(req.body) );
     
@@ -17,18 +17,21 @@ module.exports.loadItem = function(req, res) {
   // req.body.lat = "40.652315";
   // req.body.lon": -74.344705,
   // req.body.radius": 460,
-    req.body.venueid = req.body.fld_venueID;
+    req.body.venueId = req.body.fld_venueID;
     req.body.venueName = "The Great Burrito";
     req.body.entryId = req.params.entryId; //fld_menuItemID
 
     venueController.loadFromFsq(req, res, function(err, results){
         if(err) {
-            console.log("s not found");
-            res.send('<h1>An Error Occurred </h1>');
+            console.log("S not found");
+            var strErr = JSON.stringify(err);
+            res.send('<h1>An Error Occurred' + strErr + '</h1>');
             //res.json({err: err, results: results});
         }
         else {
             //res.render('menuItems/prvenueview', results);
+            console.log("\n\n results = \n");
+            console.log(results);
             res.render('menuItems/prvenueview', {
         venue: results.venue, 
         item: results.item,
@@ -54,7 +57,7 @@ module.exports.loadItem00 = function(req, res) {
   console.log(req.query);
   console.log(JSON.stringify(req.body) );
 
-  var col =  "testMenu"; //"";// "testMenu"; // "venueMenus";
+  var col =  "venueMenus"; //"";// "testMenu"; // "venueMenus";
   req.db.collection(col).find({"menus.entries.items.entries.items.entryId": entryId})
                 .toArray(function(err, menu){      
   
@@ -71,7 +74,7 @@ module.exports.loadItem00 = function(req, res) {
       }
       
       if (menu != null) {
-      console.log(' menu:', menu.length);
+        console.log(' menu:', menu.length);
       }
       else
       {
@@ -85,7 +88,7 @@ module.exports.loadItem00 = function(req, res) {
     //req.db.collection('venues').findOne({"name": menu[0].name}).then(function(venue){
     req.db.collection('venues').findOne({"venueId": menu[0].venueId}).then(function(venue){
       
-    console.log('\n\nVenue found! Name: ' + venue.name);
+    console.log('\n\nVenue found! Name: ' + venue.venue.name); //venue.name);
     //console.log(venue);
     //console.log(venue.venueId);
     
@@ -104,7 +107,7 @@ module.exports.loadItem00 = function(req, res) {
     var sliders = [10,20,30,40,50,60,70,80];
     //res.render('menuItems/new', {
     res.render('menuItems/prvenueview', {
-        venue: venue, 
+        venue: venue.venue,  //venue: venue, 
         item: item,
         //tree: tree00,
         tree: tree,

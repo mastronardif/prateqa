@@ -40,7 +40,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p>Restaurant Name: <%= menuitem.name %>(<%=menuitem.fourSquareId%>)</p>
+                                <p>Restaurant Name: <%= menuitem.name %>(<%=menuitem.venueId%>)</p>
                             </div>
                         </div>
                         <div class="row">
@@ -64,7 +64,7 @@
                     <div class="col-md-12">
                         <form action="/menuitems/<%= menuitem.menus.entries.items.entries.items.entryId %>"
                               method="POST">
-                            <input type="hidden" name="fld_venueID" value="<%=menuitem.fourSquareId%>"/>
+                            <input type="hidden" name="fld_venueID" value="<%=menuitem.venueId%>"/>
                             <input type="text" name="fld_menuItemID" value="<%= menuitem.menus.entries.items.entries.items.entryId %>"/>
                             <button type="submit" class="btn"> View This Dish!</button>
                         </form>

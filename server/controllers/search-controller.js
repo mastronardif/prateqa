@@ -102,7 +102,7 @@ var venueMenusAggregate = function (db, userInput, callback) {
     ///
 
     ///
-    console.log("The user input is: " + userInput);
+    console.log("\t venueMenusAggregate = function The user input is: " + userInput);
     //Using aggregate Mongodb Aggregation Pipeline
     db.collection("venueMenus").aggregate([
         {$unwind: "$menus"},
@@ -110,7 +110,7 @@ var venueMenusAggregate = function (db, userInput, callback) {
         {$unwind: "$menus.entries.items.entries.items"},
         {
             $project: {
-                "fourSquareId": 1,
+                "venueId": 1, //"fourSquareId": 1,
                 "name": 1,
                 "menus.name": 1,
                 "menus.entries.items.name": 1,
@@ -137,7 +137,7 @@ var venueMenusAggregate = function (db, userInput, callback) {
 
 module.exports.searchMenuItems = function (req, res) {
     ///////
-    console.log("module.exports.searchMenuItems");    
+    console.log("\t module.exports.searchMenuItems");    
     console.log(req.query);    
     console.log(JSON.stringify(req.body) );
     
@@ -169,6 +169,8 @@ module.exports.searchMenuItems = function (req, res) {
     var userInput = req.body.basicsearchinput;
     venueMenusAggregate(req.db, userInput, function (err, result) {
         console.log("inside the other function"+ result);
+        console.log(result);
+        
         if(err) {
             res.send(JSON.stringify(err));
             console.log("Some errorsss here!" + JSON.stringify(err) );
