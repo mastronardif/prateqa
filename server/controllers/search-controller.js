@@ -5,7 +5,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/platerate';
 var session = require('client-sessions');
 var assert = require('assert');
-var venue = require('./myvenue');
+var Venue = require('./myvenue');
 var options = {
     caseSensitive: false,
     includeScore: true,
@@ -141,13 +141,13 @@ module.exports.searchMenuItems = function (req, res) {
     console.log(req.query);    
     console.log(JSON.stringify(req.body) );
     
-    var bValidLatLon = venue.HelperIsValidLatLong(req.body.lat, req.body.long);
+    var bValidLatLon = Venue.HelperIsValidLatLong(req.body.lat, req.body.long);
     console.log('bValidLatLon = ', bValidLatLon);
     
     if (req.body.locationinput && !bValidLatLon) {
         console.log("if (req.body.locationinput && !req.body.lat && !req.body.long) ");
         var qq = {"address": req.body.locationinput};
-        venue.GetLatLongFromAddress(qq, function cb(err, data) {
+        Venue.GetLatLongFromAddress(qq, function cb(err, data) {
         console.log('\tcb(err, data)');
     
         if (err) { 

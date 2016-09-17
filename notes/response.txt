@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script src="/js/jquery-ui-sliderAccess.js"></script>
+<script src="/js/jquery-ui-timepicker-addon.js"></script>
+<script src="/js/jquery-ui-timepicker-addon.min.js"></script>
+<script src="/js/app.js"></script>
+<!--<link rel="stylesheet" href="/styles/runnable.css" />-->
+<link rel="stylesheet" href="/styles/jquery-ui-timepicker-addon.css" />
+<link rel="stylesheet" href="/styles/jquery-ui-timepicker-addon.min.css" />
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script type="text/javascript"></script>
+<link rel="stylesheet" href="/styles/slider.css">
+<link rel="stylesheet" href="/styles/advanced-search.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/styles/style.css">
+<link rel="stylesheet" href="/styles/main-style.css" media="screen">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
+    <!--From menuitempage-->
+
+    <!-- Facebook & Google+ open graph (og) protocol properties to customize what you share-->
+    <!-- Once hosted to a site, update this info and Facebook/G+/LinkedIn will build a share dialog box with it. It does not pull info correctly on localhost, but works once deployed-->
+    <!--<meta property="og:url"           content="https://eatablez.herokuapp.com/socialshare" />-->
+    <!--<meta property="og:type"          content="website" />-->
+    <!--<meta property="og:title"         content="Plate Rate" />-->
+    <!--<meta property="og:description"   content="PlateRate is a great app to help you find food you love - Find the highest rated menu items - wherever you are!" />-->
+    <!--<meta property="og:image"         content="/images/logo_platerate.png" />-->
+    <!-- LinkedIn SDK, which must be in head tag according to documentation -->
+    <!--   <script type="text/javascript" src="//platform.linkedin.com/in.js">
+    //Create an api key in LinkedIn for the site and update the current test one and store it as an environmental variable
+      api_key:   75cad1rwxl5dug
+      authorize: true
+      onLoad:    onLinkedInLoad
+    </script> -->
+    <!-- Include jQuery and jQuery UI -->
+    <!--  <script src="//code.jquery.com/jquery-1.12.1.min.js" type="text/javascript"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script> -->
+    <!-- Include Fancytree skin and library -->
+    <!--<link href="../../styles/ui.fancytree.css" rel="stylesheet" type="text/css">-->
+    <!--<script src="../../js/jquery.fancytree-all.js" type="text/javascript"></script>-->
+    <!--<script src="../../js/jquery.fancytree.gridnav.js" type="text/javascript"></script>-->
+    <!--<script src="../../js/jquery.fancytree.table.js" type="text/javascript"></script>-->
+    <!--<script src="../../js/jquery.fancytree.glyph.js" type="text/javascript"></script>-->
+    <!--<script src="../../js/menu-item-page.js"></script>-->
+    <!-- Google+ -->
+    <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
+
+    <link rel="stylesheet" href="/styles/basicsearchresults.css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG8XdsI0xYqPvnPX7C8S2oTm2eXg169hQ&libraries=places"></script>
+</head>
+<body>
+<div class="container header-container">
+    <div class="row">
+                <!-- header -->
+        <div class="row header-container">
+            <div class="col-sm-5 col-xs-4 logo">
+                <a href="../"><img id="logo" src='/images/logo_platerate.png' alt="platerate logo"></a>
+            </div>
+            <div class="col-sm-7 col-xs-8 banner">
+                <a href="../"><img id="banner" src='/images/banner_platerate.png' alt="platerate logo"></a>
+            </div>
+        </div>
+        <div class="row slogan">
+            <p>Helping You Find The Food You Love</p>
+        </div>
+
+    </div>
+</div>
+<!-- End Header-Container -->
+<div class="container-fluid page-content">
+    <div class="row row-border">
+        <div class="col-xs-6 center border-right" id="listBtn">Item View</div>
+        <div class="col-xs-6 center border-left" id="mapBtn">Map View</div>
+
+    </div>
+    <div id="mapView" style="display:none;" height="200px" width="300px">
+        <button id="geoBtn" onclick="geoFindMe()">Click Me!</button>
+    </div>
+
+    <div id="listView">
+        <div class="col-md-12">
+            <hr>
+        </div>
+        
+        <!--index-->
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p> Item Name: Black Eyed Pea Salad Homemade Potato Chips</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>Price: $ 5.00</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>Restaurant Name: Bongo West Village</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>Description: </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img src="http://placehold.it/1000x500">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="/menuitems/4a8b851bf964a520940c20e3/2445400"
+                              method="POST">
+                            <button type="submit" class="btn"> View This Dish!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+        
+    </div>
+</div>
+
+<div id="footer">
+            <div class="menu-button col-xs-4 col-sm-4 col-md-4"><span><a href="../">Search</a></span></div>
+        <div class="menu-button col-xs-4 col-sm-4 col-md-4"><span><a href="../profile">Profile</a></span></div>
+        <div class="menu-button col-xs-4 col-sm-4 col-md-4"><span><a href="../socialshare">Share</a></span></div>
+
+</div>
+
+    <script src="/js/jquery-ui-sliderAccess.js"></script>
+    <script src="/js/jquery-ui-timepicker-addon.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-slider.js"></script>
+    <script src="/js/app.js"></script>
+
+<script>
+    $('#mapBtn').on('click', function () {
+        $('#mapView').show();
+        $('#listView').hide();
+    });
+    $('#listBtn').on('click', function () {
+        $('#listView').show();
+        $('#mapView').hide();
+    });
+    function geoFindMe() {
+        var output = document.getElementById("mapView");
+        if (!navigator.geolocation) {
+            output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+            return;
+        }
+        function success(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+            var img = new Image();
+            img.src = "https://maps.googleapis.com/maps/api/staticmap?size=500x200&maptype=roadmap&markers=color:blue%7Clabel:S%7C" + latitude + "," + longitude + "&key=AIzaSyCG8XdsI0xYqPvnPX7C8S2oTm2eXg169hQ";
+            output.appendChild(img);
+        }
+
+        function error() {
+            output.innerHTML = "Unable to retrieve your location";
+        }
+
+        output.innerHTML = "<p>Locating…</p>";
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
+</script>
+</body>
+</html>

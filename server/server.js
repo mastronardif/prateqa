@@ -408,8 +408,6 @@ app.on('stormpath.ready',function () {
 
 // FM new routes begin
 app.use('/v1/api/venues', venues);
-
-
 // FM new routes end
 
 //put this app.use last.  The last .use.

@@ -2,7 +2,7 @@
 var util = require('util');
 var request = require("request");
 var Venue = require('./myvenue');
-var TEST  = require('../../scrape0a');
+//var TEST  = require('../../scrape0a');
 var _ = require('underscore');
 var uuid = require('uuid');
 var assert = require('assert');
@@ -220,7 +220,7 @@ module.exports.UpdateVenuesInDBbyLocation  = function (req, res) {
     console.log(JSON.stringify(req.body) );
     console.time('time_UpdateVenuesInDBbyLocation');
     // 1. get data from foursquare.
-    var qq = {"address": req.body.address, "lat": req.body.lat, "lon": req.body.lon, "radius": req.body.radius};
+    var qq = {"address": req.body.address, "lat": req.body.lat, "lon": req.body.long, "radius": req.body.radius};
     //Venue.list(qq, function cb(err, data) {
     Venue.listDBobjs(qq, function cb(err, data) {    
         if (err) { 
