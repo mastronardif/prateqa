@@ -109,7 +109,6 @@ module.exports.loadItem = function(req, res) {
     res.render('menuItems/prvenueview', {
         venue: venue.venue,  //venue: venue, 
         item: item,
-        //tree: tree00,
         tree: tree,
         sliders: sliders,
         miOptions: miOptions
